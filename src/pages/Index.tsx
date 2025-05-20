@@ -5,7 +5,7 @@ import Calendar from '../components/Calendar';
 
 const Index: React.FC = () => {
   return (
-    <div className="min-h-screen bg-gray-100 p-4 cursor-mac">
+    <div className="min-h-screen bg-gradient-to-br from-blue-100 to-purple-100 p-4 cursor-mac">
       <MacWindow>
         <div className="h-[calc(100vh-160px)]">
           <Calendar />

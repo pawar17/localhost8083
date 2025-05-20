@@ -18,7 +18,9 @@ const MacWindow: React.FC<MacWindowProps> = ({ children }) => {
           Calendar - My Portfolio
         </div>
       </div>
-      {children}
+      <div className="overflow-hidden">
+        {children}
+      </div>
     </div>
   );
 };
