@@ -1,12 +1,13 @@
 
 import React, { useState } from 'react';
-import { Clock, MapPin } from 'lucide-react';
+import { Clock, MapPin, Bell, Globe, Repeat } from 'lucide-react';
 import { 
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+import { Checkbox } from "@/components/ui/checkbox";
 
 export type EventType = {
   id: string;
@@ -80,34 +81,90 @@ const CalendarEvent: React.FC<CalendarEventProps> = ({ event }) => {
       </div>
       
       <Dialog open={isOpen} onOpenChange={setIsOpen}>
-        <DialogContent className="p-0 max-w-md">
-          <div className={`h-2 ${getColorForHeader()} rounded-t-lg w-full`}></div>
-          <DialogHeader className="px-4 pt-4 pb-0">
-            <DialogTitle className="text-xl font-medium">{event.title}</DialogTitle>
-          </DialogHeader>
+        <DialogContent className="p-0 max-w-md bg-gray-50 rounded-lg shadow-xl">
+          <div className="flex items-center justify-between px-3 py-2 border-b border-gray-200 bg-gray-100 rounded-t-lg">
+            <div className="flex items-center gap-4">
+              <div className="flex gap-1.5">
+                <span className="h-3 w-3 rounded-full bg-red-500"></span>
+                <span className="h-3 w-3 rounded-full bg-yellow-500"></span>
+                <span className="h-3 w-3 rounded-full bg-green-500"></span>
+              </div>
+              <div className="flex text-sm">
+                <button className="px-2 py-1 rounded hover:bg-gray-200 transition-colors">Event</button>
+                <button className="px-2 py-1 rounded bg-gray-300">Reminder</button>
+              </div>
+            </div>
+          </div>
+          
           <div className="p-4">
             <div className="mb-4">
-              <div className="text-sm text-gray-600 mb-2 flex items-center">
-                <Clock className="w-4 h-4 mr-2 text-gray-500" />
-                {getTimeDisplay()}
+              <input 
+                type="text" 
+                value={event.title} 
+                readOnly 
+                className="w-full text-lg font-medium border-none bg-transparent outline-none focus:ring-0 p-0"
+              />
+              <div className="text-sm text-gray-500 mt-1">Notes</div>
+              <div className="text-sm text-gray-700 mt-1">{event.description}</div>
+            </div>
+            
+            <div className="border-t border-gray-200 pt-3">
+              <div className="flex items-center justify-between py-1">
+                <div className="text-sm text-gray-600">remind me</div>
+                <div className="text-sm">On a Day</div>
               </div>
+              <div className="flex items-center justify-between py-1">
+                <div className="w-4"></div>
+                <div className="text-sm">06/15/2024</div>
+              </div>
+              <div className="flex items-center py-1">
+                <div className="mr-2">
+                  <Checkbox checked={true} />
+                </div>
+                <div className="text-sm text-gray-600">At a Time</div>
+              </div>
+              <div className="flex items-center justify-between py-1">
+                <div className="w-4"></div>
+                <div className="text-sm">{getTimeDisplay()}</div>
+              </div>
+              
               {event.location && (
-                <div className="text-sm text-gray-600 mb-2 flex items-center">
-                  <MapPin className="w-4 h-4 mr-2 text-gray-500" />
-                  {event.location}
+                <div className="flex items-center justify-between py-1">
+                  <div className="text-sm text-gray-600">At a Location</div>
+                  <div className="text-sm">{event.location}</div>
                 </div>
               )}
-            </div>
-            <div className="border-t pt-3">
-              <p className="text-sm text-gray-700">{event.description}</p>
-            </div>
-            <div className="mt-4 flex justify-end">
-              <button className="text-blue-600 hover:text-blue-800 text-sm mr-3">
-                Edit
-              </button>
-              <button className="text-blue-600 hover:text-blue-800 text-sm">
-                Delete
-              </button>
+              
+              <div className="flex items-center justify-between py-1">
+                <div className="text-sm text-gray-600">When Messaging a Person</div>
+              </div>
+              
+              <div className="mt-2">
+                <div className="flex items-center justify-between py-1">
+                  <div className="text-sm text-gray-600">early reminder</div>
+                  <div className="text-sm">None</div>
+                </div>
+                <div className="flex items-center justify-between py-1">
+                  <div className="text-sm text-gray-600">repeat</div>
+                  <div className="text-sm">Never</div>
+                </div>
+                <div className="flex items-center justify-between py-1">
+                  <div className="text-sm text-gray-600">priority</div>
+                  <div className="text-sm">None</div>
+                </div>
+                <div className="flex items-center justify-between py-1">
+                  <div className="text-sm text-gray-600">list</div>
+                  <div className="text-sm">Errands</div>
+                </div>
+                <div className="flex items-center justify-between py-1">
+                  <div className="text-sm text-gray-600">URL</div>
+                  <div className="text-sm">None</div>
+                </div>
+                <div className="flex items-center justify-between py-1">
+                  <div className="text-sm text-gray-600">images</div>
+                  <div className="text-sm text-blue-500">+ Add image...</div>
+                </div>
+              </div>
             </div>
           </div>
         </DialogContent>
