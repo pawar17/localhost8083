@@ -3,7 +3,6 @@ import React, { useState, useEffect } from 'react';
 import CalendarHeader from './CalendarHeader';
 import CalendarSidebar from './CalendarSidebar';
 import WeekView from './WeekView';
-import MacStatusBar from './MacStatusBar';
 
 const Calendar: React.FC = () => {
   const [currentDate, setCurrentDate] = useState(new Date());
@@ -39,7 +38,6 @@ const Calendar: React.FC = () => {
   
   return (
     <div className="flex flex-col h-full">
-      <MacStatusBar />
       <CalendarHeader 
         currentDate={currentDate}
         onPrevWeek={goToPrevWeek}
