@@ -1,11 +1,18 @@
-// Update this page (the content is just a fallback if you fail to update the page)
 
-const Index = () => {
+import React from 'react';
+import MacWindow from '../components/MacWindow';
+import Calendar from '../components/Calendar';
+
+const Index: React.FC = () => {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-gray-600">Start building your amazing project here!</p>
+    <div className="min-h-screen bg-gray-100 p-4 cursor-mac">
+      <MacWindow>
+        <div className="h-[calc(100vh-160px)]">
+          <Calendar />
+        </div>
+      </MacWindow>
+      <div className="text-center text-xs text-gray-500 mt-4">
+        Part of my interactive portfolio • Click on any event to expand it
       </div>
     </div>
   );
