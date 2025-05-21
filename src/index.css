@@ -62,18 +62,22 @@
   body {
     @apply bg-background text-foreground;
     font-feature-settings: "rlig" 1, "calt" 1;
-    cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'><path fill='black' d='M5.5,1.5c0,0-5,2.5-5,7.5s3.5,7.5,8,7.5v-15H5.5z'/></svg>"), auto;
+    cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'><path fill='black' d='M4.5,1c0,0-4,2-4,7s3,7,7,7V1H4.5z'/></svg>"), auto;
   }
 }
 
 @layer utilities {
   /* Mac cursor styles */
   .cursor-mac {
-    cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'><path fill='black' d='M5.5,1.5c0,0-5,2.5-5,7.5s3.5,7.5,8,7.5v-15H5.5z'/></svg>"), auto;
+    cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'><path fill='black' d='M4.5,1c0,0-4,2-4,7s3,7,7,7V1H4.5z'/></svg>"), auto;
   }
   
   .cursor-mac-pointer {
-    cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'><path fill='black' d='M5.5,1.5c0,0-5,2.5-5,7.5s3.5,7.5,8,7.5v-15H5.5z'/></svg>"), pointer;
+    cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'><path fill='black' d='M4.5,1c0,0-4,2-4,7s3,7,7,7V1H4.5z'/></svg>"), pointer;
+  }
+
+  .cursor-mac-text {
+    cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'><path fill='black' d='M4.5,1c0,0-4,2-4,7s3,7,7,7V1H4.5z'/></svg>"), text;
   }
 }
 
