@@ -1,4 +1,3 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -78,6 +77,14 @@
 
   .cursor-mac-text {
     cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'><path fill='black' d='M4.5,1c0,0-4,2-4,7s3,7,7,7V1H4.5z'/></svg>"), text;
+  }
+  
+  .mac-dock-item {
+    @apply transition-all duration-200 ease-in-out;
+  }
+  
+  .mac-dock-item:hover {
+    @apply scale-125 -translate-y-2;
   }
 }
 
@@ -176,5 +183,9 @@
   
   .gcal-modal-content {
     @apply bg-white rounded-lg shadow-xl overflow-hidden;
+  }
+  
+  .mac-dock {
+    @apply fixed bottom-2 left-1/2 transform -translate-x-1/2 flex items-end space-x-1 bg-white/20 backdrop-blur-xl py-1 px-2 rounded-2xl border border-white/30 shadow-lg;
   }
 }

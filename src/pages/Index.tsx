@@ -3,6 +3,7 @@ import React from 'react';
 import MacWindow from '../components/MacWindow';
 import Calendar from '../components/Calendar';
 import MacStatusBar from '../components/MacStatusBar';
+import MacDock from '../components/MacDock';
 
 const Index: React.FC = () => {
   return (
@@ -14,10 +15,11 @@ const Index: React.FC = () => {
             <Calendar />
           </div>
         </MacWindow>
-        <div className="text-center text-xs text-gray-500 mt-4">
+        <div className="text-center text-xs text-gray-500 mt-4 mb-16">
           Part of my interactive portfolio • Click on any event to expand it
         </div>
       </div>
+      <MacDock />
     </div>
   );
 };
