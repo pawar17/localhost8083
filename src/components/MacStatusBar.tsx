@@ -45,7 +45,7 @@ const MacStatusBar: React.FC = () => {
       <div className="flex items-center gap-4">
         <span>🍎</span>
         <span className="text-xs font-medium text-zinc-600">Aadya's Portfolio</span>
-        <span>File</span>
+        <span className="text-zinc-600 text-xs">File</span>
         <span>Edit</span>
         <span>View</span>
         <span>Window</span>
