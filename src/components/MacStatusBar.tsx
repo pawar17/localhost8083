@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Wifi, Battery, BatteryCharging } from 'lucide-react';
+import { Wifi, Battery, BatteryCharging, Bluetooth, Search, SlidersHorizontal, Mic } from 'lucide-react';
+
 const MacStatusBar: React.FC = () => {
   const [currentTime, setCurrentTime] = useState(new Date());
   const [batteryLevel, setBatteryLevel] = useState(85); // Mock battery level
   const [isCharging, setIsCharging] = useState(false);
+
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentTime(new Date());
@@ -22,11 +24,13 @@ const MacStatusBar: React.FC = () => {
         setIsCharging(prev => !prev);
       }
     }, 30000);
+
     return () => {
       clearInterval(timer);
       clearInterval(batteryTimer);
     };
   }, [batteryLevel, isCharging]);
+
   const formatDate = (date: Date) => {
     return date.toLocaleDateString('en-US', {
       weekday: 'long',
@@ -34,6 +38,7 @@ const MacStatusBar: React.FC = () => {
       day: 'numeric'
     });
   };
+
   const formatTime = (date: Date) => {
     return date.toLocaleTimeString('en-US', {
       hour: 'numeric',
@@ -41,9 +46,11 @@ const MacStatusBar: React.FC = () => {
       hour12: true
     });
   };
-  return <div className="mac-status-bar flex items-center justify-between bg-opacity-80 text-white px-4 py-1 text-sm bg-stone-100">
+
+  return (
+    <div className="mac-status-bar flex items-center justify-between bg-opacity-80 text-white px-4 py-1 text-sm bg-stone-100">
       <div className="flex items-center gap-4">
-        <span>🍎</span>
+        <img src="/logo/icon.png" alt="Apple Logo" className="h-6 w-auto" />
         <span className="text-xs font-medium text-zinc-600">Aadya's Portfolio</span>
         <span className="text-zinc-600 text-xs">File</span>
         <span className="text-zinc-600 text-xs">Edit</span>
@@ -52,11 +59,17 @@ const MacStatusBar: React.FC = () => {
         <span className="text-xs text-zinc-600">Help</span>
       </div>
       <div className="flex items-center gap-4">
-        <Wifi className="w-4 h-4" />
-        {isCharging ? <BatteryCharging className="w-4 h-4" /> : <Battery className="w-4 h-4" />}
+        <Bluetooth className="w-4 h-4 text-zinc-600" />
+        <Wifi className="w-4 h-4 text-zinc-600" />
+        {isCharging ? <BatteryCharging className="w-4 h-4 text-zinc-600" /> : <Battery className="w-4 h-4 text-zinc-600" />}
+        <Search className="w-4 h-4 text-zinc-600" />
+        <img src="/control-center-icon.png" alt="Control Center" className="w-4 h-4 opacity-60" />
+        <img src="/siri__fsb5b98qe526_og-removebg-preview.png" alt="Siri" className="w-8 h-8 object-contain" />
         <span className="text-zinc-600 text-xs">{formatDate(currentTime)}</span>
         <span className="text-zinc-600 text-xs">{formatTime(currentTime)}</span>
       </div>
-    </div>;
+    </div>
+  );
 };
+
 export default MacStatusBar;
