@@ -54,8 +54,8 @@ const MacStatusBar: React.FC = () => {
       <div className="flex items-center gap-4">
         <Wifi className="w-4 h-4" />
         {isCharging ? <BatteryCharging className="w-4 h-4" /> : <Battery className="w-4 h-4" />}
-        <span>{formatDate(currentTime)}</span>
-        <span>{formatTime(currentTime)}</span>
+        <span className="text-zinc-600 text-xs">{formatDate(currentTime)}</span>
+        <span className="text-zinc-600 text-xs">{formatTime(currentTime)}</span>
       </div>
     </div>;
 };
