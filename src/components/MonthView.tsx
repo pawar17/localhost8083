@@ -1,19 +1,17 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import CalendarEvent, { EventType } from './CalendarEvent';
 
-type WeekViewProps = {
-  startDate: Date;
+type MonthViewProps = {
+  currentMonth: Date;
 };
 
-// Time slots from 8 AM to 6 PM
-const timeSlots = Array.from({ length: 11 }, (_, i) => i + 8);
-
-const WeekView: React.FC<WeekViewProps> = ({ startDate }) => {
-  // Full week, 2-hour events, color-matched
-  const events: EventType[] = React.useMemo(() => [
+const MonthView: React.FC<MonthViewProps> = ({ currentMonth }) => {
+  // Sample events - reusing the same events from WeekView
+  const events: EventType[] = useMemo(() => [
     // Sunday
     { id: '1', title: 'Work: Sprint Planning', time: '9:00 AM', endTime: '11:00 AM', color: 'red', description: 'Plan the week with the team', location: 'Office', day: 0 },
     { id: '2', title: 'Personal: Gym', time: '11:00 AM', endTime: '1:00 PM', color: 'blue', description: 'Workout session', location: 'Gym', day: 0 },
+    // More events from WeekView...
     { id: '3', title: 'Meetings: Team Sync', time: '2:00 PM', endTime: '4:00 PM', color: 'yellow', description: 'Weekly team sync', location: 'Zoom', day: 0 },
     { id: '4', title: 'Health: Yoga', time: '4:00 PM', endTime: '6:00 PM', color: 'green', description: 'Yoga for relaxation', location: 'Studio', day: 0 },
     { id: '5', title: 'Learning: React Course', time: '7:00 PM', endTime: '9:00 PM', color: 'purple', description: 'Complete React module', location: 'Home', day: 0 },
@@ -53,71 +51,113 @@ const WeekView: React.FC<WeekViewProps> = ({ startDate }) => {
     { id: '33', title: 'Meetings: Review', time: '2:00 PM', endTime: '4:00 PM', color: 'yellow', description: 'Review session', location: 'Zoom', day: 6 },
     { id: '34', title: 'Health: Hike', time: '4:00 PM', endTime: '6:00 PM', color: 'green', description: 'Hiking', location: 'Trail', day: 6 },
     { id: '35', title: 'Learning: Art', time: '7:00 PM', endTime: '9:00 PM', color: 'purple', description: 'Art class', location: 'Studio', day: 6 },
+    // Keeping a subset for brevity
   ], []);
   
-  // Generate week days
-  const weekDays = Array.from({ length: 7 }, (_, i) => {
-    const day = new Date(startDate);
-    day.setDate(startDate.getDate() + i);
-    return day;
-  });
-  
-  // Format day header (Mon 15)
-  const formatDayHeader = (date: Date) => {
-    const today = new Date();
-    const isToday = date.toDateString() === today.toDateString();
+  // Generate days for the calendar grid
+  const daysInMonthGrid = useMemo(() => {
+    const year = currentMonth.getFullYear();
+    const month = currentMonth.getMonth();
+    const firstDayOfMonth = new Date(year, month, 1);
+    const lastDayOfMonth = new Date(year, month + 1, 0);
+    const daysCount = lastDayOfMonth.getDate();
     
-    return (
-      <div className={`text-center py-2 ${isToday ? 'border-b-2 border-red-500' : ''}`}>
-        <div className="text-sm text-gray-600">{date.toLocaleDateString('en-US', { weekday: 'short' })}</div>
-        <div className={`text-lg font-medium ${isToday ? 'text-red-500' : 'text-gray-800'}`}>
-          {date.getDate()}
-        </div>
-      </div>
-    );
-  };
+    const days = [];
+    const firstDayWeekday = firstDayOfMonth.getDay(); // 0 for Sunday
+    
+    // Add previous month days to fill first week
+    for (let i = firstDayWeekday - 1; i >= 0; i--) {
+      const day = new Date(year, month, -i);
+      days.push({
+        date: day,
+        isCurrentMonth: false,
+        events: []
+      });
+    }
+    
+    // Add current month days
+    for (let i = 1; i <= daysCount; i++) {
+      const day = new Date(year, month, i);
+      days.push({
+        date: day,
+        isCurrentMonth: true,
+        events: getEventsForDay(day, events)
+      });
+    }
+    
+    // Add next month days to fill last week
+    const lastWeekdayOfMonth = lastDayOfMonth.getDay(); // 0-6
+    for (let i = 1; i < 7 - lastWeekdayOfMonth; i++) {
+      const day = new Date(year, month + 1, i);
+      days.push({
+        date: day,
+        isCurrentMonth: false,
+        events: []
+      });
+    }
+    
+    return days;
+  }, [currentMonth, events]);
   
-  // Get events for a specific day and hour
-  const getEventsForTimeSlot = (day: number, hour: number): EventType[] => {
-    return events.filter(event => {
-      const eventDay = event.day;
-      const eventHour = parseInt(event.time.split(':')[0]);
-      const isPM = event.time.includes('PM') && eventHour !== 12;
-      const normalizedHour = isPM ? eventHour + 12 : eventHour;
-      return eventDay === day && normalizedHour === hour;
-    });
-  };
+  // Function to get events for a specific day
+  function getEventsForDay(day: Date, allEvents: EventType[]): EventType[] {
+    // For demonstration, just distribute events across days
+    const dayOfMonth = day.getDate();
+    return allEvents.filter((_, index) => (dayOfMonth + index) % 10 === index % 3);
+  }
+  
+  // Group days into weeks
+  const weeks = useMemo(() => {
+    const result = [];
+    for (let i = 0; i < daysInMonthGrid.length; i += 7) {
+      result.push(daysInMonthGrid.slice(i, i + 7));
+    }
+    return result;
+  }, [daysInMonthGrid]);
   
   return (
-    <div className="mac-week-view h-full bg-white">
-      {/* Time column and day headers */}
-      <div className="grid grid-cols-8 border-b">
-        <div className="text-right pr-2"></div>
-        {weekDays.map((day, index) => (
-          <div key={index} className="border-l">
-            {formatDayHeader(day)}
+    <div className="mac-month-view h-full">
+      {/* Weekday Headers */}
+      <div className="grid grid-cols-7 border-b border-gray-200">
+        {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map((day) => (
+          <div key={day} className="p-2 text-center text-sm text-gray-600 font-medium">
+            {day}
           </div>
         ))}
       </div>
-      {/* Time grid */}
-      <div className="overflow-auto">
-        {timeSlots.map((hour) => (
-          <div key={hour} className="grid grid-cols-8 border-b">
-            {/* Time gutter */}
-            <div className="text-right pr-2 py-1 text-xs text-gray-500 pt-2">
-              {hour === 12 ? '12 PM' : hour > 12 ? `${hour - 12} PM` : `${hour} AM`}
-            </div>
-            {/* Day columns */}
-            {weekDays.map((_, dayIndex) => {
-              const events = getEventsForTimeSlot(dayIndex, hour);
+      
+      {/* Calendar grid */}
+      <div className="grid grid-rows-6 h-[calc(100%-2rem)] divide-y">
+        {weeks.map((week, weekIndex) => (
+          <div key={weekIndex} className="grid grid-cols-7 divide-x h-full">
+            {week.map((day, dayIndex) => {
+              const isToday = day.date.toDateString() === new Date().toDateString();
+              
               return (
-                <div key={dayIndex} className="border-l min-h-[60px] relative">
-                  {/* Half hour divider */}
-                  <div className="absolute w-full border-t border-dashed border-gray-100 top-[50%]"></div>
+                <div 
+                  key={dayIndex} 
+                  className={`relative overflow-hidden ${
+                    day.isCurrentMonth ? 'bg-white' : 'bg-gray-50'
+                  }`}
+                >
+                  <div className={`p-1 sticky top-0 z-10 ${isToday ? 'bg-red-500 text-white rounded-full w-7 h-7 flex items-center justify-center mx-auto mt-1' : 'text-right pr-2'}`}>
+                    {isToday ? (
+                      <div className="text-sm font-bold">{day.date.getDate()}</div>
+                    ) : (
+                      <div className={`text-sm ${day.isCurrentMonth ? 'text-gray-800' : 'text-gray-400'}`}>{day.date.getDate()}</div>
+                    )}
+                  </div>
                   
-                  {events.map(event => (
-                    <CalendarEvent key={event.id} event={event} />
-                  ))}
+                  <div className="p-1 space-y-1 overflow-y-auto max-h-[calc(100%-1.75rem)]">
+                    {day.events.map((event) => (
+                      <div 
+                        key={event.id} 
+                        className={`text-xs p-1 rounded overflow-hidden truncate cursor-mac-pointer bg-${event.color}-100 border-l-2 border-${event.color}-500`}
+                      >
+                        <div className="truncate">{event.time} {event.title}</div>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               );
             })}
@@ -128,4 +168,4 @@ const WeekView: React.FC<WeekViewProps> = ({ startDate }) => {
   );
 };
 
-export default WeekView;
+export default MonthView;

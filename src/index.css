@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -34,17 +35,16 @@
     --sidebar-border: 220 13% 91%;
     --sidebar-ring: 217.2 91.2% 59.8%;
     
-    /* Google Calendar colors */
-    --gcal-blue: 214 89% 52%;
-    --gcal-blue-hover: 214 89% 47%;
-    --gcal-red: 0 79% 63%;
-    --gcal-green: 145 63% 42%;
-    --gcal-yellow: 36 100% 65%;
-    --gcal-purple: 264 68% 71%;
-    --gcal-border: 240 5.9% 90%;
-    --gcal-text: 240 5.9% 26%;
-    --gcal-text-secondary: 240 4.8% 46%;
-    --gcal-background: 0 0% 100%;
+    /* Mac Calendar colors */
+    --mac-blue: 214 100% 50%;
+    --mac-red: 0 100% 50%;
+    --mac-green: 120 100% 40%;
+    --mac-yellow: 48 100% 50%;
+    --mac-purple: 280 100% 50%;
+    --mac-border: 0 0% 85%;
+    --mac-text: 0 0% 25%;
+    --mac-text-secondary: 0 0% 55%;
+    --mac-background: 0 0% 100%;
   }
 
   .dark {
@@ -119,16 +119,17 @@
     @apply bg-black bg-opacity-80 text-white px-4 py-1;
   }
   
+  /* Mac Calendar Specific Styles */
   .gcal-header {
-    @apply flex items-center justify-between p-4 border-b border-gray-200;
+    @apply flex items-center justify-between p-3 border-b border-gray-200;
   }
   
   .gcal-button {
-    @apply px-4 py-2 rounded-md cursor-mac-pointer hover:bg-gray-100 transition-colors;
+    @apply px-4 py-1.5 rounded-md cursor-mac-pointer hover:bg-gray-100 transition-colors;
   }
   
   .gcal-primary-button {
-    @apply bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition-colors cursor-mac-pointer;
+    @apply bg-blue-500 text-white px-4 py-1.5 rounded-md hover:bg-blue-600 transition-colors cursor-mac-pointer;
   }
   
   .gcal-sidebar {
@@ -139,12 +140,12 @@
     @apply w-16 pr-2 text-right text-xs text-gray-500;
   }
   
-  .gcal-week-view {
+  .mac-week-view {
     @apply border-l border-t;
   }
   
-  .gcal-week-body {
-    @apply divide-y;
+  .mac-month-view {
+    @apply border-l border-t;
   }
   
   .gcal-time-row {
