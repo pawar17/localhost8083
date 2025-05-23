@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import CalendarHeader from './CalendarHeader';
 import CalendarSidebar from './CalendarSidebar';
@@ -9,7 +8,7 @@ type ViewType = 'day' | 'week' | 'month' | 'year';
 
 const Calendar: React.FC = () => {
   const [currentDate, setCurrentDate] = useState(new Date());
-  const [view, setView] = useState<ViewType>('week');
+  const [view, setView] = useState<ViewType>('week'); // Setting default to week view
   
   // Get the start of the current week (Sunday)
   const getStartOfWeek = (date: Date) => {
@@ -57,7 +56,7 @@ const Calendar: React.FC = () => {
   };
   
   return (
-    <div className="flex flex-col h-full">
+    <div className="flex flex-col h-full bg-gray-900 text-blue-300">
       <CalendarHeader 
         currentDate={currentDate}
         onPrevPeriod={goToPrevPeriod}
@@ -68,7 +67,7 @@ const Calendar: React.FC = () => {
       />
       <div className="flex flex-1 overflow-hidden">
         <CalendarSidebar currentDate={currentDate} />
-        <div className="flex-1 min-h-0 overflow-auto bg-white">
+        <div className="flex-1 min-h-0 overflow-auto">
           {view === 'week' && <WeekView startDate={startOfWeek} />}
           {view === 'month' && <MonthView currentMonth={currentDate} />}
         </div>

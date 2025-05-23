@@ -1,13 +1,12 @@
 
 import React, { useState } from 'react';
-import { Clock, MapPin, Bell, Globe, Repeat } from 'lucide-react';
+import { Clock, MapPin } from 'lucide-react';
 import { 
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { Checkbox } from "@/components/ui/checkbox";
 
 export type EventType = {
   id: string;
@@ -31,24 +30,26 @@ const CalendarEvent: React.FC<CalendarEventProps> = ({ event }) => {
     let colorClasses = '';
     
     switch(event.color) {
-      case 'blue':
-        colorClasses = 'bg-blue-100 border-l-4 border-blue-500 text-blue-800';
+      case 'blue': // Personal activities
+        colorClasses = 'bg-blue-900 border border-blue-400 text-blue-300';
         break;
-      case 'green':
-        colorClasses = 'bg-green-100 border-l-4 border-green-500 text-green-800';
+      case 'green': // Work/Technical
+        colorClasses = 'bg-green-900 border border-green-400 text-green-300';
         break;
-      case 'yellow':
-        colorClasses = 'bg-yellow-100 border-l-4 border-yellow-500 text-yellow-800';
+      case 'yellow': // Research/Learning
+        colorClasses = 'bg-yellow-900 border border-yellow-400 text-yellow-300';
         break;
-      case 'red':
-        colorClasses = 'bg-red-100 border-l-4 border-red-500 text-red-800';
+      case 'red': // Meetings/Organizations
+        colorClasses = 'bg-red-900 border border-red-400 text-red-300';
         break;
-      case 'purple':
-        colorClasses = 'bg-purple-100 border-l-4 border-purple-500 text-purple-800';
+      case 'purple': // Career Development
+        colorClasses = 'bg-purple-900 border border-purple-400 text-purple-300';
         break;
+      default:
+        colorClasses = 'bg-blue-900 border border-blue-400 text-blue-300';
     }
     
-    return `rounded-md px-2 py-1 mb-1 ${colorClasses} overflow-hidden text-ellipsis w-[95%] mx-auto cursor-mac-pointer`;
+    return `rounded-sm px-1 py-1 mb-1 ${colorClasses} overflow-hidden text-ellipsis w-[95%] mx-auto cursor-mac-pointer`;
   };
   
   const getTimeDisplay = () => {
@@ -60,12 +61,12 @@ const CalendarEvent: React.FC<CalendarEventProps> = ({ event }) => {
   
   const getColorForHeader = () => {
     switch(event.color) {
-      case 'blue': return 'bg-blue-500';
-      case 'green': return 'bg-green-500';
-      case 'yellow': return 'bg-yellow-500';
-      case 'red': return 'bg-red-500';
-      case 'purple': return 'bg-purple-500';
-      default: return 'bg-gray-500';
+      case 'blue': return 'bg-blue-800';
+      case 'green': return 'bg-green-800';
+      case 'yellow': return 'bg-yellow-800';
+      case 'red': return 'bg-red-800';
+      case 'purple': return 'bg-purple-800';
+      default: return 'bg-gray-800';
     }
   };
   
@@ -76,95 +77,30 @@ const CalendarEvent: React.FC<CalendarEventProps> = ({ event }) => {
         onClick={() => setIsOpen(true)}
       >
         <div className="text-xs font-medium">{event.title}</div>
-        {event.time && <div className="text-xs">{getTimeDisplay()}</div>}
-        {event.location && <div className="text-xs truncate">{event.location}</div>}
       </div>
       
       <Dialog open={isOpen} onOpenChange={setIsOpen}>
-        <DialogContent className="p-0 max-w-md bg-gray-50 rounded-lg shadow-xl">
-          <div className="flex items-center justify-between px-3 py-2 border-b border-gray-200 bg-gray-100 rounded-t-lg">
-            <div className="flex items-center gap-4">
-              <div className="flex gap-1.5">
-                <span className="h-3 w-3 rounded-full bg-red-500"></span>
-                <span className="h-3 w-3 rounded-full bg-yellow-500"></span>
-                <span className="h-3 w-3 rounded-full bg-green-500"></span>
-              </div>
-              <div className="flex text-sm">
-                <button className="px-2 py-1 rounded hover:bg-gray-200 transition-colors">Event</button>
-                <button className="px-2 py-1 rounded bg-gray-300">Reminder</button>
-              </div>
-            </div>
-          </div>
+        <DialogContent className="p-0 max-w-md bg-gray-900 text-blue-100 rounded-lg shadow-xl border border-blue-400">
+          <DialogHeader className={`px-4 py-3 ${getColorForHeader()}`}>
+            <DialogTitle>{event.title}</DialogTitle>
+            <div className="text-sm opacity-75">{getTimeDisplay()}</div>
+          </DialogHeader>
           
           <div className="p-4">
             <div className="mb-4">
-              <input 
-                type="text" 
-                value={event.title} 
-                readOnly 
-                className="w-full text-lg font-medium border-none bg-transparent outline-none focus:ring-0 p-0"
-              />
-              <div className="text-sm text-gray-500 mt-1">Notes</div>
-              <div className="text-sm text-gray-700 mt-1">{event.description}</div>
+              <div className="text-sm">{event.description}</div>
             </div>
             
-            <div className="border-t border-gray-200 pt-3">
-              <div className="flex items-center justify-between py-1">
-                <div className="text-sm text-gray-600">remind me</div>
-                <div className="text-sm">On a Day</div>
+            {event.location && (
+              <div className="flex items-center gap-2 text-sm text-blue-300 mb-2">
+                <MapPin size={16} />
+                <span>{event.location}</span>
               </div>
-              <div className="flex items-center justify-between py-1">
-                <div className="w-4"></div>
-                <div className="text-sm">06/15/2024</div>
-              </div>
-              <div className="flex items-center py-1">
-                <div className="mr-2">
-                  <Checkbox checked={true} />
-                </div>
-                <div className="text-sm text-gray-600">At a Time</div>
-              </div>
-              <div className="flex items-center justify-between py-1">
-                <div className="w-4"></div>
-                <div className="text-sm">{getTimeDisplay()}</div>
-              </div>
-              
-              {event.location && (
-                <div className="flex items-center justify-between py-1">
-                  <div className="text-sm text-gray-600">At a Location</div>
-                  <div className="text-sm">{event.location}</div>
-                </div>
-              )}
-              
-              <div className="flex items-center justify-between py-1">
-                <div className="text-sm text-gray-600">When Messaging a Person</div>
-              </div>
-              
-              <div className="mt-2">
-                <div className="flex items-center justify-between py-1">
-                  <div className="text-sm text-gray-600">early reminder</div>
-                  <div className="text-sm">None</div>
-                </div>
-                <div className="flex items-center justify-between py-1">
-                  <div className="text-sm text-gray-600">repeat</div>
-                  <div className="text-sm">Never</div>
-                </div>
-                <div className="flex items-center justify-between py-1">
-                  <div className="text-sm text-gray-600">priority</div>
-                  <div className="text-sm">None</div>
-                </div>
-                <div className="flex items-center justify-between py-1">
-                  <div className="text-sm text-gray-600">list</div>
-                  <div className="text-sm">Errands</div>
-                </div>
-                <div className="flex items-center justify-between py-1">
-                  <div className="text-sm text-gray-600">URL</div>
-                  <div className="text-sm">None</div>
-                </div>
-                <div className="flex items-center justify-between py-1">
-                  <div className="text-sm text-gray-600">images</div>
-                  <div className="text-sm text-blue-500">+ Add image...</div>
-                </div>
-              </div>
+            )}
+            
+            <div className="flex items-center gap-2 text-sm text-blue-300">
+              <Clock size={16} />
+              <span>{getTimeDisplay()}</span>
             </div>
           </div>
         </DialogContent>
