@@ -1,4 +1,3 @@
-
 import React from 'react';
 import CalendarEvent, { EventType } from './CalendarEvent';
 
@@ -10,35 +9,50 @@ type WeekViewProps = {
 const timeSlots = Array.from({ length: 11 }, (_, i) => i + 8);
 
 const WeekView: React.FC<WeekViewProps> = ({ startDate }) => {
-  // Custom events based on user's image
+  // Full week, 2-hour events, color-matched
   const events: EventType[] = React.useMemo(() => [
-    // Personal activities - Blue
-    { id: '1', title: 'Go on a run', time: '10:00 AM', color: 'blue', description: 'Morning exercise', location: 'Park', day: 0 },
-    { id: '2', title: 'Meal Prep', time: '12:00 PM', color: 'blue', description: 'Prepare meals for the week', location: 'Home', day: 0 },
-    { id: '3', title: 'Cafe Hopping to do work!', time: '2:00 PM', color: 'blue', description: 'Work at different cafes', location: 'Local Cafes', day: 0 },
-    
-    // Work/Technical - Green
-    { id: '4', title: 'InnovateHer Meeting', time: '10:00 AM', color: 'green', description: 'Weekly team meeting', location: 'Conference Room', day: 1 },
-    { id: '5', title: 'Update GitHub', time: '12:00 PM', color: 'green', description: 'Update project repositories', location: 'Remote', day: 1 },
-    { id: '6', title: 'Arduino Projects', time: '2:00 PM', color: 'green', description: 'Work on Arduino prototypes', location: 'Lab', day: 1 },
-    
-    // Research/Learning - Yellow
-    { id: '7', title: 'Disability Visibility India', time: '12:00 PM', color: 'yellow', description: 'Research session', location: 'Library', day: 2 },
-    { id: '8', title: 'Research Project', time: '2:00 PM', color: 'yellow', description: 'Work on research paper', location: 'Study Room', day: 2 },
-    
-    // Meetings/Organizations - Red
-    { id: '9', title: 'Consulting club casework', time: '10:00 AM', color: 'red', description: 'Club meeting and case studies', location: 'Business Building', day: 3 },
-    { id: '10', title: 'Purdue Student Government Meeting', time: '2:00 PM', color: 'red', description: 'Student government weekly meeting', location: 'Student Union', day: 3 },
-    
-    // Career Development - Purple
-    { id: '11', title: 'Certifications', time: '10:00 AM', color: 'purple', description: 'Work on professional certifications', location: 'Home Office', day: 4 },
-    { id: '12', title: 'Edit resume', time: '12:00 PM', color: 'purple', description: 'Update resume with recent experiences', location: 'Home Office', day: 4 },
-    { id: '13', title: 'On campus job', time: '2:00 PM', color: 'purple', description: 'Campus employment', location: 'University', day: 4 },
-    
-    // Important Reminders - Green
-    { id: '14', title: 'Technical Projects', time: '10:00 AM', color: 'green', description: 'Work on technical portfolio projects', location: 'Home Office', day: 5 },
-    { id: '15', title: 'CALL HOME!', time: '12:00 PM', color: 'blue', description: 'Weekly call with family', location: 'Home', day: 5 },
-    { id: '16', title: 'Prepare for Interview!', time: '2:00 PM', color: 'purple', description: 'Interview preparation', location: 'Home Office', day: 5 },
+    // Sunday
+    { id: '1', title: 'Work: Sprint Planning', time: '9:00 AM', endTime: '11:00 AM', color: 'red', description: 'Plan the week with the team', location: 'Office', day: 0 },
+    { id: '2', title: 'Personal: Gym', time: '11:00 AM', endTime: '1:00 PM', color: 'blue', description: 'Workout session', location: 'Gym', day: 0 },
+    { id: '3', title: 'Meetings: Team Sync', time: '2:00 PM', endTime: '4:00 PM', color: 'yellow', description: 'Weekly team sync', location: 'Zoom', day: 0 },
+    { id: '4', title: 'Health: Yoga', time: '4:00 PM', endTime: '6:00 PM', color: 'green', description: 'Yoga for relaxation', location: 'Studio', day: 0 },
+    { id: '5', title: 'Learning: React Course', time: '7:00 PM', endTime: '9:00 PM', color: 'purple', description: 'Complete React module', location: 'Home', day: 0 },
+    // Monday
+    { id: '6', title: 'Work: Code Review', time: '9:00 AM', endTime: '11:00 AM', color: 'red', description: 'Review PRs', location: 'Office', day: 1 },
+    { id: '7', title: 'Personal: Reading', time: '11:00 AM', endTime: '1:00 PM', color: 'blue', description: 'Read a new book', location: 'Home', day: 1 },
+    { id: '8', title: 'Meetings: Client Call', time: '2:00 PM', endTime: '4:00 PM', color: 'yellow', description: 'Discuss project', location: 'Zoom', day: 1 },
+    { id: '9', title: 'Health: Run', time: '4:00 PM', endTime: '6:00 PM', color: 'green', description: 'Evening run', location: 'Park', day: 1 },
+    { id: '10', title: 'Learning: Python', time: '7:00 PM', endTime: '9:00 PM', color: 'purple', description: 'Python exercises', location: 'Home', day: 1 },
+    // Tuesday
+    { id: '11', title: 'Work: Design Review', time: '9:00 AM', endTime: '11:00 AM', color: 'red', description: 'Review UI/UX', location: 'Office', day: 2 },
+    { id: '12', title: 'Personal: Groceries', time: '11:00 AM', endTime: '1:00 PM', color: 'blue', description: 'Weekly shopping', location: 'Store', day: 2 },
+    { id: '13', title: 'Meetings: Standup', time: '2:00 PM', endTime: '4:00 PM', color: 'yellow', description: 'Daily standup', location: 'Zoom', day: 2 },
+    { id: '14', title: 'Health: Swim', time: '4:00 PM', endTime: '6:00 PM', color: 'green', description: 'Swimming laps', location: 'Pool', day: 2 },
+    { id: '15', title: 'Learning: Algorithms', time: '7:00 PM', endTime: '9:00 PM', color: 'purple', description: 'Algorithm practice', location: 'Home', day: 2 },
+    // Wednesday
+    { id: '16', title: 'Work: Feature Dev', time: '9:00 AM', endTime: '11:00 AM', color: 'red', description: 'Develop new feature', location: 'Office', day: 3 },
+    { id: '17', title: 'Personal: Coffee', time: '11:00 AM', endTime: '1:00 PM', color: 'blue', description: 'Coffee with friend', location: 'Cafe', day: 3 },
+    { id: '18', title: 'Meetings: Planning', time: '2:00 PM', endTime: '4:00 PM', color: 'yellow', description: 'Sprint planning', location: 'Zoom', day: 3 },
+    { id: '19', title: 'Health: Walk', time: '4:00 PM', endTime: '6:00 PM', color: 'green', description: 'Evening walk', location: 'Park', day: 3 },
+    { id: '20', title: 'Learning: Math', time: '7:00 PM', endTime: '9:00 PM', color: 'purple', description: 'Math exercises', location: 'Home', day: 3 },
+    // Thursday
+    { id: '21', title: 'Work: Demo Prep', time: '9:00 AM', endTime: '11:00 AM', color: 'red', description: 'Prepare for demo', location: 'Office', day: 4 },
+    { id: '22', title: 'Personal: Call Mom', time: '11:00 AM', endTime: '1:00 PM', color: 'blue', description: 'Catch up call', location: 'Home', day: 4 },
+    { id: '23', title: 'Meetings: Demo', time: '2:00 PM', endTime: '4:00 PM', color: 'yellow', description: 'Product demo', location: 'Zoom', day: 4 },
+    { id: '24', title: 'Health: Bike', time: '4:00 PM', endTime: '6:00 PM', color: 'green', description: 'Biking', location: 'Trail', day: 4 },
+    { id: '25', title: 'Learning: History', time: '7:00 PM', endTime: '9:00 PM', color: 'purple', description: 'History reading', location: 'Home', day: 4 },
+    // Friday
+    { id: '26', title: 'Work: Retrospective', time: '9:00 AM', endTime: '11:00 AM', color: 'red', description: 'Sprint retro', location: 'Office', day: 5 },
+    { id: '27', title: 'Personal: Movie', time: '11:00 AM', endTime: '1:00 PM', color: 'blue', description: 'Watch a movie', location: 'Theater', day: 5 },
+    { id: '28', title: 'Meetings: 1:1', time: '2:00 PM', endTime: '4:00 PM', color: 'yellow', description: 'One-on-one', location: 'Zoom', day: 5 },
+    { id: '29', title: 'Health: Meditation', time: '4:00 PM', endTime: '6:00 PM', color: 'green', description: 'Meditation session', location: 'Home', day: 5 },
+    { id: '30', title: 'Learning: Science', time: '7:00 PM', endTime: '9:00 PM', color: 'purple', description: 'Science doc', location: 'Home', day: 5 },
+    // Saturday
+    { id: '31', title: 'Work: Docs', time: '9:00 AM', endTime: '11:00 AM', color: 'red', description: 'Documentation', location: 'Office', day: 6 },
+    { id: '32', title: 'Personal: Shopping', time: '11:00 AM', endTime: '1:00 PM', color: 'blue', description: 'Shopping trip', location: 'Mall', day: 6 },
+    { id: '33', title: 'Meetings: Review', time: '2:00 PM', endTime: '4:00 PM', color: 'yellow', description: 'Review session', location: 'Zoom', day: 6 },
+    { id: '34', title: 'Health: Hike', time: '4:00 PM', endTime: '6:00 PM', color: 'green', description: 'Hiking', location: 'Trail', day: 6 },
+    { id: '35', title: 'Learning: Art', time: '7:00 PM', endTime: '9:00 PM', color: 'purple', description: 'Art class', location: 'Studio', day: 6 },
   ], []);
   
   // Generate week days
@@ -75,12 +89,12 @@ const WeekView: React.FC<WeekViewProps> = ({ startDate }) => {
   };
   
   return (
-    <div className="mac-week-view h-full bg-gray-900 text-blue-300">
+    <div className="mac-week-view h-full bg-white">
       {/* Time column and day headers */}
-      <div className="grid grid-cols-8 border-b border-blue-800">
+      <div className="grid grid-cols-8 border-b">
         <div className="text-right pr-2"></div>
         {weekDays.map((day, index) => (
-          <div key={index} className="border-l border-blue-800">
+          <div key={index} className="border-l">
             {formatDayHeader(day)}
           </div>
         ))}
@@ -88,18 +102,18 @@ const WeekView: React.FC<WeekViewProps> = ({ startDate }) => {
       {/* Time grid */}
       <div className="overflow-auto">
         {timeSlots.map((hour) => (
-          <div key={hour} className="grid grid-cols-8 border-b border-blue-800">
+          <div key={hour} className="grid grid-cols-8 border-b">
             {/* Time gutter */}
-            <div className="text-right pr-2 py-1 text-xs text-blue-400 pt-2">
-              {hour === 12 ? 'Noon' : hour > 12 ? `${hour - 12} PM` : `${hour} AM`}
+            <div className="text-right pr-2 py-1 text-xs text-gray-500 pt-2">
+              {hour === 12 ? '12 PM' : hour > 12 ? `${hour - 12} PM` : `${hour} AM`}
             </div>
             {/* Day columns */}
             {weekDays.map((_, dayIndex) => {
               const events = getEventsForTimeSlot(dayIndex, hour);
               return (
-                <div key={dayIndex} className="border-l border-blue-800 min-h-[60px] relative">
+                <div key={dayIndex} className="border-l min-h-[60px] relative">
                   {/* Half hour divider */}
-                  <div className="absolute w-full border-t border-dashed border-blue-900 top-[50%]"></div>
+                  <div className="absolute w-full border-t border-dashed border-gray-100 top-[50%]"></div>
                   
                   {events.map(event => (
                     <CalendarEvent key={event.id} event={event} />
