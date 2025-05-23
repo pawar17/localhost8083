@@ -6,14 +6,14 @@ const MacWindow: React.FC<MacWindowProps> = ({
   children
 }) => {
   return (
-    <div className="mac-window w-full max-w-6xl mx-auto my-8 flex flex-col h-full">
+    <div className="mac-window w-full max-w-6xl mx-auto flex flex-col">
       <div className="mac-titlebar">
         <div className="flex">
           <div className="mac-button mac-close"></div>
           <div className="mac-button mac-minimize"></div>
           <div className="mac-button mac-maximize"></div>
         </div>
-        <div className="flex-1 text-center text-sm text-gray-800\n">Calendar</div>
+        <div className="flex-1 text-center text-sm text-gray-800 overflow-hidden text-ellipsis whitespace-nowrap">Calendar • Click on any event to expand it</div>
       </div>
       <div className="flex-1 min-h-0 overflow-hidden flex flex-col">
         {children}

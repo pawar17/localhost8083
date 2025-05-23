@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import CalendarHeader from './CalendarHeader';
 import CalendarSidebar from './CalendarSidebar';
@@ -37,7 +36,7 @@ const Calendar: React.FC = () => {
   };
   
   return (
-    <div className="flex flex-col h-full">
+    <div className="flex flex-col">
       <CalendarHeader 
         currentDate={currentDate}
         onPrevWeek={goToPrevWeek}
@@ -46,7 +45,7 @@ const Calendar: React.FC = () => {
       />
       <div className="flex flex-1 overflow-hidden">
         <CalendarSidebar />
-        <div className="flex-1 overflow-auto">
+        <div className="flex-1 min-h-0 overflow-auto">
           <WeekView startDate={startOfWeek} />
         </div>
       </div>

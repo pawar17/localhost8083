@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
+import FindMyPopup from './FindMyPopup';
 
 const MacDock: React.FC = () => {
   const [showSpotify, setShowSpotify] = useState(false);
   const [showContact, setShowContact] = useState(false);
+  const [showEmail, setShowEmail] = useState(false);
+  const [showFindMy, setShowFindMy] = useState(false);
 
   const dockIcons = [
     { 
@@ -132,6 +135,15 @@ const MacDock: React.FC = () => {
     },
     {
       icon: (
+        <div className="w-10 h-10 flex items-center justify-center">
+          <img src="/App icons/FindMy.png" alt="Find My" className="w-full h-full object-contain" />
+        </div>
+      ),
+      name: "Find My",
+      onClick: () => setShowFindMy((prev) => !prev),
+    },
+    {
+      icon: (
         <div className="w-12 h-12 flex items-center justify-center">
           <img src="/App icons/LinkedIn.png" alt="LinkedIn" className="w-full h-full object-contain" />
         </div>
@@ -155,7 +167,7 @@ const MacDock: React.FC = () => {
                 {item.icon}
               </div>
               <div className="opacity-0 group-hover:opacity-100 absolute -bottom-8 bg-black/75 text-white text-xs px-2 py-1 rounded-md whitespace-nowrap">
-                {item.name}
+                {item.onClick ? 'click me!' : item.name}
               </div>
               <div className="h-1 w-1 bg-white/60 rounded-full mt-1 opacity-0 group-hover:opacity-100"></div>
             </div>
@@ -206,13 +218,14 @@ const MacDock: React.FC = () => {
                 </tr>
                 <tr className="border-t border-gray-200">
                   <td className="text-gray-400 py-1 pr-2 text-right align-top">note</td>
-                  <td className="text-gray-400 py-1 pl-2 italic"> </td>
+                  <td className="text-gray-700 py-1 pl-2">Feel free to reach out :)</td>
                 </tr>
               </tbody>
             </table>
           </div>
         </div>
       </div>
+      {showFindMy && <FindMyPopup onClose={() => setShowFindMy(false)} />}
     </>
   );
 };
