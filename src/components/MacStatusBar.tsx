@@ -48,7 +48,7 @@ const MacStatusBar: React.FC = () => {
   };
 
   return (
-    <div className="mac-status-bar flex items-center justify-between bg-opacity-80 text-white px-4 py-1 text-sm bg-stone-100">
+    <div className="mac-status-bar flex items-center justify-between text-white px-4 py-1 text-sm bg-gray-200 bg-opacity-80">
       <div className="flex items-center gap-4">
         <img src="/logo/icon.png" alt="Apple Logo" className="h-6 w-auto" />
         <span className="text-xs font-medium text-zinc-600">Aadya's Portfolio</span>

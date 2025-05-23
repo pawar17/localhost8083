@@ -6,13 +6,11 @@ import MacDock from '../components/MacDock';
 
 const Index: React.FC = () => {
   return (
-    <div className="h-screen w-screen flex flex-col bg-center bg-cover" style={{ backgroundImage: 'url(\/wallpaper mac.png)' }}>
-      <div className="h-10 flex-shrink-0">
-        <MacStatusBar />
-      </div>
-      <div className="flex-1 min-h-0 flex flex-col w-full px-4 py-2">
+    <div className="h-screen w-screen flex flex-col bg-wallpaper">
+      <MacStatusBar />
+      <div className="flex-1 min-h-0 flex flex-col w-full px-4 py-4 max-w-screen-lg mx-auto">
         <div className="flex flex-col flex-1 min-h-0">
-          <MacWindow>
+          <MacWindow title="Calendar">
             <div className="flex-1 min-h-0 overflow-auto">
               <Calendar />
             </div>

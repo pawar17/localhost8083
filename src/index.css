@@ -62,7 +62,7 @@
     @apply bg-background text-foreground;
     font-feature-settings: "rlig" 1, "calt" 1;
     cursor: url('/cursors/cursor1.png'), auto;
-    background: url('/wallpaper mac.jpg') no-repeat center center fixed;
+    background: url('/mac wallpaper 3.png') no-repeat center center fixed;
     background-size: cover;
   }
 }
@@ -169,10 +169,6 @@
   
   .gcal-event-yellow {
     @apply bg-yellow-100 border-l-4 border-yellow-500;
-  }
-  
-  .gcal-event-red {
-    @apply bg-red-100 border-l-4 border-red-500;
   }
   
   .gcal-event-purple {
