@@ -56,7 +56,7 @@ const Calendar: React.FC = () => {
   };
   
   return (
-    <div className="flex flex-col h-full bg-gray-900 text-blue-300">
+    <div className="flex flex-col h-full bg-white text-gray-800">
       <CalendarHeader 
         currentDate={currentDate}
         onPrevPeriod={goToPrevPeriod}
