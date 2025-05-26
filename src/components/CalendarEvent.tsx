@@ -1,5 +1,4 @@
-
-import React, { useState } from 'react';
+import React, { useState, CSSProperties } from 'react';
 import { Clock, MapPin, Bell, Globe, Repeat } from 'lucide-react';
 import { 
   Dialog,
