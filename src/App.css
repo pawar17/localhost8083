@@ -42,11 +42,12 @@
   color: #888;
 }
 
-/* Adding global cursor style */
+/* Using cursor1.png for default cursor */
 html, body, #root {
-  cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'><path fill='black' d='M4.5,1c0,0-4,2-4,7s3,7,7,7V1H4.5z'/></svg>"), auto !important;
+  cursor: url('/cursors/cursor1.png'), auto !important;
 }
 
+/* Using cursor2.png for interactive elements */
 button, a, input, select, textarea, [role="button"] {
-  cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'><path fill='black' d='M4.5,1c0,0-4,2-4,7s3,7,7,7V1H4.5z'/></svg>"), pointer !important;
+  cursor: url('/cursors/cursor2.png'), pointer !important;
 }

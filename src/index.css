@@ -55,29 +55,35 @@
   
   * {
     @apply border-border;
+    cursor: url('/cursors/cursor1.png'), auto !important;
   }
   
   body {
     @apply bg-background text-foreground;
     font-feature-settings: "rlig" 1, "calt" 1;
-    cursor: url('/cursors/cursor1.png'), auto;
+    cursor: url('/cursors/cursor1.png'), auto !important;
     background: url('/mac wallpaper 3.png') no-repeat center center fixed;
     background-size: cover;
+  }
+  
+  /* Interactive elements use cursor2 */
+  button, a, input, select, textarea, [role="button"], .cursor-mac-pointer {
+    cursor: url('/cursors/cursor2.png'), pointer !important;
   }
 }
 
 @layer utilities {
   /* Mac cursor styles */
   .cursor-mac {
-    cursor: url('/cursors/cursor1.png'), auto;
+    cursor: url('/cursors/cursor1.png'), auto !important;
   }
   
   .cursor-mac-pointer {
-    cursor: url('/cursors/cursor2.png'), pointer;
+    cursor: url('/cursors/cursor2.png'), pointer !important;
   }
 
   .cursor-mac-text {
-    cursor: url('/cursors/cursor2.png'), text;
+    cursor: url('/cursors/cursor2.png'), text !important;
   }
   
   .mac-dock-item {
