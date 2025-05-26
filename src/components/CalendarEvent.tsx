@@ -1,3 +1,4 @@
+
 import React, { useState, CSSProperties } from 'react';
 import { Clock, MapPin, Bell, Globe, Repeat } from 'lucide-react';
 import { 
@@ -41,9 +42,6 @@ const CalendarEvent: React.FC<CalendarEventProps> = ({ event, style }) => {
   
   const getEventClasses = () => {
     let colorClasses = '';
-    let borderColorClass = '';
-    let textColorClass = '';
-    let bgColorClass = '';
 
     switch(event.color) {
       case 'blue':
@@ -63,7 +61,8 @@ const CalendarEvent: React.FC<CalendarEventProps> = ({ event, style }) => {
         break;
     }
     
-    return `rounded-md px-2 py-1 mb-1 ${colorClasses} overflow-hidden text-ellipsis w-[95%] mx-auto cursor-mac-pointer`;
+    const cursorClass = event.isExpandable ? 'cursor-pointer hover:opacity-80' : '';
+    return `rounded-md px-2 py-1 mb-1 ${colorClasses} overflow-hidden text-ellipsis w-[95%] mx-auto ${cursorClass}`;
   };
   
   const getTimeDisplay = () => {
@@ -87,9 +86,12 @@ const CalendarEvent: React.FC<CalendarEventProps> = ({ event, style }) => {
   return (
     <>
       <div 
-        className={`${getEventClasses()} ${event.isExpandable ? 'cursor-mac-pointer' : ''}`}
+        className={getEventClasses()}
         onClick={event.isExpandable ? () => setIsOpen(true) : undefined}
-        style={style}
+        style={{
+          ...style,
+          cursor: event.isExpandable ? 'url(/cursors/cursor2.png), pointer' : 'url(/cursors/cursor1.png), auto'
+        }}
       >
         <div className="text-xs font-medium">{event.title}</div>
         {event.time && <div className="text-xs">{getTimeDisplay()}</div>}
