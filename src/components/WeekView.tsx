@@ -1,3 +1,4 @@
+
 import React, { CSSProperties } from 'react';
 import CalendarEvent, { EventType } from './CalendarEvent';
 
@@ -5,8 +6,8 @@ type WeekViewProps = {
   startDate: Date;
 };
 
-// Time slots from 8 AM to 6 PM (representing the start of each hour)
-const timeSlots = Array.from({ length: 11 }, (_, i) => i + 8); // 8, 9, ..., 18
+// Time slots from 8 AM to 7 PM (representing the start of each hour)
+const timeSlots = Array.from({ length: 12 }, (_, i) => i + 8); // 8, 9, ..., 19
 const totalHours = timeSlots.length;
 const hoursInDay = 24;
 const minutesInHour = 60;
@@ -63,35 +64,45 @@ const WeekView: React.FC<WeekViewProps> = ({ startDate }) => {
     return day;
   });
   
-  // Format day header (Mon 15)
+  // Format day header like Apple Calendar (25 Sun, 26 Mon, etc.)
   const formatDayHeader = (date: Date) => {
     const today = new Date();
     const isToday = date.toDateString() === today.toDateString();
+    const dayName = date.toLocaleDateString('en-US', { weekday: 'short' });
+    const dayNumber = date.getDate();
 
     return (
-      <div className={`text-center py-2 ${isToday ? 'border-b-2 border-red-500' : ''}`}>
-        <div className="text-sm text-gray-600">{date.toLocaleDateString('en-US', { weekday: 'short' })}</div>
+      <div className="text-center py-3 px-2">
         <div className={`text-lg font-medium ${isToday ? 'text-red-500' : 'text-gray-800'}`}>
-          {date.getDate()}
+          {dayNumber}
         </div>
+        <div className="text-sm text-gray-600 -mt-1">
+          {dayName}
+        </div>
+        {isToday && (
+          <div className="w-6 h-6 bg-red-500 rounded-full flex items-center justify-center mx-auto mt-1">
+            <div className="text-xs text-white font-medium">{dayNumber}</div>
+          </div>
+        )}
       </div>
     );
   };
   
   return (
-    <div className="mac-week-view h-full bg-white text-gray-800 flex flex-col"> {/* Use flex-col to arrange time header and grid */}
-      {/* Time column and day headers */}
-      <div className="grid grid-cols-8 border-b border-gray-300 flex-shrink-0"> {/* flex-shrink-0 to prevent shrinking */}
-        <div className="text-right pr-2"></div>
+    <div className="mac-week-view h-full bg-white text-gray-800 flex flex-col">
+      {/* Day headers */}
+      <div className="grid grid-cols-8 border-b border-gray-200 flex-shrink-0">
+        <div className="w-20"></div>
         {weekDays.map((day, index) => (
-          <div key={index} className="border-l border-gray-300">
+          <div key={index} className="border-l border-gray-200 first:border-l-0">
             {formatDayHeader(day)}
           </div>
         ))}
       </div>
-      {/* Time grid with events - Restructured */}
+      
+      {/* Time grid with events */}
       <div className="flex-1 overflow-auto">
-        <div className="grid grid-cols-8 h-full">
+        <div className="grid grid-cols-8">
           {timeSlots.map((hour, hourIndex) => {
             // Calculate slot start and end times for the current hour
             const slotStartTimeMinutes = hour * minutesInHour;
@@ -100,78 +111,68 @@ const WeekView: React.FC<WeekViewProps> = ({ startDate }) => {
             return (
               <React.Fragment key={hour}>
                 {/* Time gutter for the hour */}
-                <div className="text-right text-xs text-gray-500 pr-2 border-r border-b border-gray-300 flex items-start justify-end h-[60px]"> {/* align-items: start to align text at top */}
-                   {hour === 12 ? 'Noon' : hour > 12 ? `${hour - 12} PM` : `${hour} AM`}
-            </div>
-                 {/* Daily columns for the hour */}
-            {weekDays.map((_, dayIndex) => {
+                <div className="w-20 text-right text-xs text-gray-500 pr-3 border-r border-gray-200 flex items-start justify-end h-16 pt-1">
+                  {hour === 0 ? '12 AM' : 
+                   hour === 12 ? '12 PM' : 
+                   hour > 12 ? `${hour - 12} PM` : `${hour} AM`}
+                </div>
+                
+                {/* Daily columns for the hour */}
+                {weekDays.map((_, dayIndex) => {
                   // Filter events for the current day and within this hour slot
                   const eventsForHourSlot = events.filter(event => {
-                      const startTimeMinutes = parseTimeToMinutes(event.time);
-                      const endTimeMinutes = parseTimeToMinutes(event.endTime || event.time);
+                    const startTimeMinutes = parseTimeToMinutes(event.time);
+                    const endTimeMinutes = parseTimeToMinutes(event.endTime || event.time);
 
-                      return event.day === dayIndex &&
-                             ((startTimeMinutes < slotEndTimeMinutes && endTimeMinutes > slotStartTimeMinutes) || // Event overlaps with the hour slot
-                              (startTimeMinutes >= slotStartTimeMinutes && startTimeMinutes < slotEndTimeMinutes) || // Event starts within the hour slot
-                              (endTimeMinutes > slotStartTimeMinutes && endTimeMinutes <= slotEndTimeMinutes)); // Event ends within the hour slot
+                    return event.day === dayIndex &&
+                           ((startTimeMinutes < slotEndTimeMinutes && endTimeMinutes > slotStartTimeMinutes) || 
+                            (startTimeMinutes >= slotStartTimeMinutes && startTimeMinutes < slotEndTimeMinutes) || 
+                            (endTimeMinutes > slotStartTimeMinutes && endTimeMinutes <= slotEndTimeMinutes)); 
                   });
 
                   return (
-                    <div key={dayIndex} className="border-b border-gray-300 relative h-[60px]"> {/* border-b for hour line, h-[60px] for slot height, removed border-l */}
-                       {/* Render events that fall within this hour slot */}
-                       {eventsForHourSlot.map(event => {
-                         const startTimeMinutes = parseTimeToMinutes(event.time);
-                         const endTimeMinutes = parseTimeToMinutes(event.endTime || event.time);
-                         const durationMinutes = endTimeMinutes - startTimeMinutes;
+                    <div key={dayIndex} className="border-b border-gray-200 border-l border-gray-200 first:border-l-0 relative h-16">
+                      {/* Render events that fall within this hour slot */}
+                      {eventsForHourSlot.map(event => {
+                        const startTimeMinutes = parseTimeToMinutes(event.time);
+                        const endTimeMinutes = parseTimeToMinutes(event.endTime || event.time);
+                        const durationMinutes = endTimeMinutes - startTimeMinutes;
 
-                         // Calculate top position and height relative to the start of this hour slot
-                         const topOffsetMinutes = startTimeMinutes - slotStartTimeMinutes;
-                         const topPosition = (topOffsetMinutes / minutesInHour) * 60; // Convert minutes offset to pixels
-                         const eventHeight = (durationMinutes / minutesInHour) * 60; // Convert duration in minutes to pixels
+                        // Calculate top position and height relative to the start of this hour slot
+                        const topOffsetMinutes = startTimeMinutes - slotStartTimeMinutes;
+                        const topPosition = (topOffsetMinutes / minutesInHour) * 64; // Convert minutes offset to pixels (64px = 4rem height)
+                        const eventHeight = (durationMinutes / minutesInHour) * 64; // Convert duration in minutes to pixels
 
-                         const eventStyle: CSSProperties = {
-                           top: `${topPosition}px`,
-                           height: `${eventHeight}px`,
-                           position: 'absolute',
-                           left: '2px',
-                           right: '2px',
-                           zIndex: 10,
-                         };
+                        const eventStyle: CSSProperties = {
+                          top: `${topPosition}px`,
+                          height: `${eventHeight}px`,
+                          position: 'absolute',
+                          left: '2px',
+                          right: '2px',
+                          zIndex: 10,
+                        };
 
-                         // Only render the event if it starts within this hour slot or if it's a multi-hour event
-                         // that started in a previous slot but extends into this one.
-                         // We can simplify this by rendering the event in the slot where it starts
-                         // and let its height cover subsequent slots.
-                          const eventStartsInThisSlot = startTimeMinutes >= slotStartTimeMinutes && startTimeMinutes < slotEndTimeMinutes;
+                        // Only render the event if it starts within this hour slot
+                        const eventStartsInThisSlot = startTimeMinutes >= slotStartTimeMinutes && startTimeMinutes < slotEndTimeMinutes;
 
-                          if (eventStartsInThisSlot) {
-              return (
-                                <CalendarEvent
-                                  key={event.id}
-                                  event={event}
-                                  style={eventStyle}
-                                />
-                              );
-                          } else if (startTimeMinutes < slotStartTimeMinutes && endTimeMinutes > slotStartTimeMinutes) {
-                             // This handles events that span across multiple hours and need to be visible in later hour slots
-                             // We might need to adjust the rendering logic slightly if events need to be fully contained within a slot div.
-                             // For now, the absolute positioning with height calculation should largely handle this visually.
-                             // A more robust solution for multi-day/multi-hour events might involve calculating the portion of the event
-                             // that falls within this specific hour slot and rendering a smaller, segmented event block.
-                             // However, for the current goal of basic alignment and placement based on the screenshot, the current absolute positioning approach should work.
-                             // We'll stick to rendering events only in their starting hour slot for simplicity with absolute positioning across the grid.
-                             return null; // Only render event in its starting slot
-                          }
-                          return null;
-
-                       })}
-                </div>
+                        if (eventStartsInThisSlot) {
+                          return (
+                            <CalendarEvent
+                              key={event.id}
+                              event={event}
+                              style={eventStyle}
+                            />
+                          );
+                        }
+                        return null;
+                      })}
+                    </div>
                   );
                 })}
               </React.Fragment>
-              );
-            })}
-          </div>
+            );
+          })}
+        </div>
       </div>
     </div>
   );
