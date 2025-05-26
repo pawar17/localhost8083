@@ -1,5 +1,5 @@
 import React from 'react';
-import { Calendar } from 'lucide-react';
+import { Calendar, Plus } from 'lucide-react';
 
 type CalendarSidebarProps = {
   currentDate: Date;
@@ -33,7 +33,15 @@ const CalendarSidebar: React.FC<CalendarSidebarProps> = ({ currentDate }) => {
   
   return (
     <div className="gcal-sidebar w-64 bg-gray-50 p-4 border-r border-gray-200">
-      <div className="text-sm font-medium mb-4 text-gray-700">iCloud</div>
+      <div className="text-lg font-medium mb-4 text-gray-800">iCloud</div>
+      
+      {/* Create Button */}
+      <div className="mb-6">
+        <button className="gcal-primary-button flex items-center justify-center rounded-md bg-blue-500 hover:bg-blue-600 text-white px-3 py-1.5 text-sm w-full">
+          <Plus className="w-4 h-4 mr-1" />
+          <span>Create</span>
+        </button>
+      </div>
       
       {/* Mini Month View */}
       <div className="mb-6">
