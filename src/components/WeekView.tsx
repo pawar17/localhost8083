@@ -1,3 +1,4 @@
+
 import React, { CSSProperties } from 'react';
 import CalendarEvent, { EventType } from './CalendarEvent';
 
@@ -86,14 +87,14 @@ const WeekView: React.FC<WeekViewProps> = ({ startDate }) => {
       </div>
     );
   };
-  
+
   return (
-    <div className="mac-week-view h-full bg-white text-gray-800 flex flex-col">
+    <div className="h-full bg-white text-gray-800 flex flex-col">
       {/* Day headers */}
-      <div className="week-header-grid">
-        <div className="w-20"></div>
+      <div className="calendar-week-header">
+        <div className="time-column-header"></div>
         {weekDays.map((day, index) => (
-          <div key={index} className="header-cell">
+          <div key={index} className="day-header-cell">
             {formatDayHeader(day)}
           </div>
         ))}
@@ -101,7 +102,7 @@ const WeekView: React.FC<WeekViewProps> = ({ startDate }) => {
       
       {/* Time grid with events */}
       <div className="flex-1 overflow-auto">
-        <div className="week-time-grid">
+        <div className="calendar-week-grid">
           {timeSlots.map((hour) => {
             // Calculate slot start and end times for the current hour
             const slotStartTimeMinutes = hour * minutesInHour;
@@ -110,7 +111,7 @@ const WeekView: React.FC<WeekViewProps> = ({ startDate }) => {
             return (
               <React.Fragment key={hour}>
                 {/* Time slot */}
-                <div className="time-slot">
+                <div className="time-label-cell">
                   {hour === 0 ? '12 AM' : 
                    hour === 12 ? '12 PM' : 
                    hour > 12 ? `${hour - 12} PM` : `${hour} AM`}
@@ -130,7 +131,7 @@ const WeekView: React.FC<WeekViewProps> = ({ startDate }) => {
                   });
 
                   return (
-                    <div key={dayIndex} className="grid-cell">
+                    <div key={dayIndex} className="day-cell">
                       {/* Render events that fall within this hour slot */}
                       {eventsForHourSlot.map(event => {
                         const startTimeMinutes = parseTimeToMinutes(event.time);
