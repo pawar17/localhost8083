@@ -1,4 +1,3 @@
-
 import React, { useState, CSSProperties } from 'react';
 import { Clock, MapPin, Bell, Globe, Repeat } from 'lucide-react';
 import { 
@@ -62,7 +61,7 @@ const CalendarEvent: React.FC<CalendarEventProps> = ({ event, style }) => {
     }
     
     const cursorClass = event.isExpandable ? 'cursor-pointer hover:opacity-80' : '';
-    return `rounded-md px-2 py-1 mb-1 ${colorClasses} overflow-hidden text-ellipsis w-[95%] mx-auto ${cursorClass}`;
+    return `rounded-md px-3 py-2 mb-1 ${colorClasses} overflow-hidden text-ellipsis w-[98%] mx-auto ${cursorClass}`;
   };
   
   const getTimeDisplay = () => {
