@@ -151,6 +151,15 @@ const MacDock: React.FC = () => {
       name: "LinkedIn",
       onClick: () => window.open('https://www.linkedin.com/in/aadyapawar/', '_blank'),
     },
+    {
+      icon: (
+        <div className="w-10 h-10 flex items-center justify-center">
+          <img src="/App icons/Pinterest.png" alt="Pinterest" className="w-full h-full object-contain" />
+        </div>
+      ),
+      name: "Pinterest",
+      onClick: () => window.open('https://pin.it/2koY5rhiP', '_blank'),
+    },
   ];
 
   return (

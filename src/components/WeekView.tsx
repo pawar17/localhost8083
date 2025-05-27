@@ -1,4 +1,3 @@
-
 import React, { CSSProperties } from 'react';
 import CalendarEvent, { EventType } from './CalendarEvent';
 
@@ -16,22 +15,22 @@ const WeekView: React.FC<WeekViewProps> = ({ startDate }) => {
   // Mock events based on the screenshot layout
   const events: EventType[] = React.useMemo(() => [
     { id: '1', title: 'Go on a run', time: '8:00 AM', endTime: '9:00 AM', color: 'blue', description: '', day: 0, isExpandable: true }, // Monday
-    { id: '2', title: 'Meal Prep', time: '9:00 AM', endTime: '11:00 AM', color: 'blue', description: '', day: 0, isExpandable: false }, // Monday
-    { id: '3', title: 'Cafe Hopping to do work!', time: '1:00 PM', endTime: '4:00 PM', color: 'blue', description: '', day: 0, isExpandable: false }, // Monday
+    { id: '2', title: 'Meal Prep', time: '9:00 AM', endTime: '11:00 AM', color: 'green', description: '', day: 0, isExpandable: false }, // Monday
+    { id: '3', title: 'Cafe Hopping to do work!', time: '1:00 PM', endTime: '4:00 PM', color: 'yellow', description: '', day: 0, isExpandable: false }, // Monday
 
     { id: '4', title: 'InnovateHer Meeting', time: '8:30 AM', endTime: '10:00 AM', color: 'green', description: '', day: 1, isExpandable: true }, // Tuesday
-    { id: '5', title: 'Update GitHub', time: '10:30 AM', endTime: '12:00 PM', color: 'green', description: '', day: 1, isExpandable: true }, // Tuesday
-    { id: '6', title: 'Arduino Projects', time: '1:00 PM', endTime: '3:30 PM', color: 'green', description: '', day: 1, isExpandable: true }, // Tuesday
+    { id: '5', title: 'Update GitHub', time: '10:30 AM', endTime: '12:00 PM', color: 'blue', description: '', day: 1, isExpandable: true }, // Tuesday
+    { id: '6', title: 'Arduino Projects', time: '1:00 PM', endTime: '3:30 PM', color: 'red', description: '', day: 1, isExpandable: true }, // Tuesday
 
-    { id: '7', title: 'Disability Visibility India', time: '10:00 AM', endTime: '12:00 PM', color: 'yellow', description: '', day: 2, isExpandable: false }, // Wednesday
-    { id: '8', title: 'Research Project', time: '1:30 PM', endTime: '3:30 PM', color: 'yellow', description: '', day: 2, isExpandable: false }, // Wednesday
+    { id: '7', title: 'Disability Visibility India', time: '10:00 AM', endTime: '12:00 PM', color: 'yellow', description: '', day: 2, isExpandable: true }, // Wednesday
+    { id: '8', title: 'Research Project', time: '1:30 PM', endTime: '3:30 PM', color: 'purple', description: '', day: 2, isExpandable: true }, // Wednesday
 
     { id: '9', title: 'Consulting club casework', time: '8:30 AM', endTime: '10:30 AM', color: 'red', description: '', day: 3, isExpandable: true }, // Thursday
-    { id: '10', title: 'Purdue Student Government', time: '12:00 PM', endTime: '1:30 PM', color: 'red', description: '', day: 3, isExpandable: true }, // Thursday
+    { id: '10', title: 'Purdue Student Government', time: '12:00 PM', endTime: '1:30 PM', color: 'blue', description: '', day: 3, isExpandable: true }, // Thursday
 
     { id: '11', title: 'Certifications', time: '8:30 AM', endTime: '11:00 AM', color: 'purple', description: '', day: 4, isExpandable: true }, // Friday
-    { id: '12', title: 'Edit resume', time: '11:30 AM', endTime: '1:00 PM', color: 'purple', description: '', day: 4, isExpandable: true }, // Friday
-    { id: '13', title: 'On campus job', time: '2:00 PM', endTime: '4:30 PM', color: 'purple', description: '', day: 4, isExpandable: false }, // Friday
+    { id: '12', title: 'Edit resume', time: '11:30 AM', endTime: '1:00 PM', color: 'green', description: '', day: 4, isExpandable: true }, // Friday
+    { id: '13', title: 'On campus job', time: '2:00 PM', endTime: '4:30 PM', color: 'red', description: '', day: 4, isExpandable: true }, // Friday
 
     { id: '14', title: 'Technical Projects', time: '8:30 AM', endTime: '10:30 AM', color: 'blue', description: '', day: 5, isExpandable: true }, // Saturday
     { id: '15', title: 'CALL HOME!', time: '11:00 AM', endTime: '1:00 PM', color: 'yellow', description: '', day: 5, isExpandable: false }, // Saturday
