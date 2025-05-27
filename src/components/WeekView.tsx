@@ -1,4 +1,3 @@
-
 import React, { CSSProperties } from 'react';
 import CalendarEvent, { EventType } from './CalendarEvent';
 
@@ -90,89 +89,85 @@ const WeekView: React.FC<WeekViewProps> = ({ startDate }) => {
 
   return (
     <div className="h-full bg-white text-gray-800 flex flex-col">
-      {/* Day headers */}
-      <div className="calendar-week-header">
-        <div className="time-column-header"></div>
+      {/* Clean calendar grid using CSS Grid */}
+      <div className="clean-calendar-grid">
+        {/* Header Row */}
+        <div className="clean-time-slot clean-header-cell"></div>
         {weekDays.map((day, index) => (
-          <div key={index} className="day-header-cell">
+          <div key={index} className="clean-header-cell">
             {formatDayHeader(day)}
           </div>
         ))}
-      </div>
-      
-      {/* Time grid with events */}
-      <div className="flex-1 overflow-auto">
-        <div className="calendar-week-grid">
-          {timeSlots.map((hour) => {
-            // Calculate slot start and end times for the current hour
-            const slotStartTimeMinutes = hour * minutesInHour;
-            const slotEndTimeMinutes = (hour + 1) * minutesInHour;
 
-            return (
-              <React.Fragment key={hour}>
-                {/* Time slot */}
-                <div className="time-label-cell">
-                  {hour === 0 ? '12 AM' : 
-                   hour === 12 ? '12 PM' : 
-                   hour > 12 ? `${hour - 12} PM` : `${hour} AM`}
-                </div>
-                
-                {/* Daily columns for the hour */}
-                {weekDays.map((_, dayIndex) => {
-                  // Filter events for the current day and within this hour slot
-                  const eventsForHourSlot = events.filter(event => {
-                    const startTimeMinutes = parseTimeToMinutes(event.time);
-                    const endTimeMinutes = parseTimeToMinutes(event.endTime || event.time);
+        {/* Time rows */}
+        {timeSlots.map((hour) => {
+          const slotStartTimeMinutes = hour * minutesInHour;
+          const slotEndTimeMinutes = (hour + 1) * minutesInHour;
 
-                    return event.day === dayIndex &&
-                           ((startTimeMinutes < slotEndTimeMinutes && endTimeMinutes > slotStartTimeMinutes) || 
-                            (startTimeMinutes >= slotStartTimeMinutes && startTimeMinutes < slotEndTimeMinutes) || 
-                            (endTimeMinutes > slotStartTimeMinutes && endTimeMinutes <= slotEndTimeMinutes)); 
-                  });
+          return (
+            <React.Fragment key={hour}>
+              {/* Time slot */}
+              <div className="clean-time-slot">
+                {hour === 0 ? '12 AM' : 
+                 hour === 12 ? '12 PM' : 
+                 hour > 12 ? `${hour - 12} PM` : `${hour} AM`}
+              </div>
+              
+              {/* Daily columns for the hour */}
+              {weekDays.map((_, dayIndex) => {
+                // Filter events for the current day and within this hour slot
+                const eventsForHourSlot = events.filter(event => {
+                  const startTimeMinutes = parseTimeToMinutes(event.time);
+                  const endTimeMinutes = parseTimeToMinutes(event.endTime || event.time);
 
-                  return (
-                    <div key={dayIndex} className="day-cell">
-                      {/* Render events that fall within this hour slot */}
-                      {eventsForHourSlot.map(event => {
-                        const startTimeMinutes = parseTimeToMinutes(event.time);
-                        const endTimeMinutes = parseTimeToMinutes(event.endTime || event.time);
-                        const durationMinutes = endTimeMinutes - startTimeMinutes;
+                  return event.day === dayIndex &&
+                         ((startTimeMinutes < slotEndTimeMinutes && endTimeMinutes > slotStartTimeMinutes) || 
+                          (startTimeMinutes >= slotStartTimeMinutes && startTimeMinutes < slotEndTimeMinutes) || 
+                          (endTimeMinutes > slotStartTimeMinutes && endTimeMinutes <= slotEndTimeMinutes)); 
+                });
 
-                        // Calculate top position and height relative to the start of this hour slot
-                        const topOffsetMinutes = startTimeMinutes - slotStartTimeMinutes;
-                        const topPosition = (topOffsetMinutes / minutesInHour) * 64; // Convert minutes offset to pixels (64px = 4rem height)
-                        const eventHeight = (durationMinutes / minutesInHour) * 64; // Convert duration in minutes to pixels
+                return (
+                  <div key={dayIndex} className="clean-cell">
+                    {/* Render events that fall within this hour slot */}
+                    {eventsForHourSlot.map(event => {
+                      const startTimeMinutes = parseTimeToMinutes(event.time);
+                      const endTimeMinutes = parseTimeToMinutes(event.endTime || event.time);
+                      const durationMinutes = endTimeMinutes - startTimeMinutes;
 
-                        const eventStyle: CSSProperties = {
-                          top: `${topPosition}px`,
-                          height: `${eventHeight}px`,
-                          position: 'absolute',
-                          left: '2px',
-                          right: '2px',
-                          zIndex: 10,
-                        };
+                      // Calculate top position and height relative to the start of this hour slot
+                      const topOffsetMinutes = startTimeMinutes - slotStartTimeMinutes;
+                      const topPosition = (topOffsetMinutes / minutesInHour) * 60; // Convert minutes offset to pixels (60px = cell height)
+                      const eventHeight = (durationMinutes / minutesInHour) * 60; // Convert duration in minutes to pixels
 
-                        // Only render the event if it starts within this hour slot
-                        const eventStartsInThisSlot = startTimeMinutes >= slotStartTimeMinutes && startTimeMinutes < slotEndTimeMinutes;
+                      const eventStyle: CSSProperties = {
+                        top: `${topPosition}px`,
+                        height: `${eventHeight}px`,
+                        position: 'absolute',
+                        left: '2px',
+                        right: '2px',
+                        zIndex: 10,
+                      };
 
-                        if (eventStartsInThisSlot) {
-                          return (
-                            <CalendarEvent
-                              key={event.id}
-                              event={event}
-                              style={eventStyle}
-                            />
-                          );
-                        }
-                        return null;
-                      })}
-                    </div>
-                  );
-                })}
-              </React.Fragment>
-            );
-          })}
-        </div>
+                      // Only render the event if it starts within this hour slot
+                      const eventStartsInThisSlot = startTimeMinutes >= slotStartTimeMinutes && startTimeMinutes < slotEndTimeMinutes;
+
+                      if (eventStartsInThisSlot) {
+                        return (
+                          <CalendarEvent
+                            key={event.id}
+                            event={event}
+                            style={eventStyle}
+                          />
+                        );
+                      }
+                      return null;
+                    })}
+                  </div>
+                );
+              })}
+            </React.Fragment>
+          );
+        })}
       </div>
     </div>
   );

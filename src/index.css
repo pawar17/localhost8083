@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -191,6 +192,44 @@
   
   .mac-dock {
     @apply fixed bottom-2 left-1/2 transform -translate-x-1/2 flex items-end space-x-1 bg-white/20 backdrop-blur-xl py-1 px-2 rounded-2xl border border-white/30 shadow-lg;
+  }
+
+  /* Clean Calendar Grid Layout (from sample code) */
+  .clean-calendar-grid {
+    display: grid;
+    grid-template-columns: 80px repeat(7, 1fr);
+    grid-auto-rows: 60px;
+    border: 1px solid #ccc;
+    font-family: sans-serif;
+    height: 100%;
+    overflow-y: auto;
+  }
+
+  .clean-header-cell {
+    background: #f9f9f9;
+    text-align: center;
+    font-weight: bold;
+    padding: 8px;
+    border: 1px solid #ddd;
+  }
+
+  .clean-time-slot {
+    text-align: right;
+    padding: 8px 12px;
+    font-size: 14px;
+    border: 1px solid #ddd;
+    background-color: #fafafa;
+  }
+
+  .clean-cell {
+    border: 1px solid #eee;
+    background-color: white;
+    transition: background-color 0.2s;
+    position: relative;
+  }
+
+  .clean-cell:hover {
+    background-color: #f0f0f0;
   }
 
   /* Clean Calendar Grid Layout */
