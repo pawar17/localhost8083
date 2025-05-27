@@ -89,17 +89,18 @@ const WeekView: React.FC<WeekViewProps> = ({ startDate }) => {
 
   return (
     <div className="h-full bg-white text-gray-800 flex flex-col">
-      {/* Clean calendar grid using CSS Grid */}
-      <div className="clean-calendar-grid">
-        {/* Header Row */}
-        <div className="clean-time-slot clean-header-cell"></div>
+      {/* Header */}
+      <div className="calendar-week-header py-2">
+        <div className="time-column-header"></div>
         {weekDays.map((day, index) => (
-          <div key={index} className="clean-header-cell">
+          <div key={index} className="day-header-cell py-2">
             {formatDayHeader(day)}
           </div>
         ))}
+      </div>
 
-        {/* Time rows */}
+      {/* Grid */}
+      <div className="calendar-week-grid">
         {timeSlots.map((hour) => {
           const slotStartTimeMinutes = hour * minutesInHour;
           const slotEndTimeMinutes = (hour + 1) * minutesInHour;
@@ -107,7 +108,7 @@ const WeekView: React.FC<WeekViewProps> = ({ startDate }) => {
           return (
             <React.Fragment key={hour}>
               {/* Time slot */}
-              <div className="clean-time-slot">
+              <div className="time-label-cell">
                 {hour === 0 ? '12 AM' : 
                  hour === 12 ? '12 PM' : 
                  hour > 12 ? `${hour - 12} PM` : `${hour} AM`}
@@ -127,7 +128,7 @@ const WeekView: React.FC<WeekViewProps> = ({ startDate }) => {
                 });
 
                 return (
-                  <div key={dayIndex} className="clean-cell">
+                  <div key={dayIndex} className="day-cell">
                     {/* Render events that fall within this hour slot */}
                     {eventsForHourSlot.map(event => {
                       const startTimeMinutes = parseTimeToMinutes(event.time);
