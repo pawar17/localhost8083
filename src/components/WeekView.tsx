@@ -38,7 +38,7 @@ const WeekView: React.FC<WeekViewProps> = ({ startDate }) => {
 
     // Additional Saturday events
     { id: '17', title: 'Grocery Shopping', time: '9:30 AM', endTime: '10:30 AM', color: 'purple', description: '', day: 6, isExpandable: false }, // Saturday
-    { id: '18', title: 'Gym', time: '1:00 PM', endTime: '2:00 PM', color: 'red', description: '', day: 6, isExpandable: true }, // Saturday - moved to 1 PM
+    { id: '18', title: 'Gym', time: '1:30 PM', endTime: '2:30 PM', color: 'red', description: '', day: 6, isExpandable: true }, // Saturday
     { id: '19', title: 'Read a book', time: '4:00 PM', endTime: '5:30 PM', color: 'blue', description: '', day: 6, isExpandable: false }, // Saturday
 
   ], []);
@@ -71,7 +71,7 @@ const WeekView: React.FC<WeekViewProps> = ({ startDate }) => {
     const dayNumber = date.getDate();
 
     return (
-      <div className="text-center">
+      <div className="text-center py-3 px-2">
         <div className={`text-lg font-medium ${isToday ? 'text-red-500' : 'text-gray-800'}`}>
           {dayNumber}
         </div>
@@ -90,10 +90,10 @@ const WeekView: React.FC<WeekViewProps> = ({ startDate }) => {
   return (
     <div className="h-full bg-white text-gray-800 flex flex-col">
       {/* Header */}
-      <div className="calendar-week-header">
+      <div className="calendar-week-header py-2">
         <div className="time-column-header"></div>
         {weekDays.map((day, index) => (
-          <div key={index} className="day-header-cell">
+          <div key={index} className="day-header-cell py-2">
             {formatDayHeader(day)}
           </div>
         ))}
@@ -144,8 +144,8 @@ const WeekView: React.FC<WeekViewProps> = ({ startDate }) => {
                         top: `${topPosition}px`,
                         height: `${eventHeight}px`,
                         position: 'absolute',
-                        left: '1px',
-                        right: '1px',
+                        left: '2px',
+                        right: '2px',
                         zIndex: 10,
                       };
 
