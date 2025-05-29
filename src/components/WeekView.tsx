@@ -14,31 +14,64 @@ const minutesInHour = 60;
 const WeekView: React.FC<WeekViewProps> = ({ startDate }) => {
   // Mock events based on the screenshot layout
   const events: EventType[] = React.useMemo(() => [
-    { id: '1', title: 'Go on a run', time: '8:00 AM', endTime: '9:00 AM', color: 'blue', description: '', day: 0, isExpandable: true }, // Monday
+    { id: '1', title: 'Go on a run', time: '8:00 AM', endTime: '9:00 AM', color: 'blue', description: 'You can check my strava out and follow my journey as I train for a half marathon in October!', day: 0, isExpandable: true }, // Monday
     { id: '2', title: 'Meal Prep', time: '9:00 AM', endTime: '11:00 AM', color: 'green', description: '', day: 0, isExpandable: false }, // Monday
     { id: '3', title: 'Cafe Hopping to do work!', time: '1:00 PM', endTime: '4:00 PM', color: 'yellow', description: '', day: 0, isExpandable: false }, // Monday
 
-    { id: '4', title: 'InnovateHer Meeting', time: '8:30 AM', endTime: '10:00 AM', color: 'green', description: '', day: 1, isExpandable: true }, // Tuesday
-    { id: '5', title: 'Update GitHub', time: '10:30 AM', endTime: '12:00 PM', color: 'blue', description: '', day: 1, isExpandable: true }, // Tuesday
-    { id: '6', title: 'Arduino Projects', time: '1:00 PM', endTime: '3:30 PM', color: 'red', description: '', day: 1, isExpandable: true }, // Tuesday
+    { id: '4', title: 'InnovateHer Meeting', time: '8:30 AM', endTime: '10:00 AM', color: 'green', description: `As a woman in CS, I founded InnovateHer to create space for others like me. What started as a student government idea became Purdue's first women-centric hackathon and a community of 500+.
 
-    { id: '7', title: 'Disability Visibility India', time: '10:00 AM', endTime: '12:00 PM', color: 'yellow', description: '', day: 2, isExpandable: true }, // Wednesday
-    { id: '8', title: 'Research Project', time: '1:30 PM', endTime: '3:30 PM', color: 'purple', description: '', day: 2, isExpandable: true }, // Wednesday
+- Brought together 7+ orgs to launch 2 hackathons with 200+ participants each
+- Raised over $80K to support inclusive, impact-driven tech projects
+- Built and led a 60-member team; now proudly sustained by new leadership`, day: 1, isExpandable: true }, // Tuesday
+    { id: '5', title: 'Update GitHub', time: '10:30 AM', endTime: '12:00 PM', color: 'blue', description: 'Click here to view my GitHub profiles!', day: 1, isExpandable: true }, // Tuesday
+    { id: '6', title: 'Arduino Projects', time: '1:00 PM', endTime: '3:30 PM', color: 'red', description: 'I completed a certification in Arduino at Purdue. I enjoy working with microcontrollers and want to pursue independent projects with Arduino!', day: 1, isExpandable: true }, // Tuesday
 
-    { id: '9', title: 'Consulting club casework', time: '8:30 AM', endTime: '10:30 AM', color: 'red', description: '', day: 3, isExpandable: true }, // Thursday
-    { id: '10', title: 'Purdue Student Government', time: '12:00 PM', endTime: '1:30 PM', color: 'blue', description: '', day: 3, isExpandable: true }, // Thursday
+    { id: '7', title: 'Disability Visibility India', time: '10:00 AM', endTime: '12:00 PM', color: 'yellow', description: `I launched this in 2020 as a digital toolkit for families of individuals with disabilities in India. What started as a simple website resource became a growing community - one that taught me about accessibility, care, and inclusive design. It's still one of the most meaningful projects I've built.
+`, day: 2, isExpandable: true }, // Wednesday
+    { id: '8', title: 'Research Project', time: '1:30 PM', endTime: '3:30 PM', color: 'purple', description: `At C-Lab, I worked on a generative AI project focused on simulating part mobility using 3D point clouds. I implemented and compared diffusion and transformer-based models, integrating them into a CAD-compatible pipeline in Python to explore real-world mechanical design applications.
 
-    { id: '11', title: 'Certifications', time: '8:30 AM', endTime: '11:00 AM', color: 'purple', description: '', day: 4, isExpandable: true }, // Friday
-    { id: '12', title: 'Edit resume', time: '11:30 AM', endTime: '1:00 PM', color: 'green', description: '', day: 4, isExpandable: true }, // Friday
-    { id: '13', title: 'On campus job', time: '2:00 PM', endTime: '4:30 PM', color: 'red', description: '', day: 4, isExpandable: true }, // Friday
+In the CAST project, I focused on improving speech-to-text systems for children, who are often underrepresented in commercial ASR models. I fine-tuned transformer architectures and developed a deep phoneme classification model using PyTorch, resulting in a 12% improvement in accuracy. The project emphasized accessibility and the potential of AI in educational and therapeutic settings.
 
-    { id: '14', title: 'Technical Projects', time: '8:30 AM', endTime: '10:30 AM', color: 'blue', description: '', day: 5, isExpandable: true }, // Saturday
+Learn more about what I did by taking a look at my resume!`, day: 2, isExpandable: true }, // Wednesday
+
+    { id: '9', title: 'Consulting club casework', time: '8:30 AM', endTime: '10:30 AM', color: 'red', description: `At PurdueThink, I led strategy and growth initiatives for student startups and organizations. As a consultant, I scaled Boilerexams through market research, survey analysis, and faculty outreach. Later, as Project Manager, I guided a team in restructuring Purdue Pilots Inc., delivered strategic recommendations, and secured three new projects hence expanding our campus-wide impact`, day: 3, isExpandable: true }, // Thursday
+    { id: '10', title: 'Purdue Student Government', time: '12:00 PM', endTime: '1:30 PM', color: 'blue', description: `Served on Purdue Student Government's DEI Committee for two years. As Executive Director, I led a 13-member team, worked on student body legislation, and launched campus-wide initiatives focused on accessibility, representation, and inclusion.`, day: 3, isExpandable: true }, // Thursday
+
+    { id: '11', title: 'Certifications', time: '8:30 AM', endTime: '11:00 AM', color: 'purple', description: `- Forage Program: Citi Asia – Global Consumer Banking Virtual Reality Intern
+- Forage Program: Goldman Sachs – Virtual Engineering Intern
+- Purdue Milestones Program – Programming with Arduino
+- Grow with Google – Data Analytics
+- Project Management`, day: 4, isExpandable: true }, // Friday
+    { id: '12', title: 'Edit resume', time: '11:30 AM', endTime: '1:00 PM', color: 'green', description: 'This is my 3 page working CV, I have all my experiences from the last 4 years listed on this resume', day: 4, isExpandable: true }, // Friday
+    { id: '13', title: 'On campus job', time: '2:00 PM', endTime: '4:30 PM', color: 'red', description: `Office of Undergraduate Research, West Lafayette, IN
+Research Assistant | Feb 2023 – Present
+Developed interactive Tableau dashboards for research data visualization and conducted sentiment analysis on survey responses.
+
+Disability Resource Center, West Lafayette, IN
+Student Intern | Aug 2023 – Aug 2024
+Converted and edited course materials into Braille and accessible formats to support inclusive learning.
+
+Purdue Dining & Culinary, West Lafayette, IN
+Student Staff | Oct 2022 – Feb 2023
+Served 1,000+ students per shift, assisted in meal prep and inventory, and collaborated with a team to improve operational efficiency.`, day: 4, isExpandable: true }, // Friday
+
+    { id: '14', title: 'Technical Projects', time: '8:30 AM', endTime: '10:30 AM', color: 'blue', description: `Financial Transaction Platform: Built full-stack app with React.js, Firebase, and Checkbook API enabling secure international payments; placed 2nd at Treehacks.
+
+Disability Visibility India Website: Developed accessible web platform to support and grow disability community in India.
+
+Music Recommender System: Implemented deep learning (RNN/LSTM) and collaborative filtering to enhance song recommendations on large-scale dataset.
+
+S&P 500 Stock Forecasting: Created LSTM-based model improving stock trend predictions by 18%.
+
+IPL Player Performance Predictor: Designed ML model to predict player performance for IPL 2025 using historical data (2008–2024); webscraped real-time stats, recent form, and contextual match metrics to drive accuracy.
+
+Arduino Musical Box: Programmed sensor-driven interactive musical device using Arduino.`, day: 5, isExpandable: true }, // Saturday
     { id: '15', title: 'CALL HOME!', time: '11:00 AM', endTime: '1:00 PM', color: 'yellow', description: '', day: 5, isExpandable: false }, // Saturday
     { id: '16', title: 'Prepare for Interview!', time: '2:00 PM', endTime: '5:00 PM', color: 'green', description: '', day: 5, isExpandable: false }, // Saturday
 
     // Additional Saturday events
-    { id: '17', title: 'Grocery Shopping', time: '9:30 AM', endTime: '10:30 AM', color: 'purple', description: '', day: 6, isExpandable: false }, // Saturday
-    { id: '18', title: 'Gym', time: '1:30 PM', endTime: '2:30 PM', color: 'red', description: '', day: 6, isExpandable: true }, // Saturday
+    { id: '17', title: 'Grocery Shopping', time: '9:30 AM', endTime: '11:00 AM', color: 'purple', description: '', day: 6, isExpandable: false }, // Saturday
+    { id: '18', title: 'Gym', time: '11:00 AM', endTime: '12:00 PM', color: 'red', description: 'Been a (sort of consistent) gym girly for the last 4 years, I really enjoy working out and lifting weights :)', day: 6, isExpandable: true }, // Saturday
     { id: '19', title: 'Read a book', time: '4:00 PM', endTime: '5:30 PM', color: 'blue', description: '', day: 6, isExpandable: false }, // Saturday
 
   ], []);

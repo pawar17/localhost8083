@@ -1,4 +1,3 @@
-
 import React, { useState, CSSProperties } from 'react';
 import { Clock, MapPin, Bell, Globe, Repeat } from 'lucide-react';
 import { 
@@ -99,11 +98,11 @@ const CalendarEvent: React.FC<CalendarEventProps> = ({ event, style }) => {
       </div>
       
       <Dialog open={isOpen} onOpenChange={setIsOpen}>
-        <DialogContent className="p-0 max-w-md bg-gray-50 rounded-lg shadow-xl">
+        <DialogContent className="p-0 max-w-md bg-gray-50 rounded-lg shadow-xl" style={{ maxHeight: '80vh', overflowY: 'auto' }}>
           <div className="flex items-center justify-between px-3 py-2 border-b border-gray-200 bg-gray-100 rounded-t-lg">
             <div className="flex items-center gap-4">
               <div className="flex gap-1.5">
-                <span className="h-3 w-3 rounded-full bg-red-500"></span>
+                <button className="h-3 w-3 rounded-full bg-red-500" onClick={() => setIsOpen(false)}></button>
                 <span className="h-3 w-3 rounded-full bg-yellow-500"></span>
                 <span className="h-3 w-3 rounded-full bg-green-500"></span>
               </div>
@@ -123,7 +122,130 @@ const CalendarEvent: React.FC<CalendarEventProps> = ({ event, style }) => {
                 className="w-full text-lg font-medium border-none bg-transparent outline-none focus:ring-0 p-0"
               />
               <div className="text-sm text-gray-500 mt-1">Notes</div>
-              <div className="text-sm text-gray-700 mt-1">{event.description}</div>
+              <div className="text-sm text-gray-700 mt-1">
+                {event.id === '8' ? (
+                  <div>
+                    {event.description.split('\n\n').map((paragraph, index) => (
+                      <p key={index} className={index > 0 ? 'mt-2' : ''}>
+                        {paragraph}
+                      </p>
+                    ))}
+                  </div>
+                ) : event.id === '11' ? (
+                  <ul className="list-disc list-inside">
+                    {event.description.split('\n').map((item, index) => {
+                      // Remove leading hyphen and space if they exist
+                      const cleanItem = item.startsWith('- ') ? item.substring(2) : item;
+                      return <li key={index}>{cleanItem}</li>;
+                    })}
+                  </ul>
+                ) : event.id === '13' ? (
+                  <div>
+                    {event.description.split('\n\n').map((jobBlock, jobIndex) => {
+                      const lines = jobBlock.split('\n');
+                      const locationAndRole = lines[0];
+                      const titleAndDates = lines[1];
+                      const descriptionPoints = lines.slice(2).filter(line => line.trim() !== ''); // Filter out empty lines
+
+                      return (
+                        <div key={jobIndex} className={jobIndex > 0 ? 'mt-4' : ''}>
+                          <p><strong className="font-medium">{locationAndRole}</strong></p>
+                          <p className="text-sm text-gray-600">{titleAndDates}</p>
+                          {descriptionPoints.length > 0 && (
+                            <ul className="list-disc list-inside mt-1">
+                              {descriptionPoints.map((point, pointIndex) => (
+                                <li key={pointIndex}>{point}</li>
+                              ))}
+                            </ul>
+                          )}
+                        </div>
+                      );
+                    })}
+                  </div>
+                ) : event.id === '14' ? (
+                  <ul className="list-disc list-inside">
+                    {event.description.split('\n\n').map((project, index, arr) => {
+                      const parts = project.split(': ', 2); // Split into two parts at the first ': '
+                      const title = parts[0];
+                      const description = parts.length > 1 ? parts[1] : '';
+                      return (
+                        <li key={index} style={{ marginBottom: index < arr.length - 1 ? '0.5rem' : '0' }}>
+                          <strong className="font-medium">{title}:</strong> {description}
+                        </li>
+                      );
+                    })}
+                  </ul>
+                ) : event.id === '4' ? (
+                  <div>
+                    {event.description.split('\n').map((line, index, arr) => {
+                       if (index === 0) {
+                        return <p key={index}>{line}</p>;
+                       } else if (line.startsWith('- ')) {
+                         const cleanItem = line.substring(2);
+                         return null;
+                       }
+                       return null;
+                    })}
+                    <ul className="list-disc list-inside mt-1">
+                      {event.description.split('\n').slice(1).filter(line => line.startsWith('- ')).map((line, index) => {
+                         const cleanItem = line.substring(2);
+                         return <li key={index}>{cleanItem}</li>;
+                      })}
+                    </ul>
+                  </div>
+                ) : (
+                  event.description
+                )}
+              </div>
+              {event.id === '1' && (
+                <div className="mt-4 strava-embed-container mx-auto">
+                  {/*<iframe height={454} width={300} frameBorder='0' allowTransparency='true' src='https://www.strava.com/athletes/115399087/latest-rides/a1820ea9344acfa99d738eda0f018ce7dda1072e'></iframe>*/}
+                  <iframe height={160} width={300} frameBorder={0} allowTransparency={true} scrolling="no" src="https://www.strava.com/athletes/115399087/activity-summary/a1820ea9344acfa99d738eda0f018ce7dda1072e"></iframe>
+                </div>
+              )}
+              {event.id === '4' && (
+                <div className="mt-4 text-sm">
+                  <p>Learn More:</p>
+                  <ul>
+                    <li><a href="https://www.google.com/search?q=Innovateher+purdue&sca_esv=905f7b0eae3ddda1&rlz=1C1RXQR_enUS1019US1019&sxsrf=AE3TifPXvPxXGVCI6uhOyVfKq9IzZ4kblQ%3A1748317321739&ei=iTQ1aPvuLPag5NoP4c6KoAs&ved=0ahUKEwi716rH3cKNAxV2EFkFHWGnErQQ4dUDCBA&uact=5&oq=Innovateher+purdue&gs_lp=Egxnd3Mtd2l6LXNlcnAiEklubm92YXRlaGVyIHB1cmR1ZTIKEAAYsAMY1gQYRzIKEAAYsAMY1gQYRzIKEAAYsAMY1gQYRzIKEAAYsAMY1gQYR0jRDlCXBljIDXABeAGQAQCYAVWgAecBqgEBM7gBA8gBAPgBAZgCBKAC_QHCAgoQIxiABBgnGIoFwgIFEAAY7wXCAggQABiABBiiBJgDAOIDBRIBMSBAiAYBkAYEkgcBNKAH6QuyBwEzuAf3AcIHAzItNMgHEA&sclient=gws-wiz-serp" target="_blank" rel="noopener noreferrer" className="text-pink-500">Google Search Results</a></li>
+                    <li><a href="https://www.purdueexponent.org/campus/women-coding-club-to-host-hackathon/article_297d44e4-cb8d-11ee-910a-f397edfebbde.html" target="_blank" rel="noopener noreferrer" className="text-pink-500">Purdue Newspaper Article</a></li>
+                    <li><a href="https://www.instagram.com/innovateherhacks/?hl=en" target="_blank" rel="noopener noreferrer" className="text-pink-500">Instagram</a></li>
+                    <li><a href="https://innovateherhacks.my.canva.site/#contact" target="_blank" rel="noopener noreferrer" className="text-pink-500">Info Site</a></li>
+                  </ul>
+                </div>
+              )}
+              {event.id === '5' && (
+                <div className="mt-4 text-sm">
+                  <a href="https://github.com/pawar17" target="_blank" rel="noopener noreferrer" className="text-pink-500">View Profile</a>
+                </div>
+              )}
+              {event.id === '6' && (
+                <div className="mt-4 text-sm">
+                  <p>Certification: <a href="https://engineering.purdue.edu/Engr/Academics/Undergraduate/certificates/Milestones/Programming_with_Arduino/2024/Spring/lpMR2tC8I_WNEvN5iTTlDw.png/lpMR2tC8I_WNEvN5iTTlDw.png" target="_blank" rel="noopener noreferrer" className="text-pink-500">View Certification</a></p>
+                  <p>Projects Playlist: <a href="https://www.youtube.com/playlist?list=PLDjG7BISikRu_m3x5A4Ha9KvuqHsKhPYe" target="_blank" rel="noopener noreferrer" className="text-pink-500">Watch on YouTube</a></p>
+                </div>
+              )}
+              {event.id === '12' && (
+                <div className="mt-4 text-sm">
+                  <a href="https://docs.google.com/document/d/1Ju6e-mVTXWJqo8gsHTJC2ZR7HgV0ixd_/edit?usp=sharing&ouid=100865589809991997614&rtpof=true&sd=true" target="_blank" rel="noopener noreferrer" className="text-blue-500">View Working CV</a>
+                </div>
+              )}
+              {event.id === '7' && (
+                <div className="mt-4 text-sm">
+                  <p>Learn More:</p>
+                  <ul>
+                    <li><a href="https://www.disability-visibility.com/" target="_blank" rel="noopener noreferrer" className="text-pink-500">Website</a></li>
+                    <li><p>Media Features:</p></li>
+                    <li><a href="https://www.youtube.com/watch?v=ACmcNJJiRzo" target="_blank" rel="noopener noreferrer" className="text-pink-500">YouTube Feature</a></li>
+                    <li><a href="https://www.hindustantimes.com/lifestyle/art-culture/are-our-city-eateries-inclusive-101645187672291.html" target="_blank" rel="noopener noreferrer" className="text-pink-500">Hindustan Times Article</a></li>
+                  </ul>
+                </div>
+              )}
+              {event.id === '8' && (
+                <div className="mt-4 text-sm">
+
+                </div>
+              )}
             </div>
             
             <div className="border-t border-gray-200 pt-3">

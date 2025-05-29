@@ -41,12 +41,13 @@
   color: #888;
 }
 
-/* Using cursor1.png for default cursor */
-html, body, #root {
-  cursor: url('/cursors/cursor1.png'), auto !important;
-}
 
 /* Using cursor2.png for interactive elements on hover */
 a:hover, button:hover, input:hover, select:hover, textarea:hover, [role="button"]:hover {
   cursor: url('/cursors/cursor2.png'), pointer !important;
+}
+
+/* Ensure standard hand cursor for dock icons */
+.mac-dock-container .dock-icon-clickable-area {
+  cursor: pointer !important;
 }
