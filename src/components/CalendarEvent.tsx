@@ -1,4 +1,3 @@
-
 import React, { useState, CSSProperties } from 'react';
 import { Clock, MapPin, Bell, Globe, Repeat } from 'lucide-react';
 import { 
@@ -6,7 +5,6 @@ import {
   DialogContent,
   DialogHeader,
   DialogTitle,
-  DialogOverlay,
 } from "@/components/ui/dialog";
 import { Checkbox } from "@/components/ui/checkbox";
 
@@ -63,7 +61,7 @@ const CalendarEvent: React.FC<CalendarEventProps> = ({ event, style }) => {
     }
     
     const cursorClass = event.isExpandable ? 'cursor-pointer hover:opacity-80' : '';
-    return `rounded-md px-2 py-1 mb-1 ${colorClasses} overflow-hidden text-ellipsis w-[95%] mx-auto ${cursorClass}`;
+    return `rounded-md px-3 py-2 mb-1 ${colorClasses} overflow-hidden text-ellipsis w-[98%] mx-auto ${cursorClass}`;
   };
   
   const getTimeDisplay = () => {
@@ -100,7 +98,6 @@ const CalendarEvent: React.FC<CalendarEventProps> = ({ event, style }) => {
       </div>
       
       <Dialog open={isOpen} onOpenChange={setIsOpen}>
-        <DialogOverlay className="bg-white/60 backdrop-blur-sm" />
         <DialogContent className="p-0 max-w-md bg-gray-50 rounded-lg shadow-xl">
           <div className="flex items-center justify-between px-3 py-2 border-b border-gray-200 bg-gray-100 rounded-t-lg">
             <div className="flex items-center gap-4">
