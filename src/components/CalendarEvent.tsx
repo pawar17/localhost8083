@@ -99,12 +99,8 @@ const CalendarEvent: React.FC<CalendarEventProps> = ({ event, style }) => {
       </div>
       
       <Dialog open={isOpen} onOpenChange={setIsOpen}>
-<<<<<<< HEAD
-        <DialogContent className="p-0 max-w-md bg-gray-50 rounded-lg shadow-xl" style={{ maxHeight: '80vh', overflowY: 'auto' }}>
-=======
         <DialogOverlay className="bg-white/60 backdrop-blur-sm" />
-        <DialogContent className="p-0 max-w-md bg-gray-50 rounded-lg shadow-xl">
->>>>>>> 287ede21cf7b5a610d6678f70bb5bfca3d8d62e2
+        <DialogContent className="p-0 max-w-md bg-gray-50 rounded-lg shadow-xl" style={{ maxHeight: '80vh', overflowY: 'auto' }}>
           <div className="flex items-center justify-between px-3 py-2 border-b border-gray-200 bg-gray-100 rounded-t-lg">
             <div className="flex items-center gap-4">
               <div className="flex gap-1.5">
