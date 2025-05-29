@@ -104,7 +104,7 @@ Arduino Musical Box: Programmed sensor-driven interactive musical device using A
     const dayNumber = date.getDate();
 
     return (
-      <div className="text-center py-3 px-2">
+      <div className="text-center">
         <div className={`text-lg font-medium ${isToday ? 'text-red-500' : 'text-gray-800'}`}>
           {dayNumber}
         </div>
@@ -123,10 +123,10 @@ Arduino Musical Box: Programmed sensor-driven interactive musical device using A
   return (
     <div className="h-full bg-white text-gray-800 flex flex-col">
       {/* Header */}
-      <div className="calendar-week-header py-2">
+      <div className="calendar-week-header">
         <div className="time-column-header"></div>
         {weekDays.map((day, index) => (
-          <div key={index} className="day-header-cell py-2">
+          <div key={index} className="day-header-cell">
             {formatDayHeader(day)}
           </div>
         ))}
@@ -177,8 +177,8 @@ Arduino Musical Box: Programmed sensor-driven interactive musical device using A
                         top: `${topPosition}px`,
                         height: `${eventHeight}px`,
                         position: 'absolute',
-                        left: '2px',
-                        right: '2px',
+                        left: '1px',
+                        right: '1px',
                         zIndex: 10,
                       };
 
