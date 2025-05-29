@@ -1,4 +1,3 @@
-
 import React, { useState, CSSProperties } from 'react';
 import { Clock, MapPin, Bell, Globe, Repeat } from 'lucide-react';
 import { 
@@ -6,7 +5,6 @@ import {
   DialogContent,
   DialogHeader,
   DialogTitle,
-  DialogOverlay,
 } from "@/components/ui/dialog";
 import { Checkbox } from "@/components/ui/checkbox";
 
@@ -100,8 +98,7 @@ const CalendarEvent: React.FC<CalendarEventProps> = ({ event, style }) => {
       </div>
       
       <Dialog open={isOpen} onOpenChange={setIsOpen}>
-        <DialogOverlay className="bg-black/20 backdrop-blur-sm" />
-        <DialogContent className="p-0 max-w-md bg-white rounded-lg shadow-xl border border-gray-200" style={{ maxHeight: '80vh', overflowY: 'auto' }}>
+        <DialogContent className="p-0 max-w-md bg-white rounded-lg shadow-xl border border-gray-200 hide-default-close" style={{ maxHeight: '80vh', overflowY: 'auto' }}>
           <div className="flex items-center justify-between px-4 py-3 border-b border-gray-200 bg-white rounded-t-lg">
             <div className="flex items-center gap-3">
               <div className="flex gap-1.5">
