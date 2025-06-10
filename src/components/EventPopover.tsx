@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { X } from 'lucide-react';
 import { EventType } from './CalendarEvent';
@@ -31,10 +30,10 @@ const EventPopover: React.FC<EventPopoverProps> = ({ event, isOpen, onClose, pos
       
       {/* Mac-style window with traffic lights */}
       <div 
-        className="fixed z-50 bg-white rounded-lg shadow-2xl border border-gray-300 w-[520px] h-[600px] overflow-hidden"
+        className="fixed z-50 bg-white rounded-lg shadow-2xl border border-gray-300 w-[480px] h-[520px] overflow-hidden"
         style={{
-          left: Math.min(position.x - 260, window.innerWidth - 540),
-          top: Math.max(position.y - 300, 20),
+          left: Math.min(position.x - 240, window.innerWidth - 500),
+          top: Math.max(position.y - 260, 20),
         }}
       >
         {/* Mac title bar with traffic lights */}
@@ -62,17 +61,102 @@ const EventPopover: React.FC<EventPopoverProps> = ({ event, isOpen, onClose, pos
               className="w-full text-lg font-medium border border-gray-300 rounded-md px-3 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
-          
-          {/* Location */}
+          {/* Notes/Description (moved up) */}
+          {event.description && (
           <div>
-            <input 
-              type="text" 
-              placeholder="Location or Video Call"
-              value={event.location || ''}
-              readOnly
-              className="w-full text-sm border border-gray-300 rounded-md px-3 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
+              <div className="w-full text-sm border border-gray-300 rounded-md px-3 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 whitespace-pre-line">
+                {(() => {
+                  // Go on a run: Strava embed
+                  if (event.id === '1') {
+                    return (
+                      <>
+                        <div>{event.description}</div>
+                        <div className="mt-4 strava-embed-container mx-auto">
+                          <iframe height={160} width={300} frameBorder={0} allowTransparency={true} scrolling="no" src="https://www.strava.com/athletes/115399087/activity-summary/a1820ea9344acfa99d738eda0f018ce7dda1072e"></iframe>
+                        </div>
+                      </>
+                    );
+                  }
+                  // InnovateHer Meeting: resource links
+                  if (event.id === '4') {
+                    return (
+                      <>
+                        <div>{event.description.split('\n')[0]}</div>
+                        <ul className="list-disc list-inside mt-1">
+                          {event.description.split('\n').slice(1).filter(line => line.startsWith('- ')).map((line, index) => {
+                            const cleanItem = line.substring(2);
+                            return <li key={index}>{cleanItem}</li>;
+                          })}
+                        </ul>
+                        <div className="mt-4 text-sm">
+                          <p>Learn More:</p>
+                          <ul>
+                            <li><a href="https://www.google.com/search?q=Innovateher+purdue&sca_esv=905f7b0eae3ddda1&rlz=1C1RXQR_enUS1019US1019&sxsrf=AE3TifPXvPxXGVCI6uhOyVfKq9IzZ4kblQ%3A1748317321739&ei=iTQ1aPvuLPag5NoP4c6KoAs&ved=0ahUKEwi716rH3cKNAxV2EFkFHWGnErQQ4dUDCBA&uact=5&oq=Innovateher+purdue&gs_lp=Egxnd3Mtd2l6LXNlcnAiEklubm92YXRlaGVyIHB1cmR1ZTIKEAAYsAMY1gQYRzIKEAAYsAMY1gQYRzIKEAAYsAMY1gQYRzIKEAAYsAMY1gQYR0jRDlCXBljIDXABeAGQAQCYAVWgAecBqgEBM7gBA8gBAPgBAZgCBKAC_QHCAgoQIxiABBgnGIoFwgIFEAAY7wXCAggQABiABBiiBJgDAOIDBRIBMSBAiAYBkAYEkgcBNKAH6QuyBwEzuAf3AcIHAzItNMgHEA&sclient=gws-wiz-serp" target="_blank" rel="noopener noreferrer" className="text-pink-500">Google Search Results</a></li>
+                            <li><a href="https://www.purdueexponent.org/campus/women-coding-club-to-host-hackathon/article_297d44e4-cb8d-11ee-910a-f397edfebbde.html" target="_blank" rel="noopener noreferrer" className="text-pink-500">Purdue Newspaper Article</a></li>
+                            <li><a href="https://www.instagram.com/innovateherhacks/?hl=en" target="_blank" rel="noopener noreferrer" className="text-pink-500">Instagram</a></li>
+                            <li><a href="https://innovateherhacks.my.canva.site/#contact" target="_blank" rel="noopener noreferrer" className="text-pink-500">Info Site</a></li>
+                          </ul>
+                        </div>
+                      </>
+                    );
+                  }
+                  // Update GitHub: GitHub link
+                  if (event.id === '5') {
+                    return (
+                      <>
+                        <div>{event.description}</div>
+                        <div className="mt-4 text-sm">
+                          <a href="https://github.com/pawar17" target="_blank" rel="noopener noreferrer" className="text-pink-500">View Profile</a>
+                        </div>
+                      </>
+                    );
+                  }
+                  // Arduino Projects: Certification and YouTube
+                  if (event.id === '6') {
+                    return (
+                      <>
+                        <div>{event.description}</div>
+                        <div className="mt-4 text-sm">
+                          <p>Certification: <a href="https://engineering.purdue.edu/Engr/Academics/Undergraduate/certificates/Milestones/Programming_with_Arduino/2024/Spring/lpMR2tC8I_WNEvN5iTTlDw.png/lpMR2tC8I_WNEvN5iTTlDw.png" target="_blank" rel="noopener noreferrer" className="text-pink-500">View Certification</a></p>
+                          <p>Projects Playlist: <a href="https://www.youtube.com/playlist?list=PLDjG7BISikRu_m3x5A4Ha9KvuqHsKhPYe" target="_blank" rel="noopener noreferrer" className="text-pink-500">Watch on YouTube</a></p>
+                        </div>
+                      </>
+                    );
+                  }
+                  // Disability Visibility India: Website and media
+                  if (event.id === '7') {
+                    return (
+                      <>
+                        <div>{event.description}</div>
+                        <div className="mt-4 text-sm">
+                          <p>Learn More:</p>
+                          <ul>
+                            <li><a href="https://www.disability-visibility.com/" target="_blank" rel="noopener noreferrer" className="text-pink-500">Website</a></li>
+                            <li><p>Media Features:</p></li>
+                            <li><a href="https://www.youtube.com/watch?v=ACmcNJJiRzo" target="_blank" rel="noopener noreferrer" className="text-pink-500">YouTube Feature</a></li>
+                            <li><a href="https://www.hindustantimes.com/lifestyle/art-culture/are-our-city-eateries-inclusive-101645187672291.html" target="_blank" rel="noopener noreferrer" className="text-pink-500">Hindustan Times Article</a></li>
+                          </ul>
+                        </div>
+                      </>
+                    );
+                  }
+                  // Edit resume: Resume link
+                  if (event.id === '12') {
+                    return (
+                      <>
+                        <div>{event.description}</div>
+                        <div className="mt-4 text-sm">
+                          <a href="https://docs.google.com/document/d/1Ju6e-mVTXWJqo8gsHTJC2ZR7HgV0ixd_/edit?usp=sharing&ouid=100865589809991997614&rtpof=true&sd=true" target="_blank" rel="noopener noreferrer" className="text-blue-500">View Working CV</a>
+                        </div>
+                      </>
+                    );
+                  }
+                  // Default: just show description
+                  return <div>{event.description}</div>;
+                })()}
+              </div>
           </div>
+          )}
           
           {/* Calendar Selection */}
           <div className="flex items-center justify-between py-2">
@@ -193,16 +277,6 @@ const EventPopover: React.FC<EventPopoverProps> = ({ event, isOpen, onClose, pos
               type="text" 
               placeholder="URL"
               className="w-full text-sm border border-gray-300 rounded-md px-3 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-          </div>
-          
-          {/* Notes */}
-          <div>
-            <textarea 
-              placeholder="Notes"
-              value={event.description}
-              readOnly
-              className="w-full text-sm border border-gray-300 rounded-md px-3 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 h-20 resize-none"
             />
           </div>
         </div>

@@ -1,11 +1,15 @@
 import React, { useState } from 'react';
 import FindMyPopup from './FindMyPopup';
+import Gallery from './Gallery';
+import CameraApp from './CameraApp';
 
 const MacDock: React.FC = () => {
   const [showSpotify, setShowSpotify] = useState(false);
   const [showContact, setShowContact] = useState(false);
   const [showEmail, setShowEmail] = useState(false);
   const [showFindMy, setShowFindMy] = useState(false);
+  const [showGallery, setShowGallery] = useState(false);
+  const [showCamera, setShowCamera] = useState(false);
   const [message, setMessage] = useState<{ text: string, x: number, y: number } | null>(null);
 
   const handleOtherAppClick = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
@@ -21,6 +25,22 @@ const MacDock: React.FC = () => {
   };
 
   const dockIcons = [
+    {
+      icon: (
+        <div className="w-12 h-12 flex items-center justify-center">
+          <img src="/App icons/camera.webp" alt="Camera" className="w-full h-full object-contain" />
+        </div>
+      ),
+      name: "Camera",
+      onClick: () => {
+        setShowCamera(true);
+        setShowGallery(false);
+        setShowSpotify(false);
+        setShowContact(false);
+        setShowEmail(false);
+        setShowFindMy(false);
+      }
+    },
     { 
       icon: (
         <div className="w-12 h-12 flex items-center justify-center">
@@ -72,11 +92,17 @@ const MacDock: React.FC = () => {
     { 
       icon: (
         <div className="w-12 h-12 flex items-center justify-center">
-          <img src="/App icons/lwNP7fGxNGl6VSwvqD3AorA1h0.png" alt="Photos" className="w-full h-full object-contain" />
+          <img src="/App icons/ogWIDEJmWxA8SVRZpEe7gk35FcM.png" alt="Photos" className="w-full h-full object-contain" />
         </div>
       ), 
       name: "Photos",
-      onClick: handleOtherAppClick
+      onClick: () => {
+        setShowGallery(true);
+        setShowSpotify(false);
+        setShowContact(false);
+        setShowEmail(false);
+        setShowFindMy(false);
+      }
     },
     { 
       icon: (
@@ -108,7 +134,7 @@ const MacDock: React.FC = () => {
     { 
       icon: (
         <div className="w-12 h-12 flex items-center justify-center">
-          <img src="/App icons/ogWIDEJmWxA8SVRZpEe7gk35FcM.png" alt="Podcasts" className="w-full h-full object-contain" />
+          <img src="/App icons/lwNP7fGxNGl6VSwvqD3AorA1h0.png" alt="Podcasts" className="w-full h-full object-contain" />
         </div>
       ), 
       name: "Podcasts",
@@ -282,6 +308,18 @@ const MacDock: React.FC = () => {
         </div>
       </div>
       {showFindMy && <FindMyPopup onClose={() => setShowFindMy(false)} />}
+      {/* Gallery Modal */}
+      {showGallery && (
+        <div className="fixed top-16 right-8 z-50" style={{ pointerEvents: 'auto' }}>
+          <Gallery onClose={() => setShowGallery(false)} />
+        </div>
+      )}
+      {/* Camera Modal */}
+      {showCamera && (
+        <div className="fixed top-16 left-8 z-50" style={{ pointerEvents: 'auto' }}>
+          <CameraApp onClose={() => setShowCamera(false)} />
+        </div>
+      )}
     </>
   );
 };
