@@ -29,49 +29,57 @@ const EventPopover: React.FC<EventPopoverProps> = ({ event, isOpen, onClose, pos
         onClick={onClose}
       />
       
-      {/* Popover */}
+      {/* Mac-style window with traffic lights */}
       <div 
-        className="fixed z-50 bg-white rounded-lg shadow-xl border border-gray-200 w-80"
+        className="fixed z-50 bg-white rounded-lg shadow-2xl border border-gray-300 w-[520px] h-[600px] overflow-hidden"
         style={{
-          left: position.x,
-          top: position.y,
-          transform: 'translate(-50%, -100%)',
-          marginTop: '-8px'
+          left: Math.min(position.x - 260, window.innerWidth - 540),
+          top: Math.max(position.y - 300, 20),
         }}
       >
-        {/* Header */}
-        <div className="flex items-center justify-between p-3 border-b border-gray-200">
-          <h3 className="font-medium text-gray-900">Edit Event</h3>
-          <button 
-            onClick={onClose}
-            className="p-1 hover:bg-gray-100 rounded"
-          >
-            <X className="h-4 w-4 text-gray-500" />
-          </button>
+        {/* Mac title bar with traffic lights */}
+        <div className="flex items-center justify-between px-4 py-3 bg-gray-50 border-b border-gray-200">
+          <div className="flex items-center gap-2">
+            <button 
+              onClick={onClose}
+              className="w-3 h-3 rounded-full bg-red-500 hover:bg-red-600 transition-colors"
+            />
+            <button className="w-3 h-3 rounded-full bg-yellow-400 hover:bg-yellow-500 transition-colors" />
+            <button className="w-3 h-3 rounded-full bg-green-500 hover:bg-green-600 transition-colors" />
+          </div>
+          <h3 className="font-medium text-gray-900 text-center flex-1">Edit Event</h3>
+          <div className="w-16"></div> {/* Spacer for centering */}
         </div>
         
         {/* Content */}
-        <div className="p-3 space-y-3">
-          <input 
-            type="text" 
-            value={event.title} 
-            readOnly 
-            className="w-full text-sm font-medium border border-gray-200 rounded px-2 py-1"
-          />
+        <div className="p-6 space-y-4 overflow-y-auto h-[calc(100%-120px)]">
+          {/* Event Title */}
+          <div>
+            <input 
+              type="text" 
+              value={event.title} 
+              readOnly 
+              className="w-full text-lg font-medium border border-gray-300 rounded-md px-3 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+          </div>
           
-          <input 
-            type="text" 
-            placeholder="Location or Video Call"
-            value={event.location || ''}
-            readOnly
-            className="w-full text-sm border border-gray-200 rounded px-2 py-1"
-          />
+          {/* Location */}
+          <div>
+            <input 
+              type="text" 
+              placeholder="Location or Video Call"
+              value={event.location || ''}
+              readOnly
+              className="w-full text-sm border border-gray-300 rounded-md px-3 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+          </div>
           
-          <div className="flex items-center justify-between">
-            <span className="text-sm text-gray-600">Calendar</span>
-            <div className="flex items-center gap-2">
+          {/* Calendar Selection */}
+          <div className="flex items-center justify-between py-2">
+            <span className="text-sm text-gray-600 w-24">Calendar</span>
+            <div className="flex items-center gap-3 flex-1 justify-end">
               <span className="text-sm">Home</span>
-              <div className={`w-3 h-3 rounded-full ${
+              <div className={`w-4 h-4 rounded-full ${
                 event.color === 'blue' ? 'bg-blue-500' :
                 event.color === 'green' ? 'bg-green-500' :
                 event.color === 'yellow' ? 'bg-yellow-500' :
@@ -81,78 +89,137 @@ const EventPopover: React.FC<EventPopoverProps> = ({ event, isOpen, onClose, pos
             </div>
           </div>
           
-          <div className="flex items-center justify-between">
-            <span className="text-sm text-gray-600">All Day</span>
-            <Checkbox checked={!event.hasTime} />
+          {/* All Day Toggle */}
+          <div className="flex items-center justify-between py-2">
+            <span className="text-sm text-gray-600 w-24">All Day</span>
+            <div className="flex-1 flex justify-end">
+              <Checkbox checked={!event.hasTime} />
+            </div>
           </div>
           
+          {/* Start Time */}
           {event.hasTime && (
-            <>
-              <div className="flex items-center justify-between">
-                <span className="text-sm text-gray-600">Starts</span>
-                <div className="flex gap-2">
-                  <input type="date" className="text-xs border border-gray-200 rounded px-1" defaultValue="2025-06-15" />
-                  <input type="time" className="text-xs border border-gray-200 rounded px-1" defaultValue={event.time} />
-                </div>
+            <div className="flex items-center justify-between py-2">
+              <span className="text-sm text-gray-600 w-24">Starts</span>
+              <div className="flex gap-3">
+                <input 
+                  type="date" 
+                  className="text-sm border border-gray-300 rounded px-2 py-1 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500" 
+                  defaultValue="2025-06-15" 
+                />
+                <input 
+                  type="time" 
+                  className="text-sm border border-gray-300 rounded px-2 py-1 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500" 
+                  defaultValue={event.time} 
+                />
+                <select className="text-sm border border-gray-300 rounded px-2 py-1 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500">
+                  <option>AM</option>
+                  <option>PM</option>
+                </select>
               </div>
-              
-              <div className="flex items-center justify-between">
-                <span className="text-sm text-gray-600">Ends</span>
-                <div className="flex gap-2">
-                  <input type="date" className="text-xs border border-gray-200 rounded px-1" defaultValue="2025-06-15" />
-                  <input type="time" className="text-xs border border-gray-200 rounded px-1" defaultValue={event.endTime || event.time} />
-                </div>
-              </div>
-            </>
+            </div>
           )}
           
-          <div className="flex items-center justify-between">
-            <span className="text-sm text-gray-600">Repeat</span>
-            <span className="text-sm">Never</span>
+          {/* End Time */}
+          {event.hasTime && (
+            <div className="flex items-center justify-between py-2">
+              <span className="text-sm text-gray-600 w-24">Ends</span>
+              <div className="flex gap-3">
+                <input 
+                  type="date" 
+                  className="text-sm border border-gray-300 rounded px-2 py-1 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500" 
+                  defaultValue="2025-06-15" 
+                />
+                <input 
+                  type="time" 
+                  className="text-sm border border-gray-300 rounded px-2 py-1 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500" 
+                  defaultValue={event.endTime || event.time} 
+                />
+                <select className="text-sm border border-gray-300 rounded px-2 py-1 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500">
+                  <option>AM</option>
+                  <option>PM</option>
+                </select>
+              </div>
+            </div>
+          )}
+          
+          {/* Repeat */}
+          <div className="flex items-center justify-between py-2">
+            <span className="text-sm text-gray-600 w-24">Repeat</span>
+            <div className="flex-1 flex justify-end">
+              <select className="text-sm border border-gray-300 rounded px-2 py-1 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <option>Never</option>
+                <option>Daily</option>
+                <option>Weekly</option>
+                <option>Monthly</option>
+                <option>Yearly</option>
+              </select>
+            </div>
           </div>
           
-          <div className="flex items-center justify-between">
-            <span className="text-sm text-gray-600">Alert</span>
-            <span className="text-sm">None</span>
+          {/* Alert */}
+          <div className="flex items-center justify-between py-2">
+            <span className="text-sm text-gray-600 w-24">Alert</span>
+            <div className="flex-1 flex justify-end">
+              <select className="text-sm border border-gray-300 rounded px-2 py-1 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <option>None</option>
+                <option>5 minutes before</option>
+                <option>15 minutes before</option>
+                <option>30 minutes before</option>
+                <option>1 hour before</option>
+              </select>
+            </div>
           </div>
           
-          <div className="flex items-center justify-between">
-            <span className="text-sm text-gray-600">Invitees</span>
-            <button className="text-sm text-red-500">+</button>
+          {/* Invitees */}
+          <div className="flex items-center justify-between py-2">
+            <span className="text-sm text-gray-600 w-24">Invitees</span>
+            <div className="flex-1 flex justify-end">
+              <button className="text-sm text-red-500 hover:text-red-600 text-2xl leading-none">+</button>
+            </div>
           </div>
           
-          <div className="flex items-center justify-between">
-            <span className="text-sm text-gray-600">Attachments</span>
-            <button className="text-sm text-red-500">+</button>
+          {/* Attachments */}
+          <div className="flex items-center justify-between py-2">
+            <span className="text-sm text-gray-600 w-24">Attachments</span>
+            <div className="flex-1 flex justify-end">
+              <button className="text-sm text-red-500 hover:text-red-600 text-2xl leading-none">+</button>
+            </div>
           </div>
           
-          <input 
-            type="text" 
-            placeholder="URL"
-            className="w-full text-sm border border-gray-200 rounded px-2 py-1"
-          />
+          {/* URL */}
+          <div>
+            <input 
+              type="text" 
+              placeholder="URL"
+              className="w-full text-sm border border-gray-300 rounded-md px-3 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+          </div>
           
-          <textarea 
-            placeholder="Notes"
-            value={event.description}
-            readOnly
-            className="w-full text-sm border border-gray-200 rounded px-2 py-1 h-16 resize-none"
-          />
+          {/* Notes */}
+          <div>
+            <textarea 
+              placeholder="Notes"
+              value={event.description}
+              readOnly
+              className="w-full text-sm border border-gray-300 rounded-md px-3 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 h-20 resize-none"
+            />
+          </div>
         </div>
         
         {/* Footer */}
-        <div className="flex items-center justify-between p-3 border-t border-gray-200">
-          <button className="text-sm text-red-500 hover:bg-red-50 px-3 py-1 rounded">
+        <div className="flex items-center justify-between p-4 border-t border-gray-200 bg-gray-50">
+          <button className="text-sm text-red-500 hover:bg-red-50 px-4 py-2 rounded-md transition-colors">
             Delete
           </button>
-          <div className="flex gap-2">
+          <div className="flex gap-3">
             <button 
               onClick={onClose}
-              className="text-sm text-gray-600 hover:bg-gray-100 px-3 py-1 rounded"
+              className="text-sm text-gray-600 hover:bg-gray-200 px-4 py-2 rounded-md transition-colors"
             >
               Cancel
             </button>
-            <button className="text-sm bg-blue-500 text-white hover:bg-blue-600 px-3 py-1 rounded">
+            <button className="text-sm bg-blue-500 text-white hover:bg-blue-600 px-4 py-2 rounded-md transition-colors">
               Save
             </button>
           </div>
