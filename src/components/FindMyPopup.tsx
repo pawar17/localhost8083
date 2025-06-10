@@ -14,7 +14,7 @@ const FindMyPopup: React.FC<FindMyPopupProps> = ({ onClose }) => {
   // const mumbaiCoordinates: [number, number] = [19.0760, 72.8777];
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
+    <div className="fixed inset-0 flex items-center justify-center z-50">
       <div className="bg-white rounded-lg shadow-xl w-[800px] h-[600px] max-w-full max-h-full flex overflow-hidden relative">
 
         {/* Traffic Light Buttons */}
