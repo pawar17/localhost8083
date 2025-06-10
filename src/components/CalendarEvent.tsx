@@ -1,3 +1,4 @@
+
 import React, { useState, CSSProperties } from 'react';
 import { Clock, MapPin, Bell, Globe, Repeat } from 'lucide-react';
 import { 
@@ -98,7 +99,11 @@ const CalendarEvent: React.FC<CalendarEventProps> = ({ event, style }) => {
       </div>
       
       <Dialog open={isOpen} onOpenChange={setIsOpen}>
-        <DialogContent className="p-0 max-w-md bg-gray-50 rounded-lg shadow-xl" style={{ maxHeight: '80vh', overflowY: 'auto' }}>
+        <DialogContent 
+          className="p-0 max-w-md bg-gray-50 rounded-lg shadow-xl hide-default-close" 
+          style={{ maxHeight: '80vh', overflowY: 'auto' }}
+          overlayClassName="bg-transparent"
+        >
           <div className="flex items-center justify-between px-3 py-2 border-b border-gray-200 bg-gray-100 rounded-t-lg">
             <div className="flex items-center gap-4">
               <div className="flex gap-1.5">

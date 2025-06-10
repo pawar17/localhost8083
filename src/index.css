@@ -288,3 +288,8 @@ html, body, #root {
 .hide-default-close button {
   display: none !important;
 }
+
+/* Remove dialog overlay background */
+[data-radix-dialog-overlay] {
+  background: transparent !important;
+}
