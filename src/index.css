@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -285,11 +286,13 @@ html, body, #root {
   overflow: hidden;
 }
 
-.hide-default-close button {
-  display: none !important;
-}
-
-/* Remove dialog overlay background */
+/* Remove sheet overlay background for clean Apple-style popup */
 [data-radix-dialog-overlay] {
   background: transparent !important;
+}
+
+/* Ensure sheet overlays are transparent */
+[data-state="open"][data-radix-dialog-overlay] {
+  background: transparent !important;
+  backdrop-filter: none !important;
 }
