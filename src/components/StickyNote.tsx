@@ -11,23 +11,24 @@ const StickyNote: React.FC = () => {
 
   return (
     <div
-      className={`fixed left-4 top-20 w-64 h-64 bg-yellow-200 shadow-lg transition-all duration-300 cursor-pointer ${
+      className={`fixed left-4 top-20 w-64 h-64 shadow-lg transition-all duration-300 cursor-pointer ${
         isBehind ? 'z-10' : 'z-50'
-      } ${isHovered ? 'shadow-xl scale-105' : 'shadow-lg scale-100'}`}
+      } ${isHovered ? 'shadow-xl scale-102' : 'shadow-lg scale-100'}`}
       onClick={handleClick}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       style={{
         background: '#fef49c',
         fontFamily: 'Bradley Hand, cursive, fantasy',
-        border: '1px solid rgba(0,0,0,0.1)',
+        border: '1px solid rgba(0,0,0,0.05)',
+        borderRadius: '2px',
       }}
     >
       {/* Note content area */}
-      <div className="p-4 h-full w-full">
-        <div className="text-gray-800 text-base leading-relaxed h-full">
-          <div className="font-medium mb-3 text-lg">To do:</div>
-          <div className="space-y-2 text-sm">
+      <div className="p-3 h-full w-full">
+        <div className="text-gray-800 text-sm leading-relaxed h-full">
+          <div className="font-medium mb-2 text-base">To do:</div>
+          <div className="space-y-1 text-sm">
             <div>• Land my dream UX job</div>
             <div>• Drink water</div>
             <div>• Move to the US</div>
