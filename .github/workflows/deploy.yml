@@ -35,6 +35,8 @@ jobs:
           ls -la dist
           echo "Contents of dist/assets directory:"
           ls -la dist/assets || true
+          echo "Creating .nojekyll file"
+          touch dist/.nojekyll
       - name: Setup Pages
         uses: actions/configure-pages@v4
       - name: Upload artifact

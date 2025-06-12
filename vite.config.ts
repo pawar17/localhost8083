@@ -19,7 +19,7 @@ export default defineConfig(({ mode }) => ({
       "@": path.resolve(__dirname, "./src"),
     },
   },
-  base: './',
+  base: '/localhost8083/',
   build: {
     outDir: 'dist',
     assetsDir: 'assets',
