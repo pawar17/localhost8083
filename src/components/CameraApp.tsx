@@ -1,3 +1,4 @@
+
 import React, { useEffect, useRef, useState } from 'react';
 
 interface CameraAppProps {
@@ -13,7 +14,6 @@ const CameraApp: React.FC<CameraAppProps> = ({ onClose }) => {
   const [error, setError] = useState<string | null>(null);
   const [isCameraStarted, setIsCameraStarted] = useState(false);
   const [availableCameras, setAvailableCameras] = useState<MediaDeviceInfo[]>([]);
-  const [cameraKey, setCameraKey] = useState(0); // For force re-mount
   const [isCameraLoading, setIsCameraLoading] = useState(false);
   const streamRef = useRef<MediaStream | null>(null);
 
@@ -32,46 +32,52 @@ const CameraApp: React.FC<CameraAppProps> = ({ onClose }) => {
     checkCameras();
   }, []);
 
-  // Stop camera stream when component unmounts (or onClose)
+  // Cleanup on unmount
   useEffect(() => {
     return () => {
-      console.log('[CameraApp] useEffect cleanup (unmount)');
-      stopCamera();
-      setIsCameraStarted(false);
-      setHasPermission(null);
-      setViewImage(null);
-      setCapturedImages([]);
-      setError(null);
-      setCameraKey(0);
-      setIsCameraLoading(false);
+      console.log('[CameraApp] Component unmounting, cleaning up');
+      cleanup();
     };
-    // eslint-disable-next-line
   }, []);
+
+  const cleanup = () => {
+    console.log('[CameraApp] Cleanup called');
+    if (streamRef.current) {
+      streamRef.current.getTracks().forEach(track => {
+        console.log('[CameraApp] Stopping track:', track);
+        track.stop();
+      });
+      streamRef.current = null;
+    }
+    if (videoRef.current) {
+      videoRef.current.srcObject = null;
+    }
+  };
 
   const startCamera = async () => {
     try {
       setIsCameraLoading(true);
+      setError(null);
+      
       // Check if we're in a secure context
       if (!window.isSecureContext) {
         throw new Error('Camera access requires a secure context (HTTPS or localhost)');
       }
 
       // Check if mediaDevices is available
-      if (!navigator.mediaDevices) {
-        throw new Error('mediaDevices not available in this browser');
-      }
-
-      // Check if getUserMedia is available
-      if (!navigator.mediaDevices.getUserMedia) {
-        throw new Error('getUserMedia not available in this browser');
+      if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+        throw new Error('Camera not available in this browser');
       }
 
       console.log('Starting camera...');
       
-      // Stop any existing stream before starting a new one
-      stopCamera();
+      // Stop any existing stream
+      if (streamRef.current) {
+        streamRef.current.getTracks().forEach(track => track.stop());
+        streamRef.current = null;
+      }
 
-      // Try to get the first available camera
+      // Get camera stream
       const constraints = {
         video: {
           deviceId: availableCameras[0]?.deviceId ? { exact: availableCameras[0].deviceId } : undefined,
@@ -84,40 +90,54 @@ const CameraApp: React.FC<CameraAppProps> = ({ onClose }) => {
       const stream = await navigator.mediaDevices.getUserMedia(constraints);
       console.log('Got stream:', stream);
       
+      // Store the stream reference
+      streamRef.current = stream;
+      
       if (!videoRef.current) {
         throw new Error('Video element not found');
       }
 
-      // Set the stream
+      // Set the stream to video element
       videoRef.current.srcObject = stream;
       
-      // Wait for the video to be ready
+      // Wait for video to be ready and play
       await new Promise((resolve, reject) => {
         if (!videoRef.current) return reject('Video element not found');
         
-        videoRef.current.onloadedmetadata = () => {
+        const video = videoRef.current;
+        
+        const onLoadedMetadata = async () => {
           console.log('Video metadata loaded');
-          resolve(true);
+          try {
+            await video.play();
+            console.log('Video playing successfully');
+            resolve(true);
+          } catch (playError) {
+            console.error('Error playing video:', playError);
+            reject('Failed to start video playback');
+          }
         };
         
-        videoRef.current.onerror = (e) => {
+        const onError = (e: Event) => {
           console.error('Video error:', e);
           reject('Error loading video');
         };
+        
+        video.addEventListener('loadedmetadata', onLoadedMetadata, { once: true });
+        video.addEventListener('error', onError, { once: true });
+        
+        // Cleanup listeners on reject
+        setTimeout(() => {
+          video.removeEventListener('loadedmetadata', onLoadedMetadata);
+          video.removeEventListener('error', onError);
+          reject('Timeout loading video');
+        }, 10000);
       });
 
-      // Start playing
-      try {
-        await videoRef.current.play();
-        console.log('Video playing successfully');
-        setHasPermission(true);
-        setIsCameraStarted(true);
-        setError(null);
-        setIsCameraLoading(false);
-      } catch (playError) {
-        console.error('Error playing video:', playError);
-        throw new Error('Failed to start video playback');
-      }
+      setHasPermission(true);
+      setIsCameraStarted(true);
+      setError(null);
+      setIsCameraLoading(false);
 
     } catch (err) {
       console.error('Camera error:', err);
@@ -125,54 +145,43 @@ const CameraApp: React.FC<CameraAppProps> = ({ onClose }) => {
       setHasPermission(false);
       setIsCameraStarted(false);
       setIsCameraLoading(false);
+      cleanup();
     }
   };
 
-  // Helper to stop camera stream and clear video element
-  const stopCamera = () => {
-    console.log('[CameraApp] stopCamera called');
-    // Clear video element srcObject first
-    if (videoRef.current) {
-      videoRef.current.srcObject = null;
-    }
-    if (streamRef.current) {
-      streamRef.current.getTracks().forEach(track => {
-        try {
-          track.stop();
-        } catch (e) { console.log('[CameraApp] Error stopping track:', e); }
-      });
-      streamRef.current = null;
-    }
-    // Clear video element srcObject again for safety
-    if (videoRef.current) {
-      videoRef.current.srcObject = null;
-    }
-    setIsCameraStarted(false);
-    setHasPermission(null);
-    setTimeout(() => {
-      if (videoRef.current) videoRef.current.srcObject = null;
-    }, 100);
-  };
-
-  // When closing the app, stop the camera and reset state
   const handleClose = () => {
     console.log('[CameraApp] handleClose called');
-    stopCamera();
+    cleanup();
     setViewImage(null);
     setError(null);
     setCapturedImages([]);
+    setIsCameraStarted(false);
+    setHasPermission(null);
     onClose();
   };
 
-  // When going back to camera from image view
   const handleBackToCamera = async () => {
     stopCamera();
     setViewImage(null);
-    setIsCameraLoading(true);
-    setCameraKey(prev => prev + 1); // Force re-mount video element
-    setTimeout(() => {
-      startCamera();
-    }, 100); // Small delay to ensure cleanup
+    
+    // If camera was already started and stream exists, just continue
+    if (streamRef.current && streamRef.current.active) {
+      console.log('[CameraApp] Stream still active, reusing');
+      if (videoRef.current) {
+        videoRef.current.srcObject = streamRef.current;
+        try {
+          await videoRef.current.play();
+        } catch (e) {
+          console.error('Error resuming video:', e);
+          // If play fails, restart camera
+          await startCamera();
+        }
+      }
+    } else {
+      // Stream not active, restart camera
+      console.log('[CameraApp] Stream not active, restarting camera');
+      await startCamera();
+    }
   };
 
   const handleCapture = () => {
@@ -255,7 +264,6 @@ const CameraApp: React.FC<CameraAppProps> = ({ onClose }) => {
                 </div>
               )}
               <video
-                key={cameraKey}
                 ref={videoRef}
                 autoPlay
                 playsInline
@@ -328,4 +336,4 @@ const CameraApp: React.FC<CameraAppProps> = ({ onClose }) => {
   );
 };
 
-export default CameraApp; 
+export default CameraApp;
