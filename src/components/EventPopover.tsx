@@ -281,19 +281,30 @@ const EventPopover: React.FC<EventPopoverProps> = ({ event, isOpen, onClose, pos
           </div>
         </div>
         
-        {/* Footer */}
-        <div className="flex items-center justify-between p-4 border-t border-gray-200 bg-gray-50">
-          <button className="text-sm text-red-500 hover:bg-red-50 px-4 py-2 rounded-md transition-colors">
-            Delete
-          </button>
-          <div className="flex gap-3">
-            <button 
+        {/* Footer with actions */}
+        <div className="absolute bottom-0 left-0 right-0 p-4 bg-gray-50 border-t border-gray-200 flex justify-between items-center">
+          <div>
+            {/* Delete button (example) */}
+            <button
+              className="px-4 py-2 rounded-md bg-red-500 text-white text-sm font-medium hover:bg-red-600 transition-colors"
               onClick={onClose}
-              className="text-sm text-gray-600 hover:bg-gray-200 px-4 py-2 rounded-md transition-colors"
+            >
+              Delete Event
+            </button>
+          </div>
+          <div className="flex gap-2">
+            {/* Cancel button */}
+            <button
+              className="px-4 py-2 rounded-md bg-gray-200 text-gray-700 text-sm font-medium hover:bg-gray-300 transition-colors"
+              onClick={onClose}
             >
               Cancel
             </button>
-            <button className="text-sm bg-blue-500 text-white hover:bg-blue-600 px-4 py-2 rounded-md transition-colors">
+            {/* Save button */}
+            <button
+              className="px-4 py-2 rounded-md bg-blue-500 text-white text-sm font-medium hover:bg-blue-600 transition-colors"
+              onClick={onClose}
+            >
               Save
             </button>
           </div>

@@ -35,9 +35,9 @@ In the CAST project, I focused on improving speech-to-text systems for children,
 Learn more about what I did by taking a look at my resume!`, day: 2, isExpandable: true }, // Wednesday
 
     { id: '9', title: 'Consulting club casework', time: '8:30 AM', endTime: '10:30 AM', color: 'red', description: `At PurdueThink, I led strategy and growth initiatives for student startups and organizations. As a consultant, I scaled Boilerexams through market research, survey analysis, and faculty outreach. Later, as Project Manager, I guided a team in restructuring Purdue Pilots Inc., delivered strategic recommendations, and secured three new projects hence expanding our campus-wide impact`, day: 3, isExpandable: true }, // Thursday
-    { id: '10', title: 'Purdue Student Government', time: '1:00 PM', endTime: '3:30 PM', color: 'green', description: `Served on Purdue Student Government's DEI Committee for two years. As Executive Director, I led a 13-member team, worked on student body legislation, and launched campus-wide initiatives focused on accessibility, representation, and inclusion.`, day: 3, isExpandable: true }, // Thursday
+    { id: '10', title: 'Purdue Student Government', time: '1:00 PM', endTime: '3:30 PM', color: 'green', description: `Served on Purdue Student Government's DEI Committee for two years & led multiple initiatives. As Executive Director, I led a 13-member team, worked on student body legislation, and launched campus-wide programs focused on accessibility, representation, and inclusion.`, day: 3, isExpandable: true }, // Thursday
 
-    { id: '11', title: 'Certifications', time: '8:30 AM', endTime: '11:00 AM', color: 'purple', description: `Currently pursuing: Six Sigma Greenbelt certification
+    { id: '11', title: 'Certifications', time: '8:30 AM', endTime: '11:00 AM', color: 'purple', description: `<i>Currently pursuing: Six Sigma Greenbelt certification</i>
       - Forage Program: Citi Asia – Global Consumer Banking Virtual Reality Intern
 - Forage Program: Goldman Sachs – Virtual Engineering Intern
 - Purdue Milestones Program – Programming with Arduino
@@ -56,11 +56,16 @@ Purdue Dining & Culinary, West Lafayette, IN
 Student Staff | Oct 2022 – Feb 2023
 Served 1,000+ students per shift, assisted in meal prep and inventory, and collaborated with a team to improve operational efficiency.`, day: 4, isExpandable: true }, // Friday
 
-    { id: '14a', title: 'Technical Project: Build Financial Transaction Platform', time: '11:00 AM', endTime: '1:30 PM', color: 'purple', description: 'Built full-stack app with React.js, Firebase, and Checkbook API enabling secure international payments; placed 2nd at Treehacks.', day: 0, isExpandable: true },
-    { id: '14b', title: 'Technical Project: Build Disability Visibility India Website', time: '12:00 PM', endTime: '2:00 PM', color: 'yellow', description: 'Developed accessible web platform to support and grow disability community in India.', day: 1, isExpandable: true },
+    { id: '14a', title: 'Technical Project: Build Financial Transaction Platform', time: '11:00 AM', endTime: '1:30 PM', color: 'purple', description: `Built full-stack app with React.js, Firebase, and Checkbook API enabling secure international payments; placed 2nd at Stanford Treehacks. Learn more: <a href="https://devpost.com/software/cashflow-7xqoc4" target="_blank" rel="noopener noreferrer">CashFlow on Devpost</a>`, day: 0, isExpandable: true },
+    { id: '14b', title: 'Technical Project: Build Disability Visibility India Website', time: '12:00 PM', endTime: '2:00 PM', color: 'yellow', description: `Developed accessible web platform to support and grow disability awareness in India while creating a toolkit resource. Learn more in the next event titled Disability Visibility. Visit: <a href="https://linktr.ee/disabilityvisibilityindia" target="_blank" rel="noopener noreferrer">Disability Visibility India Linktree</a>`, day: 1, isExpandable: true },
     { id: '14c', title: 'Technical Project: Build Music Recommender System', time: '8:00 AM', endTime: '10:00 AM', color: 'red', description: 'Implemented deep learning (RNN/LSTM) and collaborative filtering to enhance song recommendations on large-scale dataset.', day: 2, isExpandable: true },
-    { id: '14d', title: 'Technical Project: Build S&P 500 Stock Forecasting', time: '10:30 AM', endTime: '1:00 PM', color: 'blue', description: 'Created LSTM-based model improving stock trend predictions by 18%.', day: 3, isExpandable: true },
-    { id: '14e', title: 'Technical Project: Build IPL Player Performance Predictor', time: '8:00 AM', endTime: '10:30 AM', color: 'blue', description: 'Designed ML model to predict player performance for IPL 2025 using historical data (2008–2024); webscraped real-time stats, recent form, and contextual match metrics to drive accuracy.', day: 5, isExpandable: true },
+    { id: '14d', title: 'Technical Project: Build S&P 500 Stock Forecasting', time: '10:30 AM', endTime: '1:00 PM', color: 'blue', description: `This Project Analyses a data about S&P 500 to:
+Link to the dataset: <a href="https://www.kaggle.com/datasets/andrewmvd/sp-500-stocks" target="_blank" rel="noopener noreferrer">https://www.kaggle.com/datasets/andrewmvd/sp-500-stocks</a>
+
+- Explore the S&P 500 stock market performance.
+- Analyze company-level data to study sectoral trends, market capitalization, and volatility.
+- Explore index-wide trends and compare with individual stock behaviors.`, day: 3, isExpandable: true },
+    { id: '14e', title: 'Technical Project: Build IPL Player Performance Predictor', time: '8:00 AM', endTime: '10:30 AM', color: 'blue', description: `Designed ML model to predict player performance for Indian Premier League 2025, India's most popular T-20 format league, using historical data (2008–2024); webscraped real-time stats, recent form, and contextual match metrics to drive accuracy to improve sports betting odds.`, day: 5, isExpandable: true },
 
     { id: '15', title: 'CALL HOME!', time: '11:00 AM', endTime: '1:00 PM', color: 'yellow', description: '', day: 5, isExpandable: false }, // Saturday
     { id: '16', title: 'Prepare for Interview!', time: '2:00 PM', endTime: '5:00 PM', color: 'green', description: '', day: 5, isExpandable: false }, // Saturday

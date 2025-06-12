@@ -50,7 +50,7 @@ const StickyNote: React.FC = () => {
               <Emoji name="camera" width={13} style={{ verticalAlign: 'middle', display: 'inline-block' }} /> P.S. If you use the camera, you'll need to refresh the page afterward. It's work in progress :)
               </p>
               <p className="mt-4 italic mb-3" style={{ fontSize: '10px' }}>
-                <Emoji name="desktop computer" width={12} style={{ verticalAlign: 'middle', display: 'inline-block' }} />This website looks best on computer 
+               This website looks best on computer 
               </p>
             </div>
           </div>
