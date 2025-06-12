@@ -21,10 +21,13 @@ export default defineConfig(({ mode }) => ({
   },
   base: '/localhost8083/',
   build: {
+    outDir: 'dist',
     assetsDir: 'assets',
+    emptyOutDir: true,
     rollupOptions: {
       output: {
-        assetFileNames: 'assets/[name].[hash][extname]'
+        assetFileNames: 'assets/[name].[hash][extname]',
+        manualChunks: undefined
       }
     }
   },
