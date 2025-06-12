@@ -282,7 +282,7 @@ const MacDock: React.FC = () => {
             <span className="w-3 h-3 rounded-full bg-green-500 border-2 border-green-200"></span>
           </div>
           <div className="flex flex-col items-center px-6 pt-4 pb-6">
-            <img src="/ICON3.png" alt="Aadya Pawar" className="w-24 h-24 object-contain mb-2 mx-auto" />
+            <img src="./ICON3.png" alt="Aadya Pawar" className="w-24 h-24 object-contain mb-2 mx-auto" />
             <div className="text-lg font-semibold mb-1">Aadya Pawar</div>
             <table className="w-full text-sm mt-2">
               <tbody>

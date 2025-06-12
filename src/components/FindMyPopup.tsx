@@ -33,7 +33,7 @@ const FindMyPopup: React.FC<FindMyPopupProps> = ({ onClose }) => {
             {/* Me entry */}
             <div className="flex items-center mb-4">
               {/* Removed rounded-full for square image */}
-              <img src="ICON2.png" alt="Me" className="w-10 h-10 object-cover" />
+              <img src="./ICON2.png" alt="Me" className="w-10 h-10 object-cover" />
               <div className="ml-3">
                 <div className="font-medium">Me</div>
                 <div className="text-sm text-gray-500">home</div>

@@ -63,7 +63,7 @@ const MacStatusBar: React.FC = () => {
         <Wifi className="w-4 h-4 text-zinc-600" />
         {isCharging ? <BatteryCharging className="w-4 h-4 text-zinc-600" /> : <Battery className="w-4 h-4 text-zinc-600" />}
         <Search className="w-4 h-4 text-zinc-600" />
-        <img src="/control-center-icon.png" alt="Control Center" className="w-4 h-4 opacity-60" />
+        <img src="./control-center-icon.png" alt="Control Center" className="w-4 h-4 opacity-60" />
         <img src="/siri__fsb5b98qe526_og-removebg-preview.png" alt="Siri" className="w-8 h-8 object-contain" />
         <span className="text-zinc-600 text-xs">{formatDate(currentTime)}</span>
         <span className="text-zinc-600 text-xs">{formatTime(currentTime)}</span>
