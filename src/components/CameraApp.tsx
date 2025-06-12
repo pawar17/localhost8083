@@ -1,4 +1,3 @@
-
 import React, { useEffect, useRef, useState } from 'react';
 
 interface CameraAppProps {
@@ -161,27 +160,10 @@ const CameraApp: React.FC<CameraAppProps> = ({ onClose }) => {
   };
 
   const handleBackToCamera = async () => {
-    stopCamera();
+    cleanup();
     setViewImage(null);
-    
-    // If camera was already started and stream exists, just continue
-    if (streamRef.current && streamRef.current.active) {
-      console.log('[CameraApp] Stream still active, reusing');
-      if (videoRef.current) {
-        videoRef.current.srcObject = streamRef.current;
-        try {
-          await videoRef.current.play();
-        } catch (e) {
-          console.error('Error resuming video:', e);
-          // If play fails, restart camera
-          await startCamera();
-        }
-      }
-    } else {
-      // Stream not active, restart camera
-      console.log('[CameraApp] Stream not active, restarting camera');
-      await startCamera();
-    }
+    setIsCameraLoading(true);
+    await startCamera();
   };
 
   const handleCapture = () => {

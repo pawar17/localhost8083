@@ -1,5 +1,6 @@
-
 import React, { useState } from 'react';
+import { EmojiProvider, Emoji } from 'react-apple-emojis';
+import emojiData from 'react-apple-emojis/src/data.json';
 
 const StickyNote: React.FC = () => {
   const [isVisible, setIsVisible] = useState(true);
@@ -28,16 +29,32 @@ const StickyNote: React.FC = () => {
     >
       {/* Note content area */}
       <div className="p-4 h-full w-full">
-        <div className="text-gray-800 text-sm leading-relaxed h-full">
-          <div className="font-medium mb-3 text-base">Hello & welcome!</div>
-          <div className="space-y-3 text-sm">
-            <p>I had a lot of fun making this website. Since my calendar is usually jam-packed, it felt right to make a site that resembles the same energy (peep the gallery to see my actual calendar!)</p>
-            <p>Feel free to click around and play with everything on the site!</p>
-            <p className="font-medium">Quick Note:</p>
-            <p>This website looks best on a desktop computer.</p>
-            <p className="text-xs mt-4 italic">P.S. If you use the camera, you'll need to refresh the page afterward. It's work in progress :)</p>
+        <EmojiProvider data={emojiData}>
+          <div className="text-gray-800 text-sm leading-relaxed h-full">
+            <div className="font-medium mb-3 text-base flex items-center gap-2">
+              <Emoji name="waving hand" width={20} />
+              Hello & welcome!
+              <Emoji name="smiling face with smiling eyes" width={20} />
+            </div>
+            <div className="space-y-3 text-sm">
+              <p className="mb-3">
+                Since my calendar is usually jam-packed, it felt right to make a site that resembles the same energy (peep the gallery to see my actual calendar!)<Emoji name="calendar" width={12} style={{ verticalAlign: 'middle', display: 'inline-block' }} />
+              </p>
+              <p className="mb-3">
+                Feel free to click around and play with everything on the site! I had a lot of fun making this website.<Emoji name="glowing star" width={14} style={{ verticalAlign: 'middle', display: 'inline-block' }} />
+              </p>
+              <p className="mb-3">
+                Click on this note to make it disappear
+              </p>
+              <p className="text-xs mt-4 italic mb-3" style={{ fontSize: '11px' }}>
+              <Emoji name="camera" width={13} style={{ verticalAlign: 'middle', display: 'inline-block' }} /> P.S. If you use the camera, you'll need to refresh the page afterward. It's work in progress :)
+              </p>
+              <p className="mt-4 italic mb-3" style={{ fontSize: '10px' }}>
+                <Emoji name="desktop computer" width={12} style={{ verticalAlign: 'middle', display: 'inline-block' }} />This website looks best on computer 
+              </p>
+            </div>
           </div>
-        </div>
+        </EmojiProvider>
       </div>
     </div>
   );
