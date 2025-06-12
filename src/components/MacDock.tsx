@@ -28,7 +28,7 @@ const MacDock: React.FC = () => {
     {
       icon: (
         <div className="w-12 h-12 flex items-center justify-center">
-          <img src="/App icons/camera.webp" alt="Camera" className="w-full h-full object-contain" />
+          <img src="./App icons/camera.webp" alt="Camera" className="w-full h-full object-contain" />
         </div>
       ),
       name: "Camera",
@@ -44,7 +44,7 @@ const MacDock: React.FC = () => {
     { 
       icon: (
         <div className="w-12 h-12 flex items-center justify-center">
-          <img src="/App icons/1.png" alt="Finder" className="w-full h-full object-contain" />
+          <img src="./App icons/1.png" alt="Finder" className="w-full h-full object-contain" />
         </div>
       ), 
       name: "Finder",
@@ -53,7 +53,7 @@ const MacDock: React.FC = () => {
     { 
       icon: (
         <div className="w-12 h-12 flex items-center justify-center">
-          <img src="/App icons/2.png" alt="Safari" className="w-full h-full object-contain" />
+          <img src="./App icons/2.png" alt="Safari" className="w-full h-full object-contain" />
         </div>
       ), 
       name: "Safari",
@@ -62,7 +62,7 @@ const MacDock: React.FC = () => {
     { 
       icon: (
         <div className="w-12 h-12 flex items-center justify-center">
-          <img src="/App icons/CwKoPLck9kD8CifRkrpug3socM.png" alt="Email" className="w-full h-full object-contain" />
+          <img src="./App icons/CwKoPLck9kD8CifRkrpug3socM.png" alt="Email" className="w-full h-full object-contain" />
         </div>
       ), 
       name: "Email",
@@ -71,7 +71,7 @@ const MacDock: React.FC = () => {
     { 
       icon: (
         <div className="w-12 h-12 flex items-center justify-center">
-          <img src="/App icons/fm90fwzWoBMCvK5C0MOyKdo94.png" alt="Mail" className="w-full h-full object-contain" />
+          <img src="./App icons/fm90fwzWoBMCvK5C0MOyKdo94.png" alt="Mail" className="w-full h-full object-contain" />
         </div>
       ), 
       name: "Mail",
@@ -80,7 +80,7 @@ const MacDock: React.FC = () => {
     { 
       icon: (
         <div className="w-12 h-12 flex items-center justify-center">
-          <img src="/App icons/gi6dMq8dbjba0LyjZSuySu4X6zg.png" alt="Contact Book" className="w-full h-full object-contain" />
+          <img src="./App icons/gi6dMq8dbjba0LyjZSuySu4X6zg.png" alt="Contact Book" className="w-full h-full object-contain" />
         </div>
       ), 
       name: "Contact Book",
@@ -92,7 +92,7 @@ const MacDock: React.FC = () => {
     { 
       icon: (
         <div className="w-12 h-12 flex items-center justify-center">
-          <img src="/App icons/ogWIDEJmWxA8SVRZpEe7gk35FcM.png" alt="Photos" className="w-full h-full object-contain" />
+          <img src="./App icons/ogWIDEJmWxA8SVRZpEe7gk35FcM.png" alt="Photos" className="w-full h-full object-contain" />
         </div>
       ), 
       name: "Photos",
@@ -107,7 +107,7 @@ const MacDock: React.FC = () => {
     { 
       icon: (
         <div className="w-12 h-12 flex items-center justify-center">
-          <img src="/App icons/mjYHu1WKSujuvzAuskfVJSx2w.png" alt="Notes" className="w-full h-full object-contain" />
+          <img src="./App icons/mjYHu1WKSujuvzAuskfVJSx2w.png" alt="Notes" className="w-full h-full object-contain" />
         </div>
       ), 
       name: "Notes",
@@ -116,7 +116,7 @@ const MacDock: React.FC = () => {
     { 
       icon: (
         <div className="w-12 h-12 flex items-center justify-center">
-          <img src="/App icons/NMuItXJj2OKiPiAC2EdivhRPYY.png" alt="Apple TV" className="w-full h-full object-contain" />
+          <img src="./App icons/NMuItXJj2OKiPiAC2EdivhRPYY.png" alt="Apple TV" className="w-full h-full object-contain" />
         </div>
       ), 
       name: "Apple TV",
@@ -125,7 +125,7 @@ const MacDock: React.FC = () => {
     { 
       icon: (
         <div className="w-12 h-12 flex items-center justify-center">
-          <img src="/App icons/Spotify.png" alt="Music" className="w-full h-full object-contain" />
+          <img src="./App icons/Spotify.png" alt="Music" className="w-full h-full object-contain" />
         </div>
       ), 
       name: "Music",
@@ -134,7 +134,7 @@ const MacDock: React.FC = () => {
     { 
       icon: (
         <div className="w-12 h-12 flex items-center justify-center">
-          <img src="/App icons/lwNP7fGxNGl6VSwvqD3AorA1h0.png" alt="Podcasts" className="w-full h-full object-contain" />
+          <img src="./App icons/lwNP7fGxNGl6VSwvqD3AorA1h0.png" alt="Podcasts" className="w-full h-full object-contain" />
         </div>
       ), 
       name: "Podcasts",
@@ -143,7 +143,7 @@ const MacDock: React.FC = () => {
     { 
       icon: (
         <div className="w-12 h-12 flex items-center justify-center">
-          <img src="/App icons/pjjxP6KY1Ttnqhuqt9oF3QBfmE.png" alt="App Store" className="w-full h-full object-contain" />
+          <img src="./App icons/pjjxP6KY1Ttnqhuqt9oF3QBfmE.png" alt="App Store" className="w-full h-full object-contain" />
         </div>
       ), 
       name: "App Store",
@@ -152,7 +152,7 @@ const MacDock: React.FC = () => {
     { 
       icon: (
         <div className="w-12 h-12 flex items-center justify-center">
-          <img src="/App icons/qQISGOSSnz748TdrZn91l44R5u0.png" alt="Settings" className="w-full h-full object-contain" />
+          <img src="./App icons/qQISGOSSnz748TdrZn91l44R5u0.png" alt="Settings" className="w-full h-full object-contain" />
         </div>
       ), 
       name: "Settings",
@@ -161,7 +161,7 @@ const MacDock: React.FC = () => {
     { 
       icon: (
         <div className="w-12 h-12 flex items-center justify-center">
-          <img src="/App icons/VbY44vBZlQp4srNQK6ohxpco.png" alt="Folder" className="w-full h-full object-contain" />
+          <img src="./App icons/VbY44vBZlQp4srNQK6ohxpco.png" alt="Folder" className="w-full h-full object-contain" />
         </div>
       ), 
       name: "Folder",
@@ -170,7 +170,7 @@ const MacDock: React.FC = () => {
     { 
       icon: (
         <div className="w-12 h-12 flex items-center justify-center">
-          <img src="/App icons/VeljykK560qBRDkQkYyhx8ChI.png" alt="Trash" className="w-full h-full object-contain" />
+          <img src="./App icons/VeljykK560qBRDkQkYyhx8ChI.png" alt="Trash" className="w-full h-full object-contain" />
         </div>
       ), 
       name: "Trash",
@@ -179,7 +179,7 @@ const MacDock: React.FC = () => {
     { 
       icon: (
         <div className="w-12 h-12 flex items-center justify-center">
-          <img src="/App icons/xxKf6tPzYecSWOavDJjUB0MtXw.png" alt="FaceTime" className="w-full h-full object-contain" />
+          <img src="./App icons/xxKf6tPzYecSWOavDJjUB0MtXw.png" alt="FaceTime" className="w-full h-full object-contain" />
         </div>
       ), 
       name: "FaceTime",
@@ -188,7 +188,7 @@ const MacDock: React.FC = () => {
     {
       icon: (
         <div className="w-10 h-10 flex items-center justify-center">
-          <img src="/App icons/FindMy.png" alt="Find My" className="w-full h-full object-contain" />
+          <img src="./App icons/FindMy.png" alt="Find My" className="w-full h-full object-contain" />
         </div>
       ),
       name: "Find My",
@@ -197,7 +197,7 @@ const MacDock: React.FC = () => {
     {
       icon: (
         <div className="w-12 h-12 flex items-center justify-center">
-          <img src="/App icons/LinkedIn.png" alt="LinkedIn" className="w-full h-full object-contain" />
+          <img src="./App icons/LinkedIn.png" alt="LinkedIn" className="w-full h-full object-contain" />
         </div>
       ),
       name: "LinkedIn",
@@ -206,7 +206,7 @@ const MacDock: React.FC = () => {
     {
       icon: (
         <div className="w-10 h-10 flex items-center justify-center">
-          <img src="/App icons/Pinterest.png" alt="Pinterest" className="w-full h-full object-contain" />
+          <img src="./App icons/Pinterest.png" alt="Pinterest" className="w-full h-full object-contain" />
         </div>
       ),
       name: "Pinterest",
