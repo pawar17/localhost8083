@@ -290,11 +290,11 @@ const EventPopover: React.FC<EventPopoverProps> = ({ event, isOpen, onClose, pos
               onClick={onClose}
             >
               Delete Event
-            </button>
+          </button>
           </div>
           <div className="flex gap-2">
             {/* Cancel button */}
-            <button
+            <button 
               className="px-4 py-2 rounded-md bg-gray-200 text-gray-700 text-sm font-medium hover:bg-gray-300 transition-colors"
               onClick={onClose}
             >
