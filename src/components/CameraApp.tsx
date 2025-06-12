@@ -166,6 +166,7 @@ const CameraApp: React.FC<CameraAppProps> = ({ onClose }) => {
 
   // When going back to camera from image view
   const handleBackToCamera = async () => {
+    stopCamera();
     setViewImage(null);
     setIsCameraLoading(true);
     setCameraKey(prev => prev + 1); // Force re-mount video element
