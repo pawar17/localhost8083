@@ -151,6 +151,15 @@ const EventPopover: React.FC<EventPopoverProps> = ({ event, isOpen, onClose, pos
                       </>
                     );
                   }
+                  // Technical Project events: render HTML description with pink links
+                  if (["14a", "14b", "14d", "14e"].includes(event.id)) {
+                    return (
+                      <div>
+                        <style>{`.event-popover-html a { color: #ec4899 !important; }`}</style>
+                        <div className="event-popover-html" dangerouslySetInnerHTML={{ __html: event.description }} />
+                      </div>
+                    );
+                  }
                   // Default: just show description
                   return <div>{event.description}</div>;
                 })()}

@@ -47,7 +47,7 @@ const StickyNote: React.FC = () => {
                 Click on this note to make it disappear
               </p>
               <p className="text-xs mt-4 italic mb-3" style={{ fontSize: '11px' }}>
-              <Emoji name="camera" width={13} style={{ verticalAlign: 'middle', display: 'inline-block' }} /> P.S. If you use the camera, you'll need to refresh the page afterward. It's work in progress :)
+               P.S. If you use the camera, you'll need to refresh the page afterward. It's work in progress :)
               </p>
               <p className="mt-4 italic mb-3" style={{ fontSize: '10px' }}>
                This website looks best on computer 
