@@ -1,7 +1,5 @@
 import React from 'react';
-import { X } from 'lucide-react';
 import { EventType } from './CalendarEvent';
-import { Checkbox } from "@/components/ui/checkbox";
 
 type EventPopoverProps = {
   event: EventType;
@@ -13,58 +11,52 @@ type EventPopoverProps = {
 const EventPopover: React.FC<EventPopoverProps> = ({ event, isOpen, onClose, position }) => {
   if (!isOpen) return null;
 
-  const getTimeDisplay = () => {
-    if (event.endTime) {
-      return `${event.time} – ${event.endTime}`;
-    }
-    return event.time;
-  };
-
   return (
     <>
       {/* Invisible clickable area to close */}
-      <div 
-        className="fixed inset-0 z-40" 
+      <div
+        className="fixed inset-0 z-40"
         onClick={onClose}
       />
-      
-      {/* Mac-style window with traffic lights */}
-      <div 
-        className="fixed z-50 bg-white rounded-lg shadow-2xl border border-gray-300 w-[480px] h-[520px] overflow-hidden"
+
+      {/* Mac-style window */}
+      <div
+        className="fixed z-50 bg-white rounded-[10px] w-[420px] overflow-hidden"
         style={{
-          left: Math.min(position.x - 240, window.innerWidth - 500),
+          left: Math.min(position.x - 210, window.innerWidth - 440),
           top: Math.max(position.y - 260, 20),
+          boxShadow: '0 22px 70px 4px rgba(0, 0, 0, 0.56)'
         }}
       >
         {/* Mac title bar with traffic lights */}
-        <div className="flex items-center justify-between px-4 py-3 bg-gray-50 border-b border-gray-200">
-          <div className="flex items-center gap-2">
-            <button 
+        <div className="flex items-center px-3 py-2.5 bg-white">
+          <div className="flex items-center gap-[7px]">
+            <button
               onClick={onClose}
-              className="w-3 h-3 rounded-full bg-red-500 hover:bg-red-600 transition-colors"
+              className="w-[12px] h-[12px] rounded-full bg-[#FF5F57] hover:bg-[#FF4136] transition-colors"
             />
-            <button className="w-3 h-3 rounded-full bg-yellow-400 hover:bg-yellow-500 transition-colors" />
-            <button className="w-3 h-3 rounded-full bg-green-500 hover:bg-green-600 transition-colors" />
+            <button className="w-[12px] h-[12px] rounded-full bg-[#FEBC2E] hover:bg-[#FFAA00] transition-colors" />
+            <button className="w-[12px] h-[12px] rounded-full bg-[#28CA42] hover:bg-[#00D924] transition-colors" />
           </div>
-          <h3 className="font-medium text-gray-900 text-center flex-1">Edit Event</h3>
-          <div className="w-16"></div> {/* Spacer for centering */}
+          <h3 className="absolute left-1/2 transform -translate-x-1/2 text-[13px] font-semibold text-[#000]">Edit Event</h3>
         </div>
-        
+
         {/* Content */}
-        <div className="p-6 space-y-4 overflow-y-auto h-[calc(100%-120px)]">
+        <div className="max-h-[500px] overflow-y-auto bg-[#fafafa]">
           {/* Event Title */}
-          <div>
-            <input 
-              type="text" 
-              value={event.title} 
-              readOnly 
-              className="w-full text-lg font-medium border border-gray-300 rounded-md px-3 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+          <div className="px-3 pt-3 pb-2 bg-white">
+            <input
+              type="text"
+              value={event.title}
+              readOnly
+              className="w-full text-[13px] font-normal border border-[#d1d1d6] rounded-[5px] px-2.5 py-1.5 bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#007AFF] focus:border-transparent"
             />
           </div>
-          {/* Notes/Description (moved up) */}
+
+          {/* Notes/Description */}
           {event.description && (
-          <div>
-              <div className="w-full text-sm border border-gray-300 rounded-md px-3 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 whitespace-pre-line">
+          <div className="px-3 pb-2 bg-white">
+              <div className="w-full text-[13px] border border-[#d1d1d6] rounded-[5px] px-2.5 py-1.5 bg-white text-gray-700 min-h-[60px] max-h-[100px] overflow-y-auto">
                 {(() => {
                   // Go on a run: Strava embed
                   if (event.id === '1') {
@@ -166,152 +158,142 @@ const EventPopover: React.FC<EventPopoverProps> = ({ event, isOpen, onClose, pos
               </div>
           </div>
           )}
-          
-          {/* Calendar Selection */}
-          <div className="flex items-center justify-between py-2">
-            <span className="text-sm text-gray-600 w-24">Calendar</span>
-            <div className="flex items-center gap-3 flex-1 justify-end">
-              <span className="text-sm">Home</span>
-              <div className={`w-4 h-4 rounded-full ${
-                event.color === 'blue' ? 'bg-blue-500' :
-                event.color === 'green' ? 'bg-green-500' :
-                event.color === 'yellow' ? 'bg-yellow-500' :
-                event.color === 'red' ? 'bg-red-500' :
-                'bg-purple-500'
-              }`}></div>
-            </div>
-          </div>
-          
-          {/* All Day Toggle */}
-          <div className="flex items-center justify-between py-2">
-            <span className="text-sm text-gray-600 w-24">All Day</span>
-            <div className="flex-1 flex justify-end">
-              <Checkbox checked={!event.hasTime} />
-            </div>
-          </div>
-          
-          {/* Start Time */}
-          {event.hasTime && (
-            <div className="flex items-center justify-between py-2">
-              <span className="text-sm text-gray-600 w-24">Starts</span>
-              <div className="flex gap-3">
-                <input 
-                  type="date" 
-                  className="text-sm border border-gray-300 rounded px-2 py-1 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500" 
-                  defaultValue="2025-06-15" 
-                />
-                <input 
-                  type="time" 
-                  className="text-sm border border-gray-300 rounded px-2 py-1 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500" 
-                  defaultValue={event.time} 
-                />
-                <select className="text-sm border border-gray-300 rounded px-2 py-1 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500">
-                  <option>AM</option>
-                  <option>PM</option>
-                </select>
+
+          {/* Field rows - light gray background */}
+          <div className="bg-[#fafafa] pt-2">
+            {/* Calendar Selection */}
+            <div className="flex items-center justify-between px-3 py-2 bg-white mb-[1px]">
+              <span className="text-[13px] text-gray-600">Calendar</span>
+              <div className="flex items-center gap-2">
+                <span className="text-[13px] text-gray-900">Home</span>
+                <div className={`w-2 h-2 rounded-full ${
+                  event.color === 'blue' ? 'bg-[#007AFF]' :
+                  event.color === 'green' ? 'bg-[#34C759]' :
+                  event.color === 'yellow' ? 'bg-[#FFCC00]' :
+                  event.color === 'red' ? 'bg-[#FF3B30]' :
+                  'bg-[#AF52DE]'
+                }`}></div>
+                <svg className="w-2 h-3 text-gray-400" fill="none" viewBox="0 0 6 10">
+                  <path d="M1 1l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
               </div>
             </div>
-          )}
-          
-          {/* End Time */}
-          {event.hasTime && (
-            <div className="flex items-center justify-between py-2">
-              <span className="text-sm text-gray-600 w-24">Ends</span>
-              <div className="flex gap-3">
-                <input 
-                  type="date" 
-                  className="text-sm border border-gray-300 rounded px-2 py-1 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500" 
-                  defaultValue="2025-06-15" 
-                />
-                <input 
-                  type="time" 
-                  className="text-sm border border-gray-300 rounded px-2 py-1 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500" 
-                  defaultValue={event.endTime || event.time} 
-                />
-                <select className="text-sm border border-gray-300 rounded px-2 py-1 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500">
-                  <option>AM</option>
-                  <option>PM</option>
-                </select>
+
+            {/* All Day Toggle */}
+            <div className="flex items-center justify-between px-3 py-2 bg-white mb-[1px]">
+              <span className="text-[13px] text-gray-600">All Day</span>
+              <div className={`w-10 h-[22px] rounded-full transition-colors ${!event.hasTime ? 'bg-[#34C759]' : 'bg-[#d1d1d6]'} relative cursor-pointer flex items-center`}>
+                <div className={`absolute ${!event.hasTime ? 'right-[2px]' : 'left-[2px]'} w-[18px] h-[18px] bg-white rounded-full transition-all shadow-sm`}></div>
               </div>
             </div>
-          )}
-          
-          {/* Repeat */}
-          <div className="flex items-center justify-between py-2">
-            <span className="text-sm text-gray-600 w-24">Repeat</span>
-            <div className="flex-1 flex justify-end">
-              <select className="text-sm border border-gray-300 rounded px-2 py-1 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500">
-                <option>Never</option>
-                <option>Daily</option>
-                <option>Weekly</option>
-                <option>Monthly</option>
-                <option>Yearly</option>
-              </select>
+
+            {/* Starts */}
+            {event.hasTime && (
+              <div className="flex items-center justify-between px-3 py-2 bg-white mb-[1px]">
+                <span className="text-[13px] text-gray-600">Starts</span>
+                <div className="flex items-center gap-2 text-[13px] text-gray-900">
+                  <span>10/23/2025</span>
+                  <span>07:45</span>
+                  <span>PM</span>
+                  <svg className="w-2 h-3 text-gray-400" fill="none" viewBox="0 0 6 10">
+                    <path d="M1 1l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                </div>
+              </div>
+            )}
+
+            {/* Ends */}
+            {event.hasTime && (
+              <div className="flex items-center justify-between px-3 py-2 bg-white mb-[1px]">
+                <span className="text-[13px] text-gray-600">Ends</span>
+                <div className="flex items-center gap-2 text-[13px] text-gray-900">
+                  <span>10/23/2025</span>
+                  <span>08:45</span>
+                  <span>PM</span>
+                  <svg className="w-2 h-3 text-gray-400" fill="none" viewBox="0 0 6 10">
+                    <path d="M1 1l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                </div>
+              </div>
+            )}
+
+            {/* Time Zone */}
+            {event.hasTime && (
+              <div className="flex items-center justify-between px-3 py-2 bg-white mb-[1px]">
+                <span className="text-[13px] text-gray-600">Time Zone</span>
+                <div className="flex items-center gap-2">
+                  <span className="text-[13px] text-gray-900">UTC</span>
+                  <svg className="w-2 h-3 text-gray-400" fill="none" viewBox="0 0 6 10">
+                    <path d="M1 1l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                </div>
+              </div>
+            )}
+
+            {/* Repeat */}
+            <div className="flex items-center justify-between px-3 py-2 bg-white mb-[1px]">
+              <span className="text-[13px] text-gray-600">Repeat</span>
+              <div className="flex items-center gap-2">
+                <span className="text-[13px] text-gray-900">Never</span>
+                <svg className="w-2 h-3 text-gray-400" fill="none" viewBox="0 0 6 10">
+                  <path d="M1 1l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </div>
             </div>
-          </div>
-          
-          {/* Alert */}
-          <div className="flex items-center justify-between py-2">
-            <span className="text-sm text-gray-600 w-24">Alert</span>
-            <div className="flex-1 flex justify-end">
-              <select className="text-sm border border-gray-300 rounded px-2 py-1 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500">
-                <option>None</option>
-                <option>5 minutes before</option>
-                <option>15 minutes before</option>
-                <option>30 minutes before</option>
-                <option>1 hour before</option>
-              </select>
+
+            {/* Alert */}
+            <div className="flex items-center justify-between px-3 py-2 bg-white mb-[1px]">
+              <span className="text-[13px] text-gray-600">Alert</span>
+              <div className="flex items-center gap-2">
+                <span className="text-[13px] text-gray-900">15 minutes before</span>
+                <svg className="w-2 h-3 text-gray-400" fill="none" viewBox="0 0 6 10">
+                  <path d="M1 1l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </div>
             </div>
-          </div>
-          
-          {/* Invitees */}
-          <div className="flex items-center justify-between py-2">
-            <span className="text-sm text-gray-600 w-24">Invitees</span>
-            <div className="flex-1 flex justify-end">
-              <button className="text-sm text-red-500 hover:text-red-600 text-2xl leading-none">+</button>
+
+            {/* 2nd Alert */}
+            <div className="flex items-center justify-between px-3 py-2 bg-white mb-[1px]">
+              <span className="text-[13px] text-gray-600">2nd Alert</span>
+              <div className="flex items-center gap-2">
+                <span className="text-[13px] text-gray-900">None</span>
+                <svg className="w-2 h-3 text-gray-400" fill="none" viewBox="0 0 6 10">
+                  <path d="M1 1l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </div>
             </div>
-          </div>
-          
-          {/* Attachments */}
-          <div className="flex items-center justify-between py-2">
-            <span className="text-sm text-gray-600 w-24">Attachments</span>
-            <div className="flex-1 flex justify-end">
-              <button className="text-sm text-red-500 hover:text-red-600 text-2xl leading-none">+</button>
+
+            {/* Invitees */}
+            <div className="flex items-center justify-between px-3 py-2 bg-white mb-[1px]">
+              <span className="text-[13px] text-gray-600">Invitees</span>
+              <button className="text-[#FF3B30] text-base font-normal leading-none">+</button>
             </div>
-          </div>
-          
-          {/* URL */}
-          <div>
-            <input 
-              type="text" 
-              placeholder="URL"
-              className="w-full text-sm border border-gray-300 rounded-md px-3 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
+
+            {/* Attachments */}
+            <div className="flex items-center justify-between px-3 py-2 bg-white">
+              <span className="text-[13px] text-gray-600">Attachments</span>
+              <button className="text-[#FF3B30] text-base font-normal leading-none">+</button>
+            </div>
           </div>
         </div>
-        
+
         {/* Footer with actions */}
-        <div className="absolute bottom-0 left-0 right-0 p-4 bg-gray-50 border-t border-gray-200 flex justify-between items-center">
-          <div>
-            {/* Delete button (example) */}
-            <button
-              className="px-4 py-2 rounded-md bg-red-500 text-white text-sm font-medium hover:bg-red-600 transition-colors"
-              onClick={onClose}
-            >
-              Delete Event
+        <div className="px-3 py-2.5 bg-white flex justify-between items-center">
+          <button
+            className="px-4 py-1 rounded-[5px] bg-[#FF3B30] text-white text-[13px] font-medium hover:bg-[#E6322E] transition-colors"
+            onClick={onClose}
+          >
+            Delete
           </button>
-          </div>
           <div className="flex gap-2">
-            {/* Cancel button */}
-            <button 
-              className="px-4 py-2 rounded-md bg-gray-200 text-gray-700 text-sm font-medium hover:bg-gray-300 transition-colors"
+            <button
+              className="px-4 py-1 rounded-[5px] bg-[#e5e5e5] text-gray-800 text-[13px] font-medium hover:bg-[#d5d5d5] transition-colors"
               onClick={onClose}
             >
               Cancel
             </button>
-            {/* Save button */}
             <button
-              className="px-4 py-2 rounded-md bg-blue-500 text-white text-sm font-medium hover:bg-blue-600 transition-colors"
+              className="px-4 py-1 rounded-[5px] bg-[#FFB3D9] text-white text-[13px] font-medium hover:bg-[#FF9ACF] transition-colors"
               onClick={onClose}
             >
               Save

@@ -188,22 +188,21 @@ const CameraApp: React.FC<CameraAppProps> = ({ onClose }) => {
   };
 
   return (
-    <div className="flex flex-col w-[600px] h-[520px] bg-white rounded-lg shadow-2xl overflow-hidden border border-gray-200">
+    <div className="flex flex-col w-[600px] h-[500px] bg-white rounded-[10px] overflow-hidden" style={{ boxShadow: '0 22px 70px 4px rgba(0, 0, 0, 0.56)' }}>
       {/* Mac-style title bar */}
-      <div className="flex items-center justify-between px-4 py-2 bg-gray-50 border-b border-gray-200 relative">
-        <div className="flex items-center gap-2">
+      <div className="flex items-center px-3 py-2.5 bg-white relative">
+        <div className="flex items-center gap-[7px]">
           <button
             onClick={handleClose}
-            className="w-3 h-3 rounded-full bg-red-500 hover:bg-red-600 transition-colors"
+            className="w-[12px] h-[12px] rounded-full bg-[#FF5F57] hover:bg-[#FF4136] transition-colors"
             aria-label="Close"
           />
-          <span className="w-3 h-3 rounded-full bg-yellow-400 hover:bg-yellow-500 transition-colors" />
-          <span className="w-3 h-3 rounded-full bg-green-500 hover:bg-green-600 transition-colors" />
+          <span className="w-[12px] h-[12px] rounded-full bg-[#FEBC2E] hover:bg-[#FFAA00] transition-colors" />
+          <span className="w-[12px] h-[12px] rounded-full bg-[#28CA42] hover:bg-[#00D924] transition-colors" />
         </div>
-        <div className="flex-1 text-center font-medium text-gray-900">
+        <h3 className="absolute left-1/2 transform -translate-x-1/2 text-[13px] font-semibold text-[#000]">
           Photo Booth
-        </div>
-        <div className="w-16"></div>
+        </h3>
         {/* Back button, only when viewing image */}
         {viewImage && (
           <button
@@ -217,23 +216,20 @@ const CameraApp: React.FC<CameraAppProps> = ({ onClose }) => {
         )}
       </div>
 
-      <div className="flex-1 flex flex-col items-center justify-center bg-gray-100 relative pb-0">
+      <div className="flex-1 flex flex-col items-center justify-center bg-white relative">
         {error && (
-          <div className="text-red-500 text-lg mb-4">{error}</div>
+          <div className="text-red-500 text-sm mb-4">{error}</div>
         )}
-        
+
         {/* Main display area: show video or selected image */}
-        <div className="relative flex flex-col items-center w-full">
+        <div className="relative flex flex-col items-center w-full h-full">
           {viewImage ? (
-            <div className="relative w-full flex flex-col items-center">
+            <div className="relative w-full h-full flex flex-col items-center justify-center bg-black">
               <img
                 src={viewImage}
                 alt="Captured"
-                className="rounded-lg max-h-[320px] max-w-full border border-gray-300 shadow bg-black"
+                className="max-h-full max-w-full object-contain"
                 style={{
-                  aspectRatio: '4/3',
-                  width: '90%',
-                  objectFit: 'cover',
                   transform: 'scaleX(-1)'
                 }}
               />
@@ -241,8 +237,8 @@ const CameraApp: React.FC<CameraAppProps> = ({ onClose }) => {
           ) : (
             <>
               {isCameraLoading && (
-                <div className="absolute inset-0 flex items-center justify-center bg-gray-100 bg-opacity-80 z-10">
-                  <span className="text-gray-500 text-lg">Loading camera...</span>
+                <div className="absolute inset-0 flex items-center justify-center bg-white z-10">
+                  <span className="text-gray-500 text-sm">Loading camera...</span>
                 </div>
               )}
               <video
@@ -250,12 +246,8 @@ const CameraApp: React.FC<CameraAppProps> = ({ onClose }) => {
                 autoPlay
                 playsInline
                 muted
-                className="rounded-lg bg-black max-h-[320px] max-w-full border border-gray-300 shadow"
+                className="w-full h-full object-cover bg-black"
                 style={{
-                  aspectRatio: '4/3',
-                  width: '90%',
-                  objectFit: 'cover',
-                  marginTop: '16px',
                   transform: 'scaleX(-1)',
                   display: isCameraStarted ? 'block' : 'none'
                 }}
@@ -265,51 +257,56 @@ const CameraApp: React.FC<CameraAppProps> = ({ onClose }) => {
           <canvas ref={canvasRef} style={{ display: 'none' }} />
           {isCameraStarted && !viewImage && (
             <button
-              className="absolute left-1/2 -translate-x-1/2 -bottom-8 w-16 h-16 rounded-full bg-red-500 border-4 border-white shadow-lg flex items-center justify-center focus:outline-none z-20"
+              className="absolute left-1/2 -translate-x-1/2 bottom-6 w-14 h-14 rounded-full bg-[#FF3B30] border-[3px] border-white shadow-lg flex items-center justify-center focus:outline-none hover:bg-[#E6322E] transition-colors z-20"
               onClick={handleCapture}
               aria-label="Capture"
-              style={{ boxShadow: '0 4px 16px rgba(0,0,0,0.15)' }}
             >
-              <span className="w-8 h-8 rounded-full bg-white block"></span>
+              <div className="w-8 h-8 rounded-full bg-white"></div>
             </button>
           )}
         </div>
-        
+
         {!isCameraStarted && (
           <button
             onClick={startCamera}
-            className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors mt-4"
+            className="px-6 py-2 bg-[#007AFF] text-white text-[13px] font-medium rounded-[6px] hover:bg-[#0062CC] transition-colors"
           >
             Start Camera
           </button>
         )}
-        
+
         {hasPermission === false && (
-          <div className="text-gray-500 text-lg">Please grant access to camera :)</div>
+          <div className="text-gray-500 text-sm mt-2">Please grant access to camera</div>
         )}
-        
+
         {/* Bottom bar */}
-        <div className="absolute left-0 right-0 bottom-0 bg-gray-200 border-t border-gray-300 flex items-center px-4 py-2" style={{ minHeight: '64px', zIndex: 10 }}>
-          <div className="flex items-center gap-2 mr-4">
-            <span title="Grid" className="text-xl">🔲</span>
-            <span title="Photo" className="text-xl">📷</span>
-            <span title="Video" className="text-xl">🎥</span>
+        <div className="absolute left-0 right-0 bottom-0 bg-[#f5f5f5] border-t border-gray-300 flex items-center justify-between px-3 py-2" style={{ height: '56px', zIndex: 10 }}>
+          <div className="flex items-center gap-3">
+            <button title="Grid" className="w-8 h-8 flex items-center justify-center text-gray-600 hover:bg-gray-200 rounded transition-colors">
+              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><rect x="2" y="2" width="7" height="7"/><rect x="11" y="2" width="7" height="7"/><rect x="2" y="11" width="7" height="7"/><rect x="11" y="11" width="7" height="7"/></svg>
+            </button>
+            <button title="Photo" className="w-8 h-8 flex items-center justify-center text-[#007AFF] hover:bg-blue-100 rounded transition-colors">
+              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><rect x="3" y="5" width="14" height="11" rx="2" fill="none" stroke="currentColor" strokeWidth="1.5"/><circle cx="10" cy="10.5" r="2.5"/></svg>
+            </button>
+            <button title="Video" className="w-8 h-8 flex items-center justify-center text-gray-600 hover:bg-gray-200 rounded transition-colors">
+              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M2 5a2 2 0 012-2h8a2 2 0 012 2v8a2 2 0 01-2 2H4a2 2 0 01-2-2V5zm13 1l3-2v10l-3-2V6z"/></svg>
+            </button>
           </div>
-          
-          <div className="flex-1 flex gap-2 overflow-x-auto scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-200">
+
+          <div className="flex-1 flex gap-2 overflow-x-auto mx-4">
             {capturedImages.length === 0 && <div className="text-gray-400 text-xs italic">No photos yet</div>}
             {capturedImages.map((img, idx) => (
               <img
                 key={idx}
                 src={img}
                 alt={`Captured ${idx + 1}`}
-                className={`h-12 w-16 object-cover rounded border-2 cursor-pointer bg-white ${viewImage === img ? 'border-blue-600' : 'border-blue-400'}`}
+                className={`h-10 w-14 object-cover rounded cursor-pointer ${viewImage === img ? 'ring-2 ring-[#007AFF]' : 'ring-1 ring-gray-300'}`}
                 onClick={() => setViewImage(img)}
               />
             ))}
           </div>
-          
-          <button className="ml-4 px-4 py-1 rounded bg-gray-300 hover:bg-gray-400 text-gray-700 text-sm font-medium shadow" style={{ minWidth: '80px' }}>
+
+          <button className="px-4 py-1 rounded-[5px] bg-[#e5e5e5] hover:bg-[#d5d5d5] text-gray-800 text-[13px] font-medium transition-colors">
             Effects
           </button>
         </div>

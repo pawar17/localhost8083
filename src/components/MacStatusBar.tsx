@@ -48,25 +48,25 @@ const MacStatusBar: React.FC = () => {
   };
 
   return (
-    <div className="mac-status-bar flex items-center justify-between text-white px-4 py-1 text-sm bg-gray-200 bg-opacity-80">
+    <div className="flex items-center justify-between text-white px-4 py-1 text-sm bg-white/25 backdrop-blur-xl border-b border-white/10" style={{ height: '28px' }}>
       <div className="flex items-center gap-4">
-        <img src="/logo/icon.png" alt="Apple Logo" className="h-6 w-auto" />
-        <span className="text-xs font-medium text-zinc-600">Aadya's Calendar</span>
-        <span className="text-zinc-600 text-xs">File</span>
-        <span className="text-zinc-600 text-xs">Edit</span>
-        <span className="text-zinc-600 text-xs">View</span>
-        <span className="text-xs text-zinc-600">Window</span>
-        <span className="text-xs text-zinc-600">Help</span>
+        <img src="/logo/icon.png" alt="Apple Logo" className="h-5 w-auto" />
+        <span className="text-[13px] font-semibold text-gray-800">Aadya's Calendar</span>
+        <span className="text-gray-800 text-[13px]">File</span>
+        <span className="text-gray-800 text-[13px]">Edit</span>
+        <span className="text-gray-800 text-[13px]">View</span>
+        <span className="text-[13px] text-gray-800">Window</span>
+        <span className="text-[13px] text-gray-800">Help</span>
       </div>
-      <div className="flex items-center gap-4">
-        <Bluetooth className="w-4 h-4 text-zinc-600" />
-        <Wifi className="w-4 h-4 text-zinc-600" />
-        {isCharging ? <BatteryCharging className="w-4 h-4 text-zinc-600" /> : <Battery className="w-4 h-4 text-zinc-600" />}
-        <Search className="w-4 h-4 text-zinc-600" />
-        <img src="./control-center-icon.png" alt="Control Center" className="w-4 h-4 opacity-60" />
-        <img src="/siri__fsb5b98qe526_og-removebg-preview.png" alt="Siri" className="w-8 h-8 object-contain" />
-        <span className="text-zinc-600 text-xs">{formatDate(currentTime)}</span>
-        <span className="text-zinc-600 text-xs">{formatTime(currentTime)}</span>
+      <div className="flex items-center gap-3">
+        <Bluetooth className="w-[14px] h-[14px] text-gray-800" />
+        <Wifi className="w-[14px] h-[14px] text-gray-800" />
+        {isCharging ? <BatteryCharging className="w-[14px] h-[14px] text-gray-800" /> : <Battery className="w-[14px] h-[14px] text-gray-800" />}
+        <Search className="w-[14px] h-[14px] text-gray-800" />
+        <img src="./control-center-icon.png" alt="Control Center" className="w-[14px] h-[14px]" />
+        <img src="/siri__fsb5b98qe526_og-removebg-preview.png" alt="Siri" className="w-7 h-7 object-contain" />
+        <span className="text-gray-800 text-[13px]">{formatDate(currentTime)}</span>
+        <span className="text-gray-800 text-[13px] font-medium">{formatTime(currentTime)}</span>
       </div>
     </div>
   );

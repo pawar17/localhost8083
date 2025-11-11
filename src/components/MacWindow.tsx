@@ -8,16 +8,17 @@ interface MacWindowProps {
 
 const MacWindow: React.FC<MacWindowProps> = ({ children, title }) => {
   return (
-    <div className="bg-white rounded-lg shadow-xl max-w-full flex flex-col border border-gray-200 overflow-hidden">
-      <div className="flex items-center gap-2 px-3 py-2 bg-gray-50 rounded-t-lg border-b border-gray-200 cursor-grab active:cursor-grabbing">
-        <div className="flex items-center gap-1.5">
-          <span className="w-3 h-3 rounded-full bg-red-500 hover:bg-red-600 transition-colors"></span>
-          <span className="w-3 h-3 rounded-full bg-yellow-400 hover:bg-yellow-500 transition-colors"></span>
-          <span className="w-3 h-3 rounded-full bg-green-500 hover:bg-green-600 transition-colors"></span>
+    <div className="bg-white rounded-[10px] shadow-2xl max-w-full flex flex-col border border-gray-300 overflow-hidden" style={{ boxShadow: '0 10px 40px rgba(0,0,0,0.15)' }}>
+      <div className="flex items-center gap-2 px-3 py-2.5 bg-[#ececec] rounded-t-[10px] border-b border-[#d1d1d1] cursor-grab active:cursor-grabbing">
+        <div className="flex items-center gap-2">
+          <span className="w-[12px] h-[12px] rounded-full bg-[#FF5F57] hover:bg-[#FF4136] transition-colors shadow-sm"></span>
+          <span className="w-[12px] h-[12px] rounded-full bg-[#FEBC2E] hover:bg-[#FFAA00] transition-colors shadow-sm"></span>
+          <span className="w-[12px] h-[12px] rounded-full bg-[#28CA42] hover:bg-[#00D924] transition-colors shadow-sm"></span>
         </div>
-        <div className="flex-1 text-center text-sm font-medium text-gray-800 overflow-hidden text-ellipsis whitespace-nowrap">
+        <div className="flex-1 text-center text-[13px] font-medium text-[#464646] overflow-hidden text-ellipsis whitespace-nowrap">
           {title}
         </div>
+        <div className="w-[60px]"></div>
       </div>
       <div className="flex-1 min-h-0 overflow-hidden flex flex-col">
         {children}

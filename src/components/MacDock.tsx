@@ -217,7 +217,7 @@ const MacDock: React.FC = () => {
   return (
     <>
       <div className="fixed bottom-2 left-1/2 transform -translate-x-1/2 z-50 mac-dock-container">
-        <div className="flex items-end space-x-1 bg-white/20 backdrop-blur-xl py-1 px-2 rounded-2xl border border-white/30 shadow-lg">
+        <div className="flex items-end space-x-1 bg-white/30 backdrop-blur-2xl py-1.5 px-3 rounded-2xl border border-white/40 shadow-2xl" style={{ boxShadow: '0 8px 32px rgba(0,0,0,0.1), inset 0 1px 1px rgba(255,255,255,0.5)' }}>
           {dockIcons.map((item, index) => (
             <div
               key={index}

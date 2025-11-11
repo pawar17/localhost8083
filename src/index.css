@@ -59,11 +59,10 @@
   }
   
   body {
-    @apply bg-background text-foreground;
+    @apply text-foreground;
     font-feature-settings: "rlig" 1, "calt" 1;
     cursor: url('/cursors/cursor1.png'), auto !important;
-    background: url('/sequoia.png') no-repeat center center fixed;
-    background-size: cover;
+    background: #f5e5f0;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   }
   
