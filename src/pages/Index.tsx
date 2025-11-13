@@ -16,15 +16,15 @@ const Index: React.FC = () => {
   };
 
   return (
-    <div className="h-screen w-screen flex flex-col relative" style={{
-      background: 'url("mac wallpaper 6.png")',
+      <div className="h-screen w-screen flex flex-col relative" style={{
+      background: 'url("/mac wallpaper 6.png")',
     }}>
       <MacStatusBar />
 
       {/* Desktop Folder - Resume */}
       <DesktopFolder
         title="Resume"
-        iconSrc="App icons/files1.png"
+        iconSrc="/App icons/files1.png"
         position={{ x: 50, y: 80 }}
         onDoubleClick={() => setIsResumeOpen(true)}
       />
@@ -32,7 +32,7 @@ const Index: React.FC = () => {
       {/* Desktop Folder - Trash */}
       <DesktopFolder
         title="Trash"
-        iconSrc="App icons/trashfull.png"
+        iconSrc="/App icons/trashfull.png"
         position={{ x: window.innerWidth - 150, y: window.innerHeight - 200 }}
         onDoubleClick={() => setIsTrashOpen(true)}
       />
@@ -62,7 +62,7 @@ const Index: React.FC = () => {
             onClick={handleResumeClick}
           >
             <div className="w-16 h-16 mb-1 flex items-center justify-center">
-              <img src="App icons/PDF.png" alt="PDF" className="w-full h-full object-contain drop-shadow-md" />
+              <img src="/App icons/PDF.png" alt="PDF" className="w-full h-full object-contain drop-shadow-md" />
             </div>
             <div className="text-[11px] text-center text-gray-800 max-w-full px-1 group-hover:bg-[#007AFF] group-hover:text-white rounded transition-colors">
               Aadya_Resume.pdf
