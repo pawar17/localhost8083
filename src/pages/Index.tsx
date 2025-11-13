@@ -62,7 +62,7 @@ const Index: React.FC = () => {
             onClick={handleResumeClick}
           >
             <div className="w-16 h-16 mb-1 flex items-center justify-center">
-              <img src="App icons/pdf.png" alt="PDF" className="w-full h-full object-contain drop-shadow-md" />
+              <img src="App icons/PDF.png" alt="PDF" className="w-full h-full object-contain drop-shadow-md" />
             </div>
             <div className="text-[11px] text-center text-gray-800 max-w-full px-1 group-hover:bg-[#007AFF] group-hover:text-white rounded transition-colors">
               Aadya_Resume.pdf
