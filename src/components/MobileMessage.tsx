@@ -1,10 +1,20 @@
 import { useState, useEffect, useMemo } from 'react';
 import { EventType } from './CalendarEvent';
+import TextFileViewer from './TextFileViewer';
 
 export function MobileMessage() {
   const [isMobile, setIsMobile] = useState(false);
   const [activeView, setActiveView] = useState<'today' | 'calendars' | 'inbox'>('today');
   const [expandedEvent, setExpandedEvent] = useState<EventType | null>(null);
+  const [isTextFileOpen, setIsTextFileOpen] = useState(false);
+  const [textFilePath, setTextFilePath] = useState('');
+  const [textFileName, setTextFileName] = useState('');
+  
+  const handleAttachmentClick = (filePath: string, fileName: string) => {
+    setTextFilePath(filePath);
+    setTextFileName(fileName);
+    setIsTextFileOpen(true);
+  };
 
   useEffect(() => {
     const checkScreenSize = () => {
@@ -54,35 +64,26 @@ export function MobileMessage() {
 
   // All events from WeekView
   const allEvents: EventType[] = useMemo(() => [
-    { id: '1', title: 'Go on a run', time: '8:00 AM', endTime: '9:00 AM', color: 'blue', description: 'You can check my strava out and follow my journey as I train for a half marathon in October!', day: 0, isExpandable: true, hasTime: true },
-    { id: '2', title: 'Meal Prep', time: '9:00 AM', endTime: '11:00 AM', color: 'green', description: '', day: 0, isExpandable: false, hasTime: true },
-    { id: '3', title: 'Cafe Hopping to do work!', time: '2:00 PM', endTime: '4:00 PM', color: 'yellow', description: '', day: 0, isExpandable: false, hasTime: true },
-    { id: '14a', title: 'Technical Project: Build Financial Transaction Platform', time: '11:00 AM', endTime: '1:30 PM', color: 'purple', description: `Built full-stack app with React.js, Firebase, and Checkbook API enabling secure international payments; placed 2nd at Stanford Treehacks. Learn more: <a href="https://devpost.com/software/cashflow-7xqoc4" target="_blank" rel="noopener noreferrer">CashFlow on Devpost</a>`, day: 0, isExpandable: true, hasTime: true },
+    // Day 0 (Sunday)
+    { id: '1', title: 'Go on a run', time: '8:00 AM', endTime: '9:00 AM', color: 'blue', description: '', day: 0, isExpandable: true, hasTime: true },
+    { id: '14', title: 'Technical Projects', time: '10:00 AM', endTime: '12:30 PM', color: 'purple', description: 'Click on attachment to learn more about all my technical projects', day: 0, isExpandable: true, hasTime: true },
 
+    // Day 1 (Monday)
     { id: '4', title: 'InnovateHer Meeting', time: '8:30 AM', endTime: '10:00 AM', color: 'green', description: `As a woman in CS, I founded InnovateHer to create space for others like me. What started as a student government idea became Purdue's first women-centric hackathon and a community of 500+.\n\n- Brought together 7+ orgs to launch 2 hackathons with 200+ participants each\n- Raised over $80K to support inclusive, impact-driven tech projects\n- Built and led a 60-member team; now proudly sustained by new leadership`, day: 1, isExpandable: true, hasTime: true },
     { id: '5', title: 'Update GitHub', time: '10:30 AM', endTime: '12:00 PM', color: 'blue', description: 'Click here to view my GitHub profiles!', day: 1, isExpandable: true, hasTime: true },
     { id: '6', title: 'Arduino Projects', time: '2:00 PM', endTime: '4:30 PM', color: 'red', description: 'I completed a certification in Arduino at Purdue. I enjoy working with microcontrollers and want to pursue independent projects with Arduino!', day: 1, isExpandable: true, hasTime: true },
-    { id: '14b', title: 'Technical Project: Build Disability Visibility India Website', time: '12:00 PM', endTime: '2:00 PM', color: 'yellow', description: `Developed accessible web platform to support and grow disability awareness in India while creating a toolkit resource. Learn more in the next event titled Disability Visibility. Visit: <a href="https://linktr.ee/disabilityvisibilityindia" target="_blank" rel="noopener noreferrer">Disability Visibility India Linktree</a>`, day: 1, isExpandable: true, hasTime: true },
 
+    // Day 2 (Tuesday)
     { id: '7', title: 'Disability Visibility India', time: '10:00 AM', endTime: '12:00 PM', color: 'yellow', description: `I launched this in 2020 as a digital toolkit for families of individuals with disabilities in India. What started as a simple website resource became a growing community - one that taught me about accessibility, care, and inclusive design. It's still one of the most meaningful projects I've built.`, day: 2, isExpandable: true, hasTime: true },
-    { id: '8', title: 'Research Project', time: '1:30 PM', endTime: '3:30 PM', color: 'purple', description: `At C-Lab, I worked on a generative AI project focused on simulating part mobility using 3D point clouds. I implemented and compared diffusion and transformer-based models, integrating them into a CAD-compatible pipeline in Python to explore real-world mechanical design applications.\n\nIn the CAST project, I focused on improving speech-to-text systems for children, who are often underrepresented in commercial ASR models. I fine-tuned transformer architectures and developed a deep phoneme classification model using PyTorch, resulting in a 12% improvement in accuracy. The project emphasized accessibility and the potential of AI in educational and therapeutic settings.\n\nLearn more about what I did by taking a look at my resume!`, day: 2, isExpandable: true, hasTime: true },
-    { id: '14c', title: 'Technical Project: Build Music Recommender System', time: '8:00 AM', endTime: '10:00 AM', color: 'red', description: 'Implemented deep learning (RNN/LSTM) and collaborative filtering to enhance song recommendations on large-scale dataset.', day: 2, isExpandable: true, hasTime: true },
+    { id: '8', title: 'Research Project', time: '1:30 PM', endTime: '3:30 PM', color: 'purple', description: 'Click on attachment to learn more about all my research projects', day: 2, isExpandable: true, hasTime: true },
 
+    // Day 3 (Wednesday)
     { id: '9', title: 'Consulting club casework', time: '8:30 AM', endTime: '10:30 AM', color: 'red', description: `At PurdueThink, I led strategy and growth initiatives for student startups and organizations. As a consultant, I scaled Boilerexams through market research, survey analysis, and faculty outreach. Later, as Project Manager, I guided a team in restructuring Purdue Pilots Inc., delivered strategic recommendations, and secured three new projects hence expanding our campus-wide impact`, day: 3, isExpandable: true, hasTime: true },
     { id: '10', title: 'Purdue Student Government', time: '1:00 PM', endTime: '3:30 PM', color: 'green', description: `Served on Purdue Student Government's DEI Committee for two years & led multiple initiatives. As Executive Director, I led a 13-member team, worked on student body legislation, and launched campus-wide programs focused on accessibility, representation, and inclusion.`, day: 3, isExpandable: true, hasTime: true },
-    { id: '14d', title: 'Technical Project: Build S&P 500 Stock Forecasting', time: '10:30 AM', endTime: '1:00 PM', color: 'blue', description: `This Project Analyses a data about S&P 500 to:\nLink to the dataset: <a href="https://www.kaggle.com/datasets/andrewmvd/sp-500-stocks" target="_blank" rel="noopener noreferrer">https://www.kaggle.com/datasets/andrewmvd/sp-500-stocks</a>\n\n- Explore the S&P 500 stock market performance.\n- Analyze company-level data to study sectoral trends, market capitalization, and volatility.\n- Explore index-wide trends and compare with individual stock behaviors.`, day: 3, isExpandable: true, hasTime: true },
 
-    { id: '11', title: 'Certifications', time: '8:30 AM', endTime: '11:00 AM', color: 'purple', description: `<i>Currently pursuing: Six Sigma Greenbelt certification</i>\n- Forage Program: Citi Asia – Global Consumer Banking Virtual Reality Intern\n- Forage Program: Goldman Sachs – Virtual Engineering Intern\n- Purdue Milestones Program – Programming with Arduino\n- Grow with Google – Data Analytics\n- Grow with Google – Project Management`, day: 4, isExpandable: true, hasTime: true },
-    { id: '12', title: 'Edit resume', time: '11:30 AM', endTime: '1:00 PM', color: 'green', description: 'This is my 3 page working CV, I have all my experiences from the last 4 years listed on this resume', day: 4, isExpandable: true, hasTime: true },
-    { id: '13', title: 'On campus job', time: '2:00 PM', endTime: '4:30 PM', color: 'red', description: `Office of Undergraduate Research, West Lafayette, IN\nResearch Assistant | Feb 2023 – Present\nDeveloped interactive Tableau dashboards for research data visualization and conducted sentiment analysis on survey responses.\n\nDisability Resource Center, West Lafayette, IN\nStudent Intern | Aug 2023 – Aug 2024\nConverted and edited course materials into Braille and accessible formats to support inclusive learning.\n\nPurdue Dining & Culinary, West Lafayette, IN\nStudent Staff | Oct 2022 – Feb 2023\nServed 1,000+ students per shift, assisted in meal prep and inventory, and collaborated with a team to improve operational efficiency.`, day: 4, isExpandable: true, hasTime: true },
-
-    { id: '14e', title: 'Technical Project: Build IPL Player Performance Predictor', time: '8:00 AM', endTime: '10:30 AM', color: 'blue', description: `Designed ML model to predict player performance for Indian Premier League 2025, India's most popular T-20 format league, using historical data (2008–2024); webscraped real-time stats, recent form, and contextual match metrics to drive accuracy to improve sports betting odds.`, day: 5, isExpandable: true, hasTime: true },
-    { id: '15', title: 'CALL HOME!', time: '11:00 AM', endTime: '1:00 PM', color: 'yellow', description: '', day: 5, isExpandable: false, hasTime: true },
-    { id: '16', title: 'Prepare for Interview!', time: '2:00 PM', endTime: '5:00 PM', color: 'green', description: '', day: 5, isExpandable: false, hasTime: true },
-
-    { id: '17', title: 'Grocery Shopping', time: '9:30 AM', endTime: '11:00 AM', color: 'purple', description: '', day: 6, isExpandable: false, hasTime: true },
-    { id: '18', title: 'Gym', time: '11:00 AM', endTime: '12:00 PM', color: 'red', description: 'Been a (sort of consistent) gym girly for the last 4 years, I really enjoy working out and lifting weights :)', day: 6, isExpandable: true, hasTime: true },
-    { id: '19', title: 'Read a book', time: '1:00 PM', endTime: '2:30 PM', color: 'blue', description: '', day: 6, isExpandable: false, hasTime: true },
+    // Day 4 (Thursday)
+    { id: '11', title: 'Certifications', time: '8:30 AM', endTime: '11:00 AM', color: 'purple', description: 'Click on attachment to learn more about all my certifications', day: 4, isExpandable: true, hasTime: true },
+    { id: '13', title: 'On campus job', time: '2:00 PM', endTime: '4:30 PM', color: 'red', description: 'Click on attachment to learn more about all my on campus jobs', day: 4, isExpandable: true, hasTime: true },
   ], []);
 
   // Get events for current week, grouped by day
@@ -302,20 +303,19 @@ export function MobileMessage() {
               )}
 
               {/* Description */}
-              {expandedEvent.description && (
+              {(expandedEvent.description || expandedEvent.id === '1') && (
                 <div className="mb-4">
-                  <div className="text-[15px] text-gray-600 mb-2">Description</div>
+                  {expandedEvent.id !== '1' && (
+                    <div className="text-[15px] text-gray-600 mb-2">Description</div>
+                  )}
                   <div className="text-[17px] text-gray-800 leading-relaxed whitespace-pre-wrap">
                     {(() => {
                       const event = expandedEvent;
                       // Go on a run: Strava embed
                       if (event.id === '1') {
                         return (
-                          <div>
-                            <div className="mb-4">{event.description}</div>
-                            <div className="strava-embed-container mx-auto">
-                              <iframe height={160} width="100%" frameBorder={0} allowTransparency={true} scrolling="no" src="https://www.strava.com/athletes/115399087/activity-summary/a1820ea9344acfa99d738eda0f018ce7dda1072e"></iframe>
-                            </div>
+                          <div className="strava-embed-container mx-auto">
+                            <iframe height={160} width="100%" frameBorder={0} allowTransparency={true} scrolling="no" src="https://www.strava.com/athletes/115399087/activity-summary/a1820ea9344acfa99d738eda0f018ce7dda1072e"></iframe>
                           </div>
                         );
                       }
@@ -393,14 +393,21 @@ export function MobileMessage() {
                           </div>
                         );
                       }
-                      // Technical Project events: render HTML description
-                      if (["14a", "14b", "14d", "14e"].includes(event.id)) {
-                        return (
-                          <div>
-                            <style>{`.mobile-event-html a { color: #007AFF !important; text-decoration: underline; }`}</style>
-                            <div className="mobile-event-html" dangerouslySetInnerHTML={{ __html: event.description }} />
-                          </div>
-                        );
+                      // Technical Projects: just show description
+                      if (event.id === '14') {
+                        return <div>{event.description}</div>;
+                      }
+                      // Certifications: just show description
+                      if (event.id === '11') {
+                        return <div>{event.description}</div>;
+                      }
+                      // Research Project: just show description
+                      if (event.id === '8') {
+                        return <div>{event.description}</div>;
+                      }
+                      // On campus job: just show description
+                      if (event.id === '13') {
+                        return <div>{event.description}</div>;
                       }
                       // Default: just show description
                       return <div>{event.description}</div>;
@@ -408,9 +415,93 @@ export function MobileMessage() {
                   </div>
                 </div>
               )}
+
+              {/* Attachments Section */}
+              {(expandedEvent.id === '14' || expandedEvent.id === '11' || expandedEvent.id === '8' || expandedEvent.id === '13') && (
+                <div className="px-4 py-3 border-t border-gray-200">
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="text-[15px] text-gray-500">Attachments</span>
+                    <button className="text-[#FF3B30] text-lg font-normal leading-none">+</button>
+                  </div>
+                  {expandedEvent.id === '14' && (
+                    <div className="flex items-center justify-between py-1.5 px-2 hover:bg-gray-50 rounded cursor-pointer group" onClick={() => handleAttachmentClick('/technical-projects.txt', 'technical-projects.txt')}>
+                      <div className="flex items-center gap-2 flex-1">
+                        <svg className="w-4 h-4 text-gray-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+                        </svg>
+                        <span className="text-[17px] text-gray-900">technical-projects.txt</span>
+                      </div>
+                      <div className="w-5 h-5 flex items-center justify-center text-gray-400 hover:text-gray-600 opacity-0 group-hover:opacity-100 transition-opacity">
+                        <svg className="w-3 h-3" fill="none" viewBox="0 0 12 12" stroke="currentColor" strokeWidth="2">
+                          <path d="M3 3l6 6m0-6l-6 6" strokeLinecap="round"/>
+                        </svg>
+                      </div>
+                    </div>
+                  )}
+                  {expandedEvent.id === '11' && (
+                    <div className="flex items-center justify-between py-1.5 px-2 hover:bg-gray-50 rounded cursor-pointer group" onClick={() => handleAttachmentClick('/certifications.txt', 'certifications.txt')}>
+                      <div className="flex items-center gap-2 flex-1">
+                        <svg className="w-4 h-4 text-gray-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+                        </svg>
+                        <span className="text-[17px] text-gray-900">certifications.txt</span>
+                      </div>
+                      <div className="w-5 h-5 flex items-center justify-center text-gray-400 hover:text-gray-600 opacity-0 group-hover:opacity-100 transition-opacity">
+                        <svg className="w-3 h-3" fill="none" viewBox="0 0 12 12" stroke="currentColor" strokeWidth="2">
+                          <path d="M3 3l6 6m0-6l-6 6" strokeLinecap="round"/>
+                        </svg>
+                      </div>
+                    </div>
+                  )}
+                  {expandedEvent.id === '8' && (
+                    <div className="flex items-center justify-between py-1.5 px-2 hover:bg-gray-50 rounded cursor-pointer group" onClick={() => handleAttachmentClick('/research-projects.txt', 'research-projects.txt')}>
+                      <div className="flex items-center gap-2 flex-1">
+                        <svg className="w-4 h-4 text-gray-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+                        </svg>
+                        <span className="text-[17px] text-gray-900">research-projects.txt</span>
+                      </div>
+                      <div className="w-5 h-5 flex items-center justify-center text-gray-400 hover:text-gray-600 opacity-0 group-hover:opacity-100 transition-opacity">
+                        <svg className="w-3 h-3" fill="none" viewBox="0 0 12 12" stroke="currentColor" strokeWidth="2">
+                          <path d="M3 3l6 6m0-6l-6 6" strokeLinecap="round"/>
+                        </svg>
+                      </div>
+                    </div>
+                  )}
+                  {expandedEvent.id === '13' && (
+                    <div className="flex items-center justify-between py-1.5 px-2 hover:bg-gray-50 rounded cursor-pointer group" onClick={() => handleAttachmentClick('/on-campus-jobs.txt', 'on-campus-jobs.txt')}>
+                      <div className="flex items-center gap-2 flex-1">
+                        <svg className="w-4 h-4 text-gray-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+                        </svg>
+                        <span className="text-[17px] text-gray-900">on-campus-jobs.txt</span>
+                      </div>
+                      <div className="w-5 h-5 flex items-center justify-center text-gray-400 hover:text-gray-600 opacity-0 group-hover:opacity-100 transition-opacity">
+                        <svg className="w-3 h-3" fill="none" viewBox="0 0 12 12" stroke="currentColor" strokeWidth="2">
+                          <path d="M3 3l6 6m0-6l-6 6" strokeLinecap="round"/>
+                        </svg>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              )}
             </div>
           </div>
         </>
+      )}
+
+      {/* Text File Viewer */}
+      {textFilePath && (
+        <TextFileViewer
+          filePath={textFilePath}
+          fileName={textFileName}
+          isOpen={isTextFileOpen}
+          onClose={() => {
+            setIsTextFileOpen(false);
+            setTextFilePath('');
+            setTextFileName('');
+          }}
+        />
       )}
 
       {/* Bottom Navigation */}

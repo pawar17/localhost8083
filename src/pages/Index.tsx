@@ -17,7 +17,7 @@ const Index: React.FC = () => {
 
   return (
       <div className="h-screen w-screen flex flex-col relative" style={{
-      background: 'url("/mac wallpaper 6.png")',
+      background:'rgb(208, 175, 198)',
     }}>
       <MacStatusBar />
 

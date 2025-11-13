@@ -216,13 +216,15 @@ const CameraApp: React.FC<CameraAppProps> = ({ onClose }) => {
         )}
       </div>
 
-      <div className="flex-1 flex flex-col items-center justify-center bg-white relative">
+      <div className="flex-1 flex flex-col items-center justify-center bg-white relative" style={{ paddingBottom: '56px' }}>
         {error && (
-          <div className="text-red-500 text-sm mb-4">{error}</div>
+          <div className="absolute top-4 left-1/2 -translate-x-1/2 text-red-500 text-sm bg-white px-4 py-2 rounded shadow z-30">
+            {error}
+          </div>
         )}
 
         {/* Main display area: show video or selected image */}
-        <div className="relative flex flex-col items-center w-full h-full">
+        <div className="relative flex flex-col items-center justify-center w-full h-full">
           {viewImage ? (
             <div className="relative w-full h-full flex flex-col items-center justify-center bg-black">
               <img
@@ -241,6 +243,19 @@ const CameraApp: React.FC<CameraAppProps> = ({ onClose }) => {
                   <span className="text-gray-500 text-sm">Loading camera...</span>
                 </div>
               )}
+              {!isCameraStarted && !isCameraLoading && (
+                <div className="absolute inset-0 flex flex-col items-center justify-center bg-gray-100 z-10">
+                  <button
+                    onClick={startCamera}
+                    className="px-6 py-3 bg-[#007AFF] text-white text-[14px] font-medium rounded-[6px] hover:bg-[#0062CC] transition-colors shadow-lg"
+                  >
+                    Start Camera
+                  </button>
+                  {hasPermission === false && (
+                    <div className="text-gray-500 text-sm mt-3">Please grant access to camera</div>
+                  )}
+                </div>
+              )}
               <video
                 ref={videoRef}
                 autoPlay
@@ -257,7 +272,7 @@ const CameraApp: React.FC<CameraAppProps> = ({ onClose }) => {
           <canvas ref={canvasRef} style={{ display: 'none' }} />
           {isCameraStarted && !viewImage && (
             <button
-              className="absolute left-1/2 -translate-x-1/2 bottom-6 w-14 h-14 rounded-full bg-[#FF3B30] border-[3px] border-white shadow-lg flex items-center justify-center focus:outline-none hover:bg-[#E6322E] transition-colors z-20"
+              className="absolute left-1/2 -translate-x-1/2 bottom-20 w-14 h-14 rounded-full bg-[#FF3B30] border-[3px] border-white shadow-lg flex items-center justify-center focus:outline-none hover:bg-[#E6322E] transition-colors z-20"
               onClick={handleCapture}
               aria-label="Capture"
             >
@@ -265,19 +280,6 @@ const CameraApp: React.FC<CameraAppProps> = ({ onClose }) => {
             </button>
           )}
         </div>
-
-        {!isCameraStarted && (
-          <button
-            onClick={startCamera}
-            className="px-6 py-2 bg-[#007AFF] text-white text-[13px] font-medium rounded-[6px] hover:bg-[#0062CC] transition-colors"
-          >
-            Start Camera
-          </button>
-        )}
-
-        {hasPermission === false && (
-          <div className="text-gray-500 text-sm mt-2">Please grant access to camera</div>
-        )}
 
         {/* Bottom bar */}
         <div className="absolute left-0 right-0 bottom-0 bg-[#f5f5f5] border-t border-gray-300 flex items-center justify-between px-3 py-2" style={{ height: '56px', zIndex: 10 }}>

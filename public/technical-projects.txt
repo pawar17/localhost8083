@@ -1,0 +1,18 @@
+1: **Build Financial Transaction Platform (CashFlow)**
+Built full-stack app with React.js, Firebase, and Checkbook API enabling secure international payments; placed 2nd at Stanford Treehacks. Learn more: https://devpost.com/software/cashflow-7xqoc4
+
+2: **Build Disability Visibility India Website**
+Developed accessible web platform to support and grow disability awareness in India while creating a toolkit resource. Visit: https://linktr.ee/disabilityvisibilityindia
+
+3: **Build Music Recommender System**
+Implemented deep learning (RNN/LSTM) and collaborative filtering to enhance song recommendations on large-scale dataset.
+
+4: **Build S&P 500 Stock Forecasting**
+This Project Analyses data about S&P 500. Link to the dataset: https://www.kaggle.com/datasets/andrewmvd/sp-500-stocks
+- Explore the S&P 500 stock market performance.
+- Analyze company-level data to study sectoral trends, market capitalization, and volatility.
+- Explore index-wide trends and compare with individual stock behaviors.
+
+5: **Build IPL Player Performance Predictor**
+Designed ML model to predict player performance for Indian Premier League 2025, India's most popular T-20 format league, using historical data (2008–2024); webscraped real-time stats, recent form, and contextual match metrics to drive accuracy to improve sports betting odds.
+

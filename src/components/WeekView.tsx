@@ -14,67 +14,30 @@ const minutesInHour = 60;
 const WeekView: React.FC<WeekViewProps> = ({ startDate }) => {
   // Mock events based on the screenshot layout
   const events: EventType[] = React.useMemo(() => [
-    { id: '1', title: 'Go on a run', time: '8:00 AM', endTime: '9:00 AM', color: 'blue', description: 'You can check my strava out and follow my journey as I train for a half marathon in October!', day: 0, isExpandable: true }, // Monday
-    { id: '2', title: 'Meal Prep', time: '9:00 AM', endTime: '11:00 AM', color: 'green', description: '', day: 0, isExpandable: false }, // Monday
-    { id: '3', title: 'Cafe Hopping to do work!', time: '2:00 PM', endTime: '4:00 PM', color: 'yellow', description: '', day: 0, isExpandable: false }, // Monday
+    // Day 0 (Sunday)
+    { id: '1', title: 'Go on a run', time: '8:00 AM', endTime: '9:00 AM', color: 'blue', description: '', day: 0, isExpandable: true },
+    { id: '14', title: 'Technical Projects', time: '09:00 AM', endTime: '10:30 AM', color: 'purple', description: 'Click on attachment to learn more about all my technical projects', day: 0, isExpandable: true },
 
-    { id: '4', title: 'InnovateHer Meeting', time: '8:30 AM', endTime: '10:00 AM', color: 'green', description: `As a woman in CS, I founded InnovateHer to create space for others like me. What started as a student government idea became Purdue's first women-centric hackathon and a community of 500+.
+    // Day 1 (Monday)
+    { id: '4', title: 'InnovateHer Meeting', time: '8:00 AM', endTime: '10:00 AM', color: 'green', description: `As a woman in CS, I founded InnovateHer to create space for others like me. What started as a student government idea became Purdue's first women-centric hackathon and a community of 500+.
 
 - Brought together 7+ orgs to launch 2 hackathons with 200+ participants each
 - Raised over $80K to support inclusive, impact-driven tech projects
-- Built and led a 60-member team; now proudly sustained by new leadership`, day: 1, isExpandable: true }, // Tuesday
-    { id: '5', title: 'Update GitHub', time: '10:30 AM', endTime: '12:00 PM', color: 'blue', description: 'Click here to view my GitHub profiles!', day: 1, isExpandable: true }, // Tuesday
-    { id: '6', title: 'Arduino Projects', time: '2:00 PM', endTime: '4:30 PM', color: 'red', description: 'I completed a certification in Arduino at Purdue. I enjoy working with microcontrollers and want to pursue independent projects with Arduino!', day: 1, isExpandable: true }, // Tuesday
+- Built and led a 60-member team; now proudly sustained by new leadership`, day: 1, isExpandable: true },
+    { id: '5', title: 'Update GitHub', time: '10:30 AM', endTime: '12:00 PM', color: 'blue', description: 'Click here to view my GitHub profiles!', day: 1, isExpandable: true },
+    { id: '6', title: 'Arduino Projects', time: '12:30 PM', endTime: '1:30 PM', color: 'red', description: 'I completed a certification in Arduino at Purdue. I enjoy working with microcontrollers and want to pursue independent projects with Arduino!', day: 1, isExpandable: true },
 
-    { id: '7', title: 'Disability Visibility India', time: '10:00 AM', endTime: '12:00 PM', color: 'yellow', description: `I launched this in 2020 as a digital toolkit for families of individuals with disabilities in India. What started as a simple website resource became a growing community - one that taught me about accessibility, care, and inclusive design. It's still one of the most meaningful projects I've built.
-`, day: 2, isExpandable: true }, // Wednesday
-    { id: '8', title: 'Research Project', time: '1:30 PM', endTime: '3:30 PM', color: 'purple', description: `At C-Lab, I worked on a generative AI project focused on simulating part mobility using 3D point clouds. I implemented and compared diffusion and transformer-based models, integrating them into a CAD-compatible pipeline in Python to explore real-world mechanical design applications.
+    // Day 2 (Tuesday)
+    { id: '7', title: 'Disability Visibility India', time: '9:00 AM', endTime: '10:00 AM', color: 'yellow', description: `I launched this in 2020 as a digital toolkit for families of individuals with disabilities in India. What started as a simple website resource became a growing community - one that taught me about accessibility, care, and inclusive design. It's still one of the most meaningful projects I've built.`, day: 2, isExpandable: true },
+    { id: '8', title: 'Research Project', time: '11:00 AM', endTime: '12:00 PM', color: 'purple', description: 'Click on attachment to learn more about all my research projects', day: 2, isExpandable: true },
 
-In the CAST project, I focused on improving speech-to-text systems for children, who are often underrepresented in commercial ASR models. I fine-tuned transformer architectures and developed a deep phoneme classification model using PyTorch, resulting in a 12% improvement in accuracy. The project emphasized accessibility and the potential of AI in educational and therapeutic settings.
+    // Day 3 (Wednesday)
+    { id: '9', title: 'Consulting club casework', time: '8:00 AM', endTime: '10:30 AM', color: 'red', description: `At PurdueThink, I led strategy and growth initiatives for student startups and organizations. As a consultant, I scaled Boilerexams through market research, survey analysis, and faculty outreach. Later, as Project Manager, I guided a team in restructuring Purdue Pilots Inc., delivered strategic recommendations, and secured three new projects hence expanding our campus-wide impact`, day: 3, isExpandable: true },
+    { id: '10', title: 'Purdue Student Government', time: '11:00 AM', endTime: '1:30 PM', color: 'green', description: `Served on Purdue Student Government's DEI Committee for two years & led multiple initiatives. As Executive Director, I led a 13-member team, worked on student body legislation, and launched campus-wide programs focused on accessibility, representation, and inclusion.`, day: 3, isExpandable: true },
 
-Learn more about what I did by taking a look at my resume!`, day: 2, isExpandable: true }, // Wednesday
-
-    { id: '9', title: 'Consulting club casework', time: '8:30 AM', endTime: '10:30 AM', color: 'red', description: `At PurdueThink, I led strategy and growth initiatives for student startups and organizations. As a consultant, I scaled Boilerexams through market research, survey analysis, and faculty outreach. Later, as Project Manager, I guided a team in restructuring Purdue Pilots Inc., delivered strategic recommendations, and secured three new projects hence expanding our campus-wide impact`, day: 3, isExpandable: true }, // Thursday
-    { id: '10', title: 'Purdue Student Government', time: '1:00 PM', endTime: '3:30 PM', color: 'green', description: `Served on Purdue Student Government's DEI Committee for two years & led multiple initiatives. As Executive Director, I led a 13-member team, worked on student body legislation, and launched campus-wide programs focused on accessibility, representation, and inclusion.`, day: 3, isExpandable: true }, // Thursday
-
-    { id: '11', title: 'Certifications', time: '8:30 AM', endTime: '11:00 AM', color: 'purple', description: `<i>Currently pursuing: Six Sigma Greenbelt certification</i>
-      - Forage Program: Citi Asia – Global Consumer Banking Virtual Reality Intern
-- Forage Program: Goldman Sachs – Virtual Engineering Intern
-- Purdue Milestones Program – Programming with Arduino
-- Grow with Google – Data Analytics
-- Grow with Google – Project Management`, day: 4, isExpandable: true }, // Friday
-    { id: '12', title: 'Edit resume', time: '11:30 AM', endTime: '1:00 PM', color: 'green', description: 'This is my 3 page working CV, I have all my experiences from the last 4 years listed on this resume', day: 4, isExpandable: true }, // Friday
-    { id: '13', title: 'On campus job', time: '2:00 PM', endTime: '4:30 PM', color: 'red', description: `Office of Undergraduate Research, West Lafayette, IN
-Research Assistant | Feb 2023 – Present
-Developed interactive Tableau dashboards for research data visualization and conducted sentiment analysis on survey responses.
-
-Disability Resource Center, West Lafayette, IN
-Student Intern | Aug 2023 – Aug 2024
-Converted and edited course materials into Braille and accessible formats to support inclusive learning.
-
-Purdue Dining & Culinary, West Lafayette, IN
-Student Staff | Oct 2022 – Feb 2023
-Served 1,000+ students per shift, assisted in meal prep and inventory, and collaborated with a team to improve operational efficiency.`, day: 4, isExpandable: true }, // Friday
-
-    { id: '14a', title: 'Technical Project: Build Financial Transaction Platform', time: '11:00 AM', endTime: '1:30 PM', color: 'purple', description: `Built full-stack app with React.js, Firebase, and Checkbook API enabling secure international payments; placed 2nd at Stanford Treehacks. Learn more: <a href="https://devpost.com/software/cashflow-7xqoc4" target="_blank" rel="noopener noreferrer">CashFlow on Devpost</a>`, day: 0, isExpandable: true },
-    { id: '14b', title: 'Technical Project: Build Disability Visibility India Website', time: '12:00 PM', endTime: '2:00 PM', color: 'yellow', description: `Developed accessible web platform to support and grow disability awareness in India while creating a toolkit resource. Learn more in the next event titled Disability Visibility. Visit: <a href="https://linktr.ee/disabilityvisibilityindia" target="_blank" rel="noopener noreferrer">Disability Visibility India Linktree</a>`, day: 1, isExpandable: true },
-    { id: '14c', title: 'Technical Project: Build Music Recommender System', time: '8:00 AM', endTime: '10:00 AM', color: 'red', description: 'Implemented deep learning (RNN/LSTM) and collaborative filtering to enhance song recommendations on large-scale dataset.', day: 2, isExpandable: true },
-    { id: '14d', title: 'Technical Project: Build S&P 500 Stock Forecasting', time: '10:30 AM', endTime: '1:00 PM', color: 'blue', description: `This Project Analyses a data about S&P 500 to:
-Link to the dataset: <a href="https://www.kaggle.com/datasets/andrewmvd/sp-500-stocks" target="_blank" rel="noopener noreferrer">https://www.kaggle.com/datasets/andrewmvd/sp-500-stocks</a>
-
-- Explore the S&P 500 stock market performance.
-- Analyze company-level data to study sectoral trends, market capitalization, and volatility.
-- Explore index-wide trends and compare with individual stock behaviors.`, day: 3, isExpandable: true },
-    { id: '14e', title: 'Technical Project: Build IPL Player Performance Predictor', time: '8:00 AM', endTime: '10:30 AM', color: 'blue', description: `Designed ML model to predict player performance for Indian Premier League 2025, India's most popular T-20 format league, using historical data (2008–2024); webscraped real-time stats, recent form, and contextual match metrics to drive accuracy to improve sports betting odds.`, day: 5, isExpandable: true },
-
-    { id: '15', title: 'CALL HOME!', time: '11:00 AM', endTime: '1:00 PM', color: 'yellow', description: '', day: 5, isExpandable: false }, // Saturday
-    { id: '16', title: 'Prepare for Interview!', time: '2:00 PM', endTime: '5:00 PM', color: 'green', description: '', day: 5, isExpandable: false }, // Saturday
-
-    // Additional Saturday events
-    { id: '17', title: 'Grocery Shopping', time: '9:30 AM', endTime: '11:00 AM', color: 'purple', description: '', day: 6, isExpandable: false }, // Saturday
-    { id: '18', title: 'Gym', time: '11:00 AM', endTime: '12:00 PM', color: 'red', description: 'Been a (sort of consistent) gym girly for the last 4 years, I really enjoy working out and lifting weights :)', day: 6, isExpandable: true }, // Saturday
-    { id: '19', title: 'Read a book', time: '1:00 PM', endTime: '2:30 PM', color: 'blue', description: '', day: 6, isExpandable: false }, // Saturday
-
+    // Day 4 (Thursday)
+    { id: '11', title: 'Certifications', time: '8:00 AM', endTime: '10:00 AM', color: 'purple', description: 'Click on attachment to learn more about all my certifications', day: 4, isExpandable: true },
+    { id: '13', title: 'On campus job', time: '10:30 AM', endTime: '12:30 PM', color: 'red', description: 'Click on attachment to learn more about all my on campus jobs', day: 4, isExpandable: true },
   ], []);
 
   // Helper function to parse time string (e.g., "10:00 AM") into minutes since midnight
