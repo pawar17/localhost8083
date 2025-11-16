@@ -11,6 +11,83 @@ const TextFileViewer: React.FC<TextFileViewerProps> = ({ filePath, fileName, isO
   const [content, setContent] = useState<string>('');
   const [loading, setLoading] = useState(true);
 
+  // Function to render markdown-like formatting and links
+  const renderFormattedText = (text: string) => {
+    // URL regex pattern
+    const urlRegex = /(https?:\/\/[^\s]+)/g;
+    
+    // Split by URLs first, then by bold markers
+    const urlParts: (string | { type: 'url'; url: string })[] = [];
+    let lastIndex = 0;
+    let match;
+    
+    // Find all URLs
+    while ((match = urlRegex.exec(text)) !== null) {
+      if (match.index > lastIndex) {
+        urlParts.push(text.substring(lastIndex, match.index));
+      }
+      urlParts.push({ type: 'url', url: match[0] });
+      lastIndex = match.index + match[0].length;
+    }
+    if (lastIndex < text.length) {
+      urlParts.push(text.substring(lastIndex));
+    }
+    
+    // Process each part for bold formatting and render
+    const result: React.ReactNode[] = [];
+    urlParts.forEach((part, partIndex) => {
+      if (typeof part === 'object' && part.type === 'url') {
+        result.push(
+          <a
+            key={`url-${partIndex}`}
+            href={part.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-blue-600 hover:text-blue-800 underline"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {part.url}
+          </a>
+        );
+      } else {
+        // Process bold and italic formatting within text parts
+        // First handle bold (**text**), then italic (*text*)
+        const boldParts = part.split(/(\*\*.*?\*\*)/g);
+        boldParts.forEach((boldPart, boldIndex) => {
+          if (boldPart.startsWith('**') && boldPart.endsWith('**')) {
+            const boldText = boldPart.slice(2, -2);
+            result.push(
+              <strong key={`${partIndex}-${boldIndex}`} className="font-semibold text-gray-900">
+                {boldText}
+              </strong>
+            );
+          } else {
+            // Process italic formatting
+            const italicParts = boldPart.split(/(\*[^*].*?\*)/g);
+            italicParts.forEach((italicPart, italicIndex) => {
+              if (italicPart.startsWith('*') && italicPart.endsWith('*') && !italicPart.startsWith('**')) {
+                const italicText = italicPart.slice(1, -1);
+                result.push(
+                  <em key={`${partIndex}-${boldIndex}-${italicIndex}`} className="italic text-gray-900">
+                    {italicText}
+                  </em>
+                );
+              } else {
+                result.push(
+                  <span key={`${partIndex}-${boldIndex}-${italicIndex}`} className="text-gray-900">
+                    {italicPart}
+                  </span>
+                );
+              }
+            });
+          }
+        });
+      }
+    });
+    
+    return result;
+  };
+
   useEffect(() => {
     if (isOpen && filePath) {
       setLoading(true);
@@ -34,7 +111,7 @@ const TextFileViewer: React.FC<TextFileViewerProps> = ({ filePath, fileName, isO
     <>
       {/* Backdrop */}
       <div
-        className="fixed inset-0 bg-black/20 z-50"
+        className="fixed inset-0 bg-black/5 z-50"
         onClick={onClose}
       />
       
@@ -71,9 +148,9 @@ const TextFileViewer: React.FC<TextFileViewerProps> = ({ filePath, fileName, isO
           {loading ? (
             <div className="text-gray-500 text-sm">Loading...</div>
           ) : (
-            <pre className="text-[13px] font-mono text-gray-900 whitespace-pre-wrap leading-relaxed">
-              {content}
-            </pre>
+            <div className="text-[13px] text-gray-900 whitespace-pre-wrap leading-relaxed">
+              {renderFormattedText(content)}
+            </div>
           )}
         </div>
       </div>

@@ -16,19 +16,14 @@ const WeekView: React.FC<WeekViewProps> = ({ startDate }) => {
   const events: EventType[] = React.useMemo(() => [
     // Day 0 (Sunday)
     { id: '1', title: 'Go on a run', time: '8:00 AM', endTime: '9:00 AM', color: 'blue', description: '', day: 0, isExpandable: true },
-    { id: '14', title: 'Technical Projects', time: '09:00 AM', endTime: '10:30 AM', color: 'purple', description: 'Click on attachment to learn more about all my technical projects', day: 0, isExpandable: true },
+    { id: '14', title: 'Technical Projects', time: '11:00 AM', endTime: '1:30 PM', color: 'purple', description: 'Click on attachment to learn more about all my technical projects', day: 0, isExpandable: true },
 
     // Day 1 (Monday)
-    { id: '4', title: 'InnovateHer Meeting', time: '8:00 AM', endTime: '10:00 AM', color: 'green', description: `As a woman in CS, I founded InnovateHer to create space for others like me. What started as a student government idea became Purdue's first women-centric hackathon and a community of 500+.
-
-- Brought together 7+ orgs to launch 2 hackathons with 200+ participants each
-- Raised over $80K to support inclusive, impact-driven tech projects
-- Built and led a 60-member team; now proudly sustained by new leadership`, day: 1, isExpandable: true },
+    { id: '4', title: 'InnovateHer Meeting', time: '8:00 AM', endTime: '10:00 AM', color: 'green', description: 'Click on attachment to learn more about InnovateHer', day: 1, isExpandable: true },
     { id: '5', title: 'Update GitHub', time: '10:30 AM', endTime: '12:00 PM', color: 'blue', description: 'Click here to view my GitHub profiles!', day: 1, isExpandable: true },
-    { id: '6', title: 'Arduino Projects', time: '12:30 PM', endTime: '1:30 PM', color: 'red', description: 'I completed a certification in Arduino at Purdue. I enjoy working with microcontrollers and want to pursue independent projects with Arduino!', day: 1, isExpandable: true },
 
     // Day 2 (Tuesday)
-    { id: '7', title: 'Disability Visibility India', time: '9:00 AM', endTime: '10:00 AM', color: 'yellow', description: `I launched this in 2020 as a digital toolkit for families of individuals with disabilities in India. What started as a simple website resource became a growing community - one that taught me about accessibility, care, and inclusive design. It's still one of the most meaningful projects I've built.`, day: 2, isExpandable: true },
+    { id: '7', title: 'Disability Visibility India', time: '9:00 AM', endTime: '10:00 AM', color: 'yellow', description: 'Click on attachment to learn more about Disability Visibility India', day: 2, isExpandable: true },
     { id: '8', title: 'Research Project', time: '11:00 AM', endTime: '12:00 PM', color: 'purple', description: 'Click on attachment to learn more about all my research projects', day: 2, isExpandable: true },
 
     // Day 3 (Wednesday)
@@ -36,8 +31,13 @@ const WeekView: React.FC<WeekViewProps> = ({ startDate }) => {
     { id: '10', title: 'Purdue Student Government', time: '11:00 AM', endTime: '1:30 PM', color: 'green', description: `Served on Purdue Student Government's DEI Committee for two years & led multiple initiatives. As Executive Director, I led a 13-member team, worked on student body legislation, and launched campus-wide programs focused on accessibility, representation, and inclusion.`, day: 3, isExpandable: true },
 
     // Day 4 (Thursday)
-    { id: '11', title: 'Certifications', time: '8:00 AM', endTime: '10:00 AM', color: 'purple', description: 'Click on attachment to learn more about all my certifications', day: 4, isExpandable: true },
     { id: '13', title: 'On campus job', time: '10:30 AM', endTime: '12:30 PM', color: 'red', description: 'Click on attachment to learn more about all my on campus jobs', day: 4, isExpandable: true },
+
+    // Day 5 (Friday)
+    { id: '6', title: 'Arduino Projects', time: '9:30 AM', endTime: '11:30 AM', color: 'yellow', description: 'I completed a certification in Arduino at Purdue. I enjoy working with microcontrollers and want to pursue independent projects with Arduino!', day: 5, isExpandable: true },
+
+    // Day 6 (Saturday)
+    { id: '11', title: 'Certifications', time: '8:30 AM', endTime: '10:00 AM', color: 'purple', description: 'Click on attachment to learn more about all my certifications', day: 6, isExpandable: true },
   ], []);
 
   // Helper function to parse time string (e.g., "10:00 AM") into minutes since midnight

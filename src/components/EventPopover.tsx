@@ -77,28 +77,9 @@ const EventPopover: React.FC<EventPopoverProps> = ({ event, isOpen, onClose, pos
                       </div>
                     );
                   }
-                  // InnovateHer Meeting: resource links
+                  // InnovateHer Meeting: just show description
                   if (event.id === '4') {
-                    return (
-                      <>
-                        <div>{event.description.split('\n')[0]}</div>
-                        <ul className="list-disc list-inside mt-1">
-                          {event.description.split('\n').slice(1).filter(line => line.startsWith('- ')).map((line, index) => {
-                            const cleanItem = line.substring(2);
-                            return <li key={index}>{cleanItem}</li>;
-                          })}
-                        </ul>
-                        <div className="mt-4 text-sm">
-                          <p>Learn More:</p>
-                          <ul>
-                            <li><a href="https://www.google.com/search?q=Innovateher+purdue&sca_esv=905f7b0eae3ddda1&rlz=1C1RXQR_enUS1019US1019&sxsrf=AE3TifPXvPxXGVCI6uhOyVfKq9IzZ4kblQ%3A1748317321739&ei=iTQ1aPvuLPag5NoP4c6KoAs&ved=0ahUKEwi716rH3cKNAxV2EFkFHWGnErQQ4dUDCBA&uact=5&oq=Innovateher+purdue&gs_lp=Egxnd3Mtd2l6LXNlcnAiEklubm92YXRlaGVyIHB1cmR1ZTIKEAAYsAMY1gQYRzIKEAAYsAMY1gQYRzIKEAAYsAMY1gQYRzIKEAAYsAMY1gQYR0jRDlCXBljIDXABeAGQAQCYAVWgAecBqgEBM7gBA8gBAPgBAZgCBKAC_QHCAgoQIxiABBgnGIoFwgIFEAAY7wXCAggQABiABBiiBJgDAOIDBRIBMSBAiAYBkAYEkgcBNKAH6QuyBwEzuAf3AcIHAzItNMgHEA&sclient=gws-wiz-serp" target="_blank" rel="noopener noreferrer" className="text-pink-500">Google Search Results</a></li>
-                            <li><a href="https://www.purdueexponent.org/campus/women-coding-club-to-host-hackathon/article_297d44e4-cb8d-11ee-910a-f397edfebbde.html" target="_blank" rel="noopener noreferrer" className="text-pink-500">Purdue Newspaper Article</a></li>
-                            <li><a href="https://www.instagram.com/innovateherhacks/?hl=en" target="_blank" rel="noopener noreferrer" className="text-pink-500">Instagram</a></li>
-                            <li><a href="https://innovateherhacks.my.canva.site/#contact" target="_blank" rel="noopener noreferrer" className="text-pink-500">Info Site</a></li>
-                          </ul>
-                        </div>
-                      </>
-                    );
+                    return <div>{event.description}</div>;
                   }
                   // Update GitHub: GitHub link
                   if (event.id === '5') {
@@ -123,22 +104,9 @@ const EventPopover: React.FC<EventPopoverProps> = ({ event, isOpen, onClose, pos
                       </>
                     );
                   }
-                  // Disability Visibility India: Website and media
+                  // Disability Visibility India: just show description
                   if (event.id === '7') {
-                    return (
-                      <>
-                        <div>{event.description}</div>
-                        <div className="mt-4 text-sm">
-                          <p>Learn More:</p>
-                          <ul>
-                            <li><a href="https://www.disability-visibility.com/" target="_blank" rel="noopener noreferrer" className="text-pink-500">Website</a></li>
-                            <li><p>Media Features:</p></li>
-                            <li><a href="https://www.youtube.com/watch?v=ACmcNJJiRzo" target="_blank" rel="noopener noreferrer" className="text-pink-500">YouTube Feature</a></li>
-                            <li><a href="https://www.hindustantimes.com/lifestyle/art-culture/are-our-city-eateries-inclusive-101645187672291.html" target="_blank" rel="noopener noreferrer" className="text-pink-500">Hindustan Times Article</a></li>
-                          </ul>
-                        </div>
-                      </>
-                    );
+                    return <div>{event.description}</div>;
                   }
                   // Edit resume: Resume link
                   if (event.id === '12') {
@@ -342,6 +310,36 @@ const EventPopover: React.FC<EventPopoverProps> = ({ event, isOpen, onClose, pos
                       <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
                     </svg>
                     <span className="text-[13px] text-gray-900">on-campus-jobs.txt</span>
+                  </div>
+                  <div className="w-4 h-4 flex items-center justify-center text-gray-400 hover:text-gray-600 opacity-0 group-hover:opacity-100 transition-opacity">
+                    <svg className="w-2.5 h-2.5" fill="none" viewBox="0 0 12 12" stroke="currentColor" strokeWidth="2">
+                      <path d="M3 3l6 6m0-6l-6 6" strokeLinecap="round"/>
+                    </svg>
+                  </div>
+                </div>
+              )}
+              {event.id === '4' && (
+                <div className="flex items-center justify-between py-1 px-1.5 hover:bg-gray-50 rounded cursor-pointer group" onClick={() => handleAttachmentClick('/innovateher.txt', 'innovateher.txt')}>
+                  <div className="flex items-center gap-1.5 flex-1">
+                    <svg className="w-3.5 h-3.5 text-gray-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+                    </svg>
+                    <span className="text-[13px] text-gray-900">innovateher.txt</span>
+                  </div>
+                  <div className="w-4 h-4 flex items-center justify-center text-gray-400 hover:text-gray-600 opacity-0 group-hover:opacity-100 transition-opacity">
+                    <svg className="w-2.5 h-2.5" fill="none" viewBox="0 0 12 12" stroke="currentColor" strokeWidth="2">
+                      <path d="M3 3l6 6m0-6l-6 6" strokeLinecap="round"/>
+                    </svg>
+                  </div>
+                </div>
+              )}
+              {event.id === '7' && (
+                <div className="flex items-center justify-between py-1 px-1.5 hover:bg-gray-50 rounded cursor-pointer group" onClick={() => handleAttachmentClick('/disability-visibility-india.txt', 'disability-visibility-india.txt')}>
+                  <div className="flex items-center gap-1.5 flex-1">
+                    <svg className="w-3.5 h-3.5 text-gray-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+                    </svg>
+                    <span className="text-[13px] text-gray-900">disability-visibility-india.txt</span>
                   </div>
                   <div className="w-4 h-4 flex items-center justify-center text-gray-400 hover:text-gray-600 opacity-0 group-hover:opacity-100 transition-opacity">
                     <svg className="w-2.5 h-2.5" fill="none" viewBox="0 0 12 12" stroke="currentColor" strokeWidth="2">

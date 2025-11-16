@@ -1,6 +1,28 @@
-1: **C-Lab: Generative AI Project - Part Mobility Simulation**
-At C-Lab, I worked on a generative AI project focused on simulating part mobility using 3D point clouds. I implemented and compared diffusion and transformer-based models, integrating them into a CAD-compatible pipeline in Python to explore real-world mechanical design applications.
+1. **GRAIL Lab - Deepfake Detection & Social Sentiment**
+*Researching deepfake tagging and social media sentiment on deepfakes. Coding deepfakes into database (10 per week) with contextual metadata. Developing ML model for deepfake identification and analyzing social consequences of manipulated media.*
+**Duration:** August 2025 - Present
+**Role:** Student Researcher
+**Tech Stack:** Python, Machine Learning, Database Management, Sentiment Analysis
+**Focus:** Misinformation, computer vision, social computing
 
-2: **CAST Project: Speech-to-Text Systems for Children**
-In the CAST project, I focused on improving speech-to-text systems for children, who are often underrepresented in commercial ASR models. I fine-tuned transformer architectures and developed a deep phoneme classification model using PyTorch, resulting in a 12% improvement in accuracy. The project emphasized accessibility and the potential of AI in educational and therapeutic settings.
+2. **DConfusion - R Package for Performance Metric Conversion**
+*DConfusion is an R package implementing transformations to convert between commonly reported performance metrics (precision, recall, accuracy, error rates, etc.) and confusion-matrix entries for binary classification studies. Makes cross-study comparison easier when different metrics are reported. Package includes developer guides, tests, and vignettes. Paper publication by January.*
+**Duration:** Ongoing
+**Role:** Developer/Researcher
+**Tech Stack:** R, Statistical Analysis, Package Development
+**Focus:** Software fault prediction, cross-study evaluation, statistical methods
 
+3. **C-Lab - Generative AI for Part Mobility**
+*Led Generative AI project implementing architectures from 5+ research papers (diffusion models, transformers). Developed CAD-integrated pipeline in Python generating and optimizing point clouds (up to 2,048 points/part) for machine learning, improving data preparation efficiency by 17%.*
+**Duration:** January 2025 - August 2025
+**Role:** Student Researcher
+**Tech Stack:** Python, Diffusion Models, Transformers, CAD integration, Point Cloud Processing
+**Focus:** Generative AI, 3D modeling, machine learning pipelines
+
+4. **Child Automated Speech to Text (CAST)**
+*Optimized transformer-based speech recognition models, boosting ML pipeline efficiency by 10% through data preprocessing, augmentation, and hyperparameter tuning. Implemented deep learning-based phoneme classification model using PyTorch, improving speech-to-text accuracy for child speech by 12%.*
+**Duration:** January 2023 - August 2024
+**Role:** Student Researcher
+**Tech Stack:** PyTorch, Transformers, Speech Recognition, Data Augmentation
+**Impact:** 12% accuracy improvement for child speech
+**Focus:** Accessible AI, speech processing, deep learning

@@ -1,18 +1,69 @@
-1: **Build Financial Transaction Platform (CashFlow)**
-Built full-stack app with React.js, Firebase, and Checkbook API enabling secure international payments; placed 2nd at Stanford Treehacks. Learn more: https://devpost.com/software/cashflow-7xqoc4
+***Click on the links to view the prototypes of the projects!***
 
-2: **Build Disability Visibility India Website**
-Developed accessible web platform to support and grow disability awareness in India while creating a toolkit resource. Visit: https://linktr.ee/disabilityvisibilityindia
+1. **NEXUS - Unified Assistive Technology Interface**
+*Designed activity-based interface transforming fragmented AT systems into seamless experience for children with quadriplegic cerebral palsy. Built React Native prototype integrating eye-gaze tracking, switch access, and voice commands. Increased functional independence from 10% to 80% through user research with families and clinicians.*
+**Tech Stack:** React Native, TypeScript, WebGazer.js, Firebase, PostgreSQL, TensorFlow.js
+**Impact:** 3-5 family pilot, 80% independence increase
+**Link:** https://access-nexus.netlify.app/
 
-3: **Build Music Recommender System**
-Implemented deep learning (RNN/LSTM) and collaborative filtering to enhance song recommendations on large-scale dataset.
 
-4: **Build S&P 500 Stock Forecasting**
-This Project Analyses data about S&P 500. Link to the dataset: https://www.kaggle.com/datasets/andrewmvd/sp-500-stocks
-- Explore the S&P 500 stock market performance.
-- Analyze company-level data to study sectoral trends, market capitalization, and volatility.
-- Explore index-wide trends and compare with individual stock behaviors.
+2. **FinAbility - Financial Tool for Cognitive Accessibility**
+*Mobile banking app promoting financial independence for adults with intellectual disabilities. Features simplified categorization, plain-language explainer (GPT-4), decision support, and practice mode with fake money. Supported autonomy framework maintains user control while enabling view-only helper access.*
+**Tech Stack:** React Native, Node.js, Plaid API, OpenAI API, PostgreSQL
+**Impact:** 8-10 participant pilot, improved financial capability scores
 
-5: **Build IPL Player Performance Predictor**
-Designed ML model to predict player performance for Indian Premier League 2025, India's most popular T-20 format league, using historical data (2008–2024); webscraped real-time stats, recent form, and contextual match metrics to drive accuracy to improve sports betting odds.
 
+3. **Co-Create AI - Human-AI Creative Partnership**
+*Experimental platform exploring five human-AI collaboration models in digital art. Modes include AI as Tool, Turn-Taking, AI as Muse, Negotiated Creation, and Real-Time Co-Creation. Study with 15-20 artists measuring creativity, authorship perception, and mode preferences generated design guidelines for creative AI tools.*
+**Tech Stack:** React, Stable Diffusion, DALL-E 3, GPT-4, Socket.io, MongoDB
+**Impact:** 15-20 artists, 75+ artworks, published design guidelines
+
+
+4. **Little Luxuries - Treatonomics Visualization**
+*Analyzed "treatonomics" - consumer behavior maintaining small indulgences during economic uncertainty. Preprocessed 500K+ transactions from e-commerce and retail data (2020-2025). Built interactive Tableau dashboards testing whether the "lipstick effect" holds and identifying modern recession indicators.*
+**Tech Stack:** Python (Pandas, NumPy), Tableau, FRED API
+**Impact:** 500K+ transactions analyzed, 5-year trend analysis
+**Team:** 3-person collaboration
+
+
+5. **CashFlow - International Payment Platform**
+*Full-stack platform enabling secure international payments with real-time fraud detection (23% reduction). Integrated currency conversion and multi-currency wallet. 2nd Place for Best Use of API - Stanford Treehacks.*
+**Tech Stack:** React.js, Firebase, Checkbook API, Node.js
+**Link:** https://devpost.com/software/cashflow-7xqoc4
+
+
+6. **Disability Visibility India Website**
+*Developed accessible website (WCAG AAA) for disability awareness non-profit. Toolkit resource improved outreach 70%, supporting 15-member growth in 6 months.*
+**Tech Stack:** HTML/CSS, JavaScript, accessibility tools
+**Impact:** 70% outreach increase
+**Link:** https://linktr.ee/disabilityvisibilityindia
+
+
+7. **Spotify Music Recommender System**
+*Hybrid recommendation system using collaborative filtering, RNN/LSTM, and matrix factorization on Million Playlist Dataset. 20% accuracy improvement, 60% engagement increase.*
+**Tech Stack:** Python, TensorFlow, RNN/LSTM, collaborative filtering
+**Impact:** 1M+ playlists analyzed
+
+
+8. **S&P 500 Stock Forecasting**
+*LSTM-based time-series model for stock trend prediction. Analyzed sectoral trends, market cap, and volatility patterns with 18% improved accuracy.*
+**Tech Stack:** Python, LSTM, Pandas, Seaborn
+**Link:** https://www.kaggle.com/datasets/andrewmvd/sp-500-stocks
+
+
+9. **IPL Player Performance Predictor**
+*ML model predicting IPL cricket performance using 16 years of historical data (2008-2024). Web-scraped real-time stats and contextual metrics. 80% prediction accuracy.*
+**Tech Stack:** Python, scikit-learn, BeautifulSoup, Pandas
+**Impact:** 80% accuracy across 16 years
+
+
+10. **Arduino Musical Box**
+*Interactive musical box with sensors and LCD display. Multiple modes (freeplay, learning, composition) demonstrating embedded systems and physical computing.*
+**Tech Stack:** Arduino, C++, sensor integration
+**Link:** https://youtu.be/9tD7aDqp4uY?si=uBbbWOLcwfLAoRRe
+
+
+11. **IMDb Dataset Analysis**
+*Analyzed 75 years of film data across 16 CSVs. Identified 100 top-grossing genres and 27 correlations across certificates, runtime, and box office performance.*
+**Tech Stack:** Python, Pandas, Seaborn
+**Scale:** 16 datasets, 75-year span
