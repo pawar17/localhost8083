@@ -48,7 +48,7 @@ const MacStatusBar: React.FC = () => {
   };
 
   return (
-    <div className="flex items-center justify-between text-white px-4 py-1 text-sm bg-white/25 backdrop-blur-xl border-b border-white/10" style={{ height: '28px' }}>
+    <div className="flex items-center justify-between text-white px-4 py-1 text-sm bg-white/35 backdrop-blur-2xl" style={{ height: '28px' }}>
       <div className="flex items-center gap-4">
         <img src="/logo/icon.png" alt="Apple Logo" className="h-5 w-auto" />
         <span className="text-[13px] font-semibold text-gray-800">Aadya's Calendar</span>
