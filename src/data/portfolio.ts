@@ -70,7 +70,7 @@ export const EVENTS: PortfolioEvent[] = [
       'Data: Tableau, Power BI, Excel, Pandas, Seaborn, Jupyter, MATLAB, SPSS',
       'Cloud: AWS, Google Cloud, Azure, Docker, REST APIs',
       'Product: Agile/Scrum, Jira, Trello, SDLC, Figma, Qualtrics',
-      'Tools: Git, Arduino, Unity, RoboGuide, Adobe Illustrator, Cursor, Lovable',
+      'Tools: Git, Arduino, Unity, RoboGuide, Adobe Illustrator, Cursor',
     ],
   },
   {
