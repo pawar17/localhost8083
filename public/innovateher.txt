@@ -1,11 +1,13 @@
 **InnovateHer - Women-Centric Hackathon Initiative**
 
-*As a woman in CS, I founded InnovateHer to create space for others like me. What started as a student government idea became Purdue's first women-centric hackathon and a community of 500+.*
+*As a woman in CS, I founded InnovateHer to create space for others like me. What started as a student government idea became a women-centric hackathon and a community of 400+.*
 
 **Impact:**
-- Brought together 7+ organizations to launch 2 hackathons with 200+ participants each
-- Raised over $80K to support inclusive, impact-driven tech projects
-- Built and led a 60-member team; now proudly sustained by new leadership
+- Ran a 36-hour hackathon two years in a row with 300+ participants each year
+- Recruited and led 80 organizers and 50 mentors across 7 teams
+- 71+ technical projects built and 2 participants landed internships
+- Raised $80K: $41,000 in year one and $39,000 in industry partnerships in year two, including Purdue's CS department
+- Featured in The Purdue Exponent for its impact on gender diversity in tech
 
 **Learn More:**
 **Google Search Results:** https://www.google.com/search?q=Innovateher+purdue&sca_esv=905f7b0eae3ddda1&rlz=1C1RXQR_enUS1019US1019&sxsrf=AE3TifPXvPxXGVCI6uhOyVfKq9IzZ4kblQ%3A1748317321739&ei=iTQ1aPvuLPag5NoP4c6KoAs&ved=0ahUKEwi716rH3cKNAxV2EFkFHWGnErQQ4dUDCBA&uact=5&oq=Innovateher+purdue&gs_lp=Egxnd3Mtd2l6LXNlcnAiEklubm92YXRlaGVyIHB1cmR1ZTIKEAAYsAMY1gQYRzIKEAAYsAMY1gQYRzIKEAAYsAMY1gQYRzIKEAAYsAMY1gQYR0jRDlCXBljIDXABeAGQAQCYAVWgAecBqgEBM7gBA8gBAPgBAZgCBKAC_QHCAgoQIxiABBgnGIoFwgIFEAAY7wXCAggQABiABBiiBJgDAOIDBRIBMSBAiAYBkAYEkgcBNKAH6QuyBwEzuAf3AcIHAzItNMgHEA&sclient=gws-wiz-serp

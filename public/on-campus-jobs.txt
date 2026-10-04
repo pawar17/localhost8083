@@ -1,16 +1,16 @@
 1: **Office of Undergraduate Research, West Lafayette, IN**
-Research Assistant | Feb 2023 – Present
-Developed interactive Tableau dashboards for research data visualization and conducted sentiment analysis on survey responses.
+Research Assistant | Feb 2023 – May 2026
+Built Tableau dashboards for the Spring Research Conference across 8+ departments, ran 20 qualitative interviews, and used NLP sentiment analysis on 70+ survey responses to drive 12 program improvements.
 
 2: **Disability Resource Center, West Lafayette, IN**
 Student Intern | Aug 2023 – Aug 2024
-Converted and edited course materials into Braille and accessible formats to support inclusive learning.
+Converted and edited course materials for 3 students across 7 classes, turning PDFs into Braille with Adobe Illustrator and accessibility tools.
 
 3: **Purdue Dining & Culinary, West Lafayette, IN**
 Student Staff | Oct 2022 – Feb 2023
 Served 1,000+ students per shift, assisted in meal prep and inventory, and collaborated with a team to improve operational efficiency.
 
 4: **The Data Mine - BASF, West Lafayette, IN**
-Project Manager/Teaching Assistant | August 2025 – Present
+Project Manager/Teaching Assistant | August 2025 – January 2026
 Directed 8 bi-weekly sprints for an 11-member BASF team, improving delivery efficiency by 25%. Streamlined communication between students and company mentor, aligning stakeholder expectations and reducing turnaround on feedback cycles by 30%, which enhanced project quality and client satisfaction.
 

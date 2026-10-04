@@ -19,11 +19,10 @@
 **Impact:** 15-20 artists, 75+ artworks, published design guidelines
 
 
-4. **Little Luxuries - Treatonomics Visualization**
-*Analyzed "treatonomics" - consumer behavior maintaining small indulgences during economic uncertainty. Preprocessed 500K+ transactions from e-commerce and retail data (2020-2025). Built interactive Tableau dashboards testing whether the "lipstick effect" holds and identifying modern recession indicators.*
-**Tech Stack:** Python (Pandas, NumPy), Tableau, FRED API
-**Impact:** 500K+ transactions analyzed, 5-year trend analysis
-**Team:** 3-person collaboration
+4. **LittleLuxuries - Macroeconomic Forecasting**
+*Engineered a macroeconomic forecasting model using SEM on 33 years of Census data, identifying search trends as a primary leading indicator for Consumer Confidence.*
+**Tech Stack:** Python, Structural Equation Modeling, Census data
+**Scale:** 33 years of data
 
 
 5. **CashFlow - International Payment Platform**

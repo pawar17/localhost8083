@@ -638,3 +638,125 @@
 .insp-foot .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--c); }
 
 .insp-embed { margin-top: 12px; border-radius: 8px; overflow: hidden; }
+
+/* ── Phone ───────────────────────────────── */
+.m-cal {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  overflow-y: auto;
+  background: #fff;
+  color: #1d1d1f;
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  padding-bottom: max(24px, env(safe-area-inset-bottom));
+}
+
+.m-head {
+  background: #e9bfd3 url('/wallpaper-rose-hills.jpg') center 70% / cover no-repeat;
+  padding: max(28px, env(safe-area-inset-top)) 20px 18px;
+}
+
+.m-name { font-size: 32px; font-weight: 700; letter-spacing: -0.02em; color: #2b1024; }
+.m-sub { font-size: 14px; color: #4a2340; margin-top: 2px; }
+
+.m-links { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+
+.m-links a {
+  font-size: 14px;
+  font-weight: 600;
+  color: #2b1024;
+  text-decoration: none;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.m-day { padding: 18px 16px 4px; border-bottom: 1px solid #ececf0; }
+
+.m-day h2 {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  margin-bottom: 8px;
+}
+
+.m-day h2.today { color: #d63f78; }
+.m-day h2 span { font-size: 14px; font-weight: 500; color: #8e8e93; }
+
+.m-ev {
+  display: flex;
+  align-items: stretch;
+  gap: 10px;
+  width: 100%;
+  padding: 9px 0;
+  text-align: left;
+  background: none;
+  border: 0;
+  font: inherit;
+  color: inherit;
+}
+
+.m-ev + .m-ev { border-top: 1px solid #f2f2f5; }
+.m-ev:active { background: #faf5f8; }
+
+.m-time {
+  width: 62px;
+  flex-shrink: 0;
+  font-size: 13px;
+  font-weight: 600;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.m-time small { display: block; font-weight: 400; color: #8e8e93; }
+.m-bar { width: 4px; border-radius: 2px; background: var(--c); flex-shrink: 0; }
+.m-text { min-width: 0; }
+.m-text strong { display: block; font-size: 16px; font-weight: 600; }
+.m-text small { display: block; font-size: 13.5px; color: #6e6e73; margin-top: 1px; }
+
+.m-note { text-align: center; font-size: 13px; color: #8e8e93; padding: 22px 20px 8px; }
+
+.m-sheet-backdrop { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.35); z-index: 10000; }
+
+.m-sheet {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  max-height: 88vh;
+  overflow-y: auto;
+  z-index: 10001;
+  background: #fff;
+  border-radius: 16px 16px 0 0;
+  padding: 8px 20px max(20px, env(safe-area-inset-bottom));
+  animation: m-up 0.22s ease-out;
+}
+
+@keyframes m-up {
+  from { transform: translateY(40px); opacity: 0; }
+  to { transform: none; opacity: 1; }
+}
+
+.m-grab { width: 38px; height: 5px; border-radius: 3px; background: #d1d1d6; margin: 0 auto 14px; }
+.m-sheet .insp-title { font-size: 20px; }
+.m-sheet .insp-bullets li, .m-sheet .insp-summary { font-size: 15px; }
+.m-sheet .insp-row { font-size: 15px; padding: 9px 6px; }
+
+.m-sheet-foot {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid #ececf0;
+  font-size: 13px;
+  color: #6e6e73;
+}
+
+.m-sheet-foot .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--c); }

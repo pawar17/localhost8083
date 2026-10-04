@@ -59,6 +59,21 @@ export const RESUME_URL =
 export const EVENTS: PortfolioEvent[] = [
   // ── All-day ──────────────────────────────────────────────
   {
+    id: 'skills',
+    title: 'Skills',
+    calendar: 'education',
+    day: 0,
+    allDay: true,
+    bullets: [
+      'Languages: Python, Java, JavaScript, TypeScript, SQL, C++, C#, PHP, HTML/CSS, KAREL',
+      'ML & AI: PyTorch, TensorFlow, Transformers, Diffusion Models, RNN/LSTM, NLP and sentiment analysis, Agentic AI',
+      'Data: Tableau, Power BI, Excel, Pandas, Seaborn, Jupyter, MATLAB, SPSS',
+      'Cloud: AWS, Google Cloud, Azure, Docker, REST APIs',
+      'Product: Agile/Scrum, Jira, Trello, SDLC, Figma, Qualtrics',
+      'Tools: Git, Arduino, Unity, RoboGuide, Adobe Illustrator, Cursor, Lovable',
+    ],
+  },
+  {
     id: 'purdue',
     title: 'Purdue University',
     calendar: 'education',
@@ -69,21 +84,22 @@ export const EVENTS: PortfolioEvent[] = [
     period: 'Graduated May 2026',
     bullets: [
       'Minors in Psychology and Critical Disability Studies',
-      'Certificates in Entrepreneurship & Innovation and Data Science',
+      'Certificates in Entrepreneurship & Innovation, Data Science and LBC',
     ],
   },
   {
     id: 'awards',
-    title: 'Awards & Honors',
+    title: 'Awards',
     calendar: 'education',
     day: 6,
     allDay: true,
     bullets: [
-      '2nd Place, Purdue Undergraduate Research Expo',
+      '2nd Place, Fall 2023 Purdue Undergraduate Research Expo',
       '2nd Place, Best Use of API at Stanford TreeHacks (CashFlow)',
       'Purdue Student Government Bricklayer Award',
       'Clarence Dammon Dean Scholarship',
-      'Jandos Women in Science Scholarship',
+      'Jandos Women in Science Programs Scholarship',
+      'Purdue Majors & Minors Summer Scholarship',
     ],
   },
 
@@ -105,9 +121,15 @@ export const EVENTS: PortfolioEvent[] = [
     day: 0,
     start: t(10),
     end: t(12, 30),
-    summary:
-      'Eleven projects across accessibility, fintech, ML and hardware. The attachment has the full list with stacks and links.',
-    skills: ['React', 'TypeScript', 'Python', 'TensorFlow', 'PyTorch', 'Tableau'],
+    summary: 'The rest of what I have built, beyond the projects that have their own events.',
+    bullets: [
+      'Spotify recommender: collaborative filtering, RNN/LSTM and matrix factorization on the Million Playlist Dataset; 20% better accuracy, 60% more engagement',
+      'S&P 500 forecasting: LSTM time-series model, 18% better trend accuracy',
+      'Cricket ML model: predicts player performance with 80% accuracy',
+      'LittleLuxuries: SEM forecasting on 33 years of Census data, finding search trends lead Consumer Confidence',
+      'IMDb analysis: 16 datasets over 75 years, 100 top-grossing genres and 27 strong correlations',
+    ],
+    skills: ['Python', 'TensorFlow', 'Pandas', 'Seaborn', 'scikit-learn'],
     attachments: [{ name: 'technical-projects.txt', path: '/technical-projects.txt' }],
   },
   {
@@ -120,10 +142,10 @@ export const EVENTS: PortfolioEvent[] = [
     location: 'Stanford University',
     role: '2nd Place, Best Use of API',
     bullets: [
-      'International payments app with a multi-currency wallet and currency conversion',
+      'Full-stack platform for secure international payments',
       'Real-time fraud detection that cut fraud attempts 23%',
     ],
-    skills: ['React', 'Firebase', 'Node.js', 'Checkbook API'],
+    skills: ['React', 'Firebase', 'Checkbook API'],
     links: [{ label: 'Devpost', url: 'https://devpost.com/software/cashflow-7xqoc4' }],
   },
 
@@ -139,11 +161,12 @@ export const EVENTS: PortfolioEvent[] = [
     role: 'Technical Business Analyst III',
     period: 'May 2026 – Present',
     bullets: [
-      'Own requirements for global FRTB commodity capital calculators modeling delta, vega and curvature risk across US, UK and LATAM',
-      'Turn cross-border capital rules into BRDs, backlogs and user stories; run sprint planning with engineers in India',
-      'Built SQL pipelines that audit multi-region market data feeds, keeping capital-reporting inputs defect-free',
+      'Own the product lifecycle for global FRTB commodity calculators, building Sensitivity-Based Approach capital models in SQL and Excel for delta, vega and curvature risk across US, UK and LATAM',
+      'Write BRDs, roadmaps and functional specs that turn cross-border capital rules into prioritized backlogs and user stories',
+      'Bridge ECM business partners and offshore engineering in India, running sprint planning across time zones',
+      'Built automated SQL sourcing and comparison pipelines that audit multi-region market data, keeping capital-reporting inputs defect-free',
     ],
-    skills: ['SQL', 'Agile', 'Jira', 'Requirements'],
+    skills: ['SQL', 'Excel', 'Agile', 'Jira'],
   },
   {
     id: 'innovateher',
@@ -156,11 +179,12 @@ export const EVENTS: PortfolioEvent[] = [
     role: 'Founder & President',
     period: 'Nov 2023 – Present',
     summary:
-      "As a woman in CS, I started InnovateHer to make space for others like me. It became Purdue's first women-centric hackathon.",
+      "As a woman in CS, I started InnovateHer to make space for others like me. It grew into a women-centric hackathon and a campus-wide community.",
     bullets: [
-      '36-hour hackathon run two years straight: 300+ participants, 71+ projects, 2 internships landed',
-      'Raised $80K ($41K in year one, $39K in year two)',
-      'Led 80 organizers and 50 mentors across 7 teams; grew a 400+ member community',
+      '36-hour hackathon run two years straight with 300+ participants each year',
+      'Led 80 organizers and 50 mentors across 7 teams; 71+ projects built and 2 internships landed',
+      'Raised $80K: $41K in year one and $39K in industry partnerships in year two, including Purdue CS',
+      'Grew a 400+ member community; featured in The Purdue Exponent',
     ],
     links: [
       {
@@ -197,9 +221,10 @@ export const EVENTS: PortfolioEvent[] = [
     summary:
       'A digital toolkit for families of people with disabilities in India that grew into a community. Still one of the most meaningful things I have built.',
     bullets: [
-      'Coded the accessible resource website from scratch',
+      'Coded the accessible resource and toolkit website, lifting outreach 70%',
       'Grew to a 15-person team in 6 months across 3 social platforms',
-      'Ran 12 awareness events with partner organizations, lifting community engagement 60%',
+      'Built partnerships and ran 12 awareness events, raising community engagement 60% and volunteer participation 15%',
+      'Lead monthly team meetings; 40% overall organizational growth',
     ],
     links: [
       { label: 'disability-visibility.com', url: 'https://www.disability-visibility.com/' },
@@ -221,14 +246,13 @@ export const EVENTS: PortfolioEvent[] = [
     start: t(10, 30),
     end: t(12, 30),
     location: 'Purdue University',
-    summary: 'Four research projects in ML, accessibility and statistics.',
+    summary: 'ML research on misinformation, generative AI and child speech.',
     bullets: [
-      'GRAIL Lab: deepfake detection and social sentiment on manipulated media',
-      'DConfusion: R package converting reported metrics into confusion-matrix entries',
-      'C-Lab: generative AI for part mobility, CAD-integrated point-cloud pipeline (17% faster data prep)',
-      'Child Automated Speech to Text: phoneme model that improved child speech accuracy 12%',
+      'GRAIL Lab (Aug 2025 – Present): deepfake tagging, social sentiment on deepfakes, and an ML model for deepfake identification; coding 10 deepfakes a week into the lab database',
+      'Child Automated Speech to Text (Jan 2023 – Aug 2024): tuned transformer speech models for 10% pipeline efficiency; PyTorch phoneme model improved child speech accuracy 12%',
+      'C-Lab: generative AI for part mobility with a CAD-integrated point-cloud pipeline',
     ],
-    skills: ['Python', 'PyTorch', 'R', 'Transformers', 'Diffusion models'],
+    skills: ['Python', 'PyTorch', 'Transformers', 'Diffusion models'],
     attachments: [{ name: 'research-projects.txt', path: '/research-projects.txt' }],
   },
   {
@@ -242,10 +266,11 @@ export const EVENTS: PortfolioEvent[] = [
     role: 'Database Design & ML Intern',
     period: 'May – Aug 2025',
     bullets: [
-      'Built an ML tariff-forecasting model and central database for 15+ business units, improving prediction accuracy 80%',
-      'Rebuilt data pipelines with Power BI and agentic AI workflows, cutting processing time 30% for 16+ self-serve teams',
+      'Standardized tariff prediction across 15+ business units with a central database and ML forecasting model, improving accuracy 80%',
+      'Integrated agentic AI for automated updates, raising data visibility 70% through Power BI dashboards',
+      'Streamlined data pipelines and SOPs, cutting processing time 30% and enabling self-serve analytics for 16+ teams',
     ],
-    skills: ['Python', 'SQL', 'Power BI', 'ML'],
+    skills: ['Python', 'SQL', 'Power BI', 'Agentic AI'],
   },
 
   // ── Wednesday ────────────────────────────────────────────
@@ -257,12 +282,12 @@ export const EVENTS: PortfolioEvent[] = [
     start: t(8, 30),
     end: t(10, 30),
     location: 'Purdue University',
-    role: 'Consultant, then Project Manager',
+    role: 'Project Manager',
     period: 'Aug 2023 – Aug 2024',
     bullets: [
-      'Led market research and user surveys that moved Boilerexams from student org to startup',
-      'Guided a team restructuring Purdue Pilots Inc. and delivered strategic recommendations',
-      'Won 3 new client projects',
+      "Led Boilerexams' expansion strategy with market research, user surveys and a professor pitch deck, taking it from student org to start-up",
+      'Led a team of 5 restructuring Purdue Pilots Inc. and building its growth and marketing strategy',
+      'Won 3 new client projects for the next semester',
     ],
   },
   {
@@ -292,8 +317,8 @@ export const EVENTS: PortfolioEvent[] = [
     role: 'Project Manager & Teaching Assistant',
     period: 'Aug 2025 – Jan 2026',
     bullets: [
-      'Ran 8 bi-weekly sprints for an 11-student team delivering a data project for BASF, improving delivery efficiency 25%',
-      'Single link between students and the BASF mentor, cutting feedback turnaround 30%',
+      'Directed 8 bi-weekly sprints for an 11-member BASF team, improving delivery efficiency 25%',
+      'Linked students and the BASF mentor, cutting feedback turnaround 30%',
     ],
   },
   {
@@ -305,9 +330,9 @@ export const EVENTS: PortfolioEvent[] = [
     end: t(17, 30),
     role: 'Assistive technology for children with cerebral palsy',
     bullets: [
-      'One activity-based interface shaped by research with clinicians and families',
+      'User research with families and clinicians shaped one activity-based interface in place of fragmented assistive tech',
+      'Raised functional independence from 10% to 80% for children with quadriplegic cerebral palsy',
       'Switch scanning, eye-gaze and head tracking input in a single app',
-      'Raised functional independence from 10% to 80% in a family pilot',
     ],
     skills: ['React', 'TypeScript', 'MediaPipe'],
     links: [
@@ -328,10 +353,12 @@ export const EVENTS: PortfolioEvent[] = [
     role: 'Paint Shop Dispense Engineering Intern',
     period: 'May – Aug 2024',
     bullets: [
-      'Built an OpenCV and sensor defect-detection system for robotic sealant application, cutting inspection time 25%',
-      'Added a KAREL anomaly model that improved defect identification 15%',
+      'Built a computer vision defect-detection system (Python, OpenCV, sensors), cutting inspection time 25%',
+      'Engineered a KAREL anomaly model for real-time quality control on industrial robots, improving defect identification 15%',
+      'Ran experiments, simulations and prototypes for a new product launch, speeding time-to-market 10%',
+      'Wrote technical documentation and user guides that sped product rollouts 20%',
     ],
-    skills: ['OpenCV', 'Python', 'KAREL', 'Robotics'],
+    skills: ['Python', 'OpenCV', 'KAREL', 'RoboGuide'],
   },
   {
     id: 'our',
@@ -344,10 +371,12 @@ export const EVENTS: PortfolioEvent[] = [
     role: 'Research Assistant',
     period: 'Feb 2023 – May 2026',
     bullets: [
-      'Ran 20 user interviews and NLP sentiment analysis on 70+ survey responses, driving 12 program improvements',
-      'Built a Qualtrics and Tableau reporting tool adopted by research offices at 14+ Big Ten schools',
+      'Built Tableau dashboards for the Spring Research Conference, standardizing reporting across 8+ departments',
+      'Ran 20 qualitative interviews that informed 8 research study recommendations',
+      'NLP sentiment analysis on 70+ survey responses drove 12 program improvements',
+      'Qualtrics survey and Tableau dashboard across all Big Ten schools, used by 14+ institutions',
     ],
-    skills: ['Qualtrics', 'Tableau', 'NLP'],
+    skills: ['Python', 'NLP', 'Tableau', 'Qualtrics'],
   },
   {
     id: 'signbridge',
@@ -358,10 +387,11 @@ export const EVENTS: PortfolioEvent[] = [
     end: t(15, 30),
     role: 'Two-way sign language translation',
     bullets: [
-      'Sign to text, speech to sign and sign to sign for ASL, ISL and BSL',
-      'Real-time hand tracking in the browser with MediaPipe',
+      'Bidirectional computer vision platform using MediaPipe Holistic and Transformer seq2seq models',
+      'Under 200 ms latency for 3D landmark extraction and temporal modeling',
+      'Independent research on deaf identity and multilingual sign language translation',
     ],
-    skills: ['MediaPipe', 'Python', 'TypeScript'],
+    skills: ['MediaPipe', 'Transformers', 'Python', 'TypeScript'],
     links: [
       { label: 'Live app', url: 'https://pawar17.github.io/SignBridge/' },
       { label: 'Code', url: 'https://github.com/pawar17/SignBridge' },
@@ -375,8 +405,10 @@ export const EVENTS: PortfolioEvent[] = [
     start: t(16),
     end: t(17),
     location: 'Purdue University',
-    summary:
-      'Research assistant, Disability Resource Center intern (course materials into Braille and accessible formats), Purdue Dining, and The Data Mine.',
+    bullets: [
+      'Disability Resource Center (Aug 2023 – Aug 2024): converted course materials into Braille for 3 students across 7 classes',
+      'Purdue Dining & Culinary (Oct 2022 – Feb 2023): served 1,000+ students a shift with a team of 15+',
+    ],
     attachments: [{ name: 'on-campus-jobs.txt', path: '/on-campus-jobs.txt' }],
   },
 
@@ -389,7 +421,7 @@ export const EVENTS: PortfolioEvent[] = [
     start: t(9, 30),
     end: t(11),
     summary:
-      'I earned a Programming with Arduino certification at Purdue and love building with microcontrollers. Favorite so far: a musical box with sensors, an LCD and three play modes.',
+      'I earned a Programming with Arduino certification at Purdue and love building with microcontrollers. Favorite so far: a musical box with sensors and a display.',
     skills: ['Arduino', 'C++', 'Sensors'],
     links: [
       {
@@ -401,6 +433,24 @@ export const EVENTS: PortfolioEvent[] = [
         url: 'https://www.youtube.com/playlist?list=PLDjG7BISikRu_m3x5A4Ha9KvuqHsKhPYe',
       },
     ],
+  },
+  {
+    id: 'dconfusion',
+    title: 'DConfusion',
+    calendar: 'research',
+    day: 5,
+    start: t(11, 30),
+    end: t(13),
+    role: 'R Package Developer',
+    period: 'May 2025 – Present',
+    summary:
+      'An R package that converts commonly reported metrics into confusion-matrix entries, so studies can be compared fairly.',
+    bullets: [
+      'Standardized statistical measures, raising model comparison accuracy 15%',
+      'Automated testing suite and CRAN documentation boosted developer efficiency 20%',
+      'Structured repository linking literature reviews and package formulas, speeding workflows 25%',
+    ],
+    skills: ['R', 'Statistics', 'Package development'],
   },
   {
     id: 'coffee',
@@ -416,6 +466,7 @@ export const EVENTS: PortfolioEvent[] = [
       { label: 'LinkedIn', url: 'https://www.linkedin.com/in/aadyapawar/' },
       { label: 'Email', url: 'mailto:aadyapawar7104@gmail.com' },
       { label: 'Resume', url: RESUME_URL },
+      { label: 'Formal portfolio', url: 'https://aadyapawar.my.canva.site/portfolio/' },
     ],
   },
 
@@ -431,9 +482,23 @@ export const EVENTS: PortfolioEvent[] = [
       'Purdue Milestones: Programming with Arduino',
       'Grow with Google: Data Analytics',
       'Grow with Google: Project Management',
-      'Forage: Goldman Sachs Engineering, Citi Global Consumer Banking',
+      'Salesforce: Project Management Essentials',
+      'Six Sigma Green Belt (in progress)',
     ],
     attachments: [{ name: 'certifications.txt', path: '/certifications.txt' }],
+  },
+  {
+    id: 'mentoring',
+    title: 'Mentoring',
+    calendar: 'leadership',
+    day: 6,
+    start: t(11),
+    end: t(12, 30),
+    location: 'Purdue University',
+    bullets: [
+      'LaunchPad (Aug 2023 – Aug 2024): guided a student building a health app that pulled data from 3+ logging apps into personal dashboards, with a supervised ML model 23% more accurate',
+      'Women in Science Programs (Aug 2024 – Aug 2025): one-on-one mentor to a first-year student in STEM, plus workshops and networking events',
+    ],
   },
 ];
 
