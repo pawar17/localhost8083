@@ -53,37 +53,37 @@ const MacDock: React.FC = () => {
     { 
       icon: (
         <div className="w-12 h-12 flex items-center justify-center">
-          <img src="./App icons/2.png" alt="Safari" className="w-full h-full object-contain" />
+          <img src="./App icons/2.png" alt="Launchpad" className="w-full h-full object-contain" />
         </div>
       ), 
-      name: "Safari",
+      name: "Launchpad",
       onClick: handleOtherAppClick
     },
     { 
       icon: (
         <div className="w-12 h-12 flex items-center justify-center">
-          <img src="./App icons/CwKoPLck9kD8CifRkrpug3socM.png" alt="Email" className="w-full h-full object-contain" />
-        </div>
-      ), 
-      name: "Email",
-      onClick: handleOtherAppClick
-    },
-    { 
-      icon: (
-        <div className="w-12 h-12 flex items-center justify-center">
-          <img src="./App icons/fm90fwzWoBMCvK5C0MOyKdo94.png" alt="Mail" className="w-full h-full object-contain" />
+          <img src="./App icons/CwKoPLck9kD8CifRkrpug3socM.png" alt="Mail" className="w-full h-full object-contain" />
         </div>
       ), 
       name: "Mail",
+      onClick: () => { window.location.href = 'mailto:aadyapawar7104@gmail.com'; }
+    },
+    { 
+      icon: (
+        <div className="w-12 h-12 flex items-center justify-center">
+          <img src="./App icons/fm90fwzWoBMCvK5C0MOyKdo94.png" alt="Messages" className="w-full h-full object-contain" />
+        </div>
+      ), 
+      name: "Messages",
       onClick: handleOtherAppClick
     },
     { 
       icon: (
         <div className="w-12 h-12 flex items-center justify-center">
-          <img src="./App icons/gi6dMq8dbjba0LyjZSuySu4X6zg.png" alt="Contact Book" className="w-full h-full object-contain" />
+          <img src="./App icons/gi6dMq8dbjba0LyjZSuySu4X6zg.png" alt="Contacts" className="w-full h-full object-contain" />
         </div>
       ), 
-      name: "Contact Book",
+      name: "Contacts",
       onClick: () => {
         console.log('Contact Book icon clicked, toggling showContact');
         setShowContact(prevShowContact => !prevShowContact);
@@ -107,43 +107,7 @@ const MacDock: React.FC = () => {
     { 
       icon: (
         <div className="w-12 h-12 flex items-center justify-center">
-          <img src="./App icons/mjYHu1WKSujuvzAuskfVJSx2w.png" alt="Notes" className="w-full h-full object-contain" />
-        </div>
-      ), 
-      name: "Notes",
-      onClick: handleOtherAppClick
-    },
-    { 
-      icon: (
-        <div className="w-12 h-12 flex items-center justify-center">
-          <img src="./App icons/NMuItXJj2OKiPiAC2EdivhRPYY.png" alt="Apple TV" className="w-full h-full object-contain" />
-        </div>
-      ), 
-      name: "Apple TV",
-      onClick: handleOtherAppClick
-    },
-    { 
-      icon: (
-        <div className="w-12 h-12 flex items-center justify-center">
-          <img src="./App icons/Spotify.png" alt="Music" className="w-full h-full object-contain" />
-        </div>
-      ), 
-      name: "Music",
-      onClick: () => setShowSpotify((prev) => !prev)
-    },
-    { 
-      icon: (
-        <div className="w-12 h-12 flex items-center justify-center">
-          <img src="./App icons/lwNP7fGxNGl6VSwvqD3AorA1h0.png" alt="Podcasts" className="w-full h-full object-contain" />
-        </div>
-      ), 
-      name: "Podcasts",
-      onClick: handleOtherAppClick
-    },
-    { 
-      icon: (
-        <div className="w-12 h-12 flex items-center justify-center">
-          <img src="./App icons/pjjxP6KY1Ttnqhuqt9oF3QBfmE.png" alt="App Store" className="w-full h-full object-contain" />
+          <img src="./App icons/mjYHu1WKSujuvzAuskfVJSx2w.png" alt="App Store" className="w-full h-full object-contain" />
         </div>
       ), 
       name: "App Store",
@@ -152,28 +116,64 @@ const MacDock: React.FC = () => {
     { 
       icon: (
         <div className="w-12 h-12 flex items-center justify-center">
-          <img src="./App icons/qQISGOSSnz748TdrZn91l44R5u0.png" alt="Settings" className="w-full h-full object-contain" />
+          <img src="./App icons/NMuItXJj2OKiPiAC2EdivhRPYY.png" alt="Reminders" className="w-full h-full object-contain" />
         </div>
       ), 
-      name: "Settings",
+      name: "Reminders",
       onClick: handleOtherAppClick
     },
     { 
       icon: (
         <div className="w-12 h-12 flex items-center justify-center">
-          <img src="./App icons/VbY44vBZlQp4srNQK6ohxpco.png" alt="Folder" className="w-full h-full object-contain" />
+          <img src="./App icons/Spotify.png" alt="Spotify" className="w-full h-full object-contain" />
         </div>
       ), 
-      name: "Folder",
+      name: "Spotify",
+      onClick: () => setShowSpotify((prev) => !prev)
+    },
+    { 
+      icon: (
+        <div className="w-12 h-12 flex items-center justify-center">
+          <img src="./App icons/lwNP7fGxNGl6VSwvqD3AorA1h0.png" alt="Documents" className="w-full h-full object-contain" />
+        </div>
+      ), 
+      name: "Documents",
       onClick: handleOtherAppClick
     },
     { 
       icon: (
         <div className="w-12 h-12 flex items-center justify-center">
-          <img src="./App icons/VeljykK560qBRDkQkYyhx8ChI.png" alt="Trash" className="w-full h-full object-contain" />
+          <img src="./App icons/pjjxP6KY1Ttnqhuqt9oF3QBfmE.png" alt="Music" className="w-full h-full object-contain" />
         </div>
       ), 
-      name: "Trash",
+      name: "Music",
+      onClick: handleOtherAppClick
+    },
+    { 
+      icon: (
+        <div className="w-12 h-12 flex items-center justify-center">
+          <img src="./App icons/qQISGOSSnz748TdrZn91l44R5u0.png" alt="Safari" className="w-full h-full object-contain" />
+        </div>
+      ), 
+      name: "Safari",
+      onClick: handleOtherAppClick
+    },
+    { 
+      icon: (
+        <div className="w-12 h-12 flex items-center justify-center">
+          <img src="./App icons/VbY44vBZlQp4srNQK6ohxpco.png" alt="System Settings" className="w-full h-full object-contain" />
+        </div>
+      ), 
+      name: "System Settings",
+      onClick: handleOtherAppClick
+    },
+    { 
+      icon: (
+        <div className="w-12 h-12 flex items-center justify-center">
+          <img src="./App icons/VeljykK560qBRDkQkYyhx8ChI.png" alt="Calendar" className="w-full h-full object-contain" />
+        </div>
+      ), 
+      name: "Calendar",
       onClick: handleOtherAppClick
     },
     { 
@@ -217,17 +217,19 @@ const MacDock: React.FC = () => {
   return (
     <>
       <div className="fixed bottom-2 left-1/2 transform -translate-x-1/2 z-50 mac-dock-container">
-        <div className="flex items-end space-x-1 bg-white/30 backdrop-blur-2xl py-1.5 px-3 rounded-2xl border border-white/40 shadow-2xl" style={{ boxShadow: '0 8px 32px rgba(0,0,0,0.1), inset 0 1px 1px rgba(255,255,255,0.5)' }}>
+        <div className="flex items-end gap-1.5 bg-white/35 backdrop-blur-2xl py-1.5 px-2.5 rounded-[20px] border border-white/50" style={{ boxShadow: '0 10px 30px rgba(70,20,50,0.14), inset 0 1px 0 rgba(255,255,255,0.6)' }}>
           {dockIcons.map((item, index) => (
             <div
               key={index}
-              className="flex flex-col items-center cursor-mac-pointer cursor-pointer transition-all duration-200 ease-in-out hover:scale-125 hover:-translate-y-2 relative dock-icon-clickable-area"
+              className="group flex flex-col items-center cursor-mac-pointer cursor-pointer relative dock-icon-clickable-area"
               onClick={item.onClick}
+              aria-label={item.name}
+              role="button"
             >
-              <div className="relative w-12 h-12 flex items-center justify-center rounded-xl shadow-md overflow-hidden">
+              <span className="dock-label">{item.name}</span>
+              <div className="relative w-12 h-12 flex items-center justify-center transition-transform duration-200 ease-out group-hover:scale-[1.18] group-hover:-translate-y-1.5 origin-bottom">
                 {item.icon}
               </div>
-              <div className="h-1 w-1 bg-white/60 rounded-full mt-1 opacity-0 group-hover:opacity-100"></div>
             </div>
           ))}
         </div>
@@ -287,8 +289,8 @@ const MacDock: React.FC = () => {
             <table className="w-full text-sm mt-2">
               <tbody>
                 <tr className="border-t border-gray-200">
-                  <td className="text-gray-400 py-1 pr-2 text-right w-24">home</td>
-                  <td className="text-gray-700 py-1 pl-2 break-all">pawar17@purdue.edu</td>
+                  <td className="text-gray-400 py-1 pr-2 text-right w-24">email</td>
+                  <td className="text-gray-700 py-1 pl-2 break-all">aadyapawar7104@gmail.com</td>
                 </tr>
                 <tr className="border-t border-gray-200">
                   <td className="text-gray-400 py-1 pr-2 text-right">birthday</td>
@@ -296,7 +298,7 @@ const MacDock: React.FC = () => {
                 </tr>
                 <tr className="border-t border-gray-200">
                   <td className="text-gray-400 py-1 pr-2 text-right align-top">home</td>
-                  <td className="text-gray-700 py-1 pl-2">West Lafayette, IN</td>
+                  <td className="text-gray-700 py-1 pl-2">New York, NY</td>
                 </tr>
                 <tr className="border-t border-gray-200">
                   <td className="text-gray-400 py-1 pr-2 text-right align-top">note</td>

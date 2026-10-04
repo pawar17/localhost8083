@@ -43,7 +43,7 @@ const TextFileViewer: React.FC<TextFileViewerProps> = ({ filePath, fileName, isO
             href={part.url}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-blue-600 hover:text-blue-800 underline"
+            className="text-blue-600 hover:text-blue-800 underline [overflow-wrap:anywhere]"
             onClick={(e) => e.stopPropagation()}
           >
             {part.url}
@@ -52,7 +52,7 @@ const TextFileViewer: React.FC<TextFileViewerProps> = ({ filePath, fileName, isO
       } else {
         // Process bold and italic formatting within text parts
         // First handle bold (**text**), then italic (*text*)
-        const boldParts = part.split(/(\*\*.*?\*\*)/g);
+        const boldParts = (part as string).split(/(\*\*.*?\*\*)/g);
         boldParts.forEach((boldPart, boldIndex) => {
           if (boldPart.startsWith('**') && boldPart.endsWith('**')) {
             const boldText = boldPart.slice(2, -2);
@@ -111,20 +111,20 @@ const TextFileViewer: React.FC<TextFileViewerProps> = ({ filePath, fileName, isO
     <>
       {/* Backdrop */}
       <div
-        className="fixed inset-0 bg-black/5 z-50"
+        className="fixed inset-0 bg-black/5 z-[70]"
         onClick={onClose}
       />
       
       {/* Text Editor Window */}
       <div
-        className="fixed z-50 bg-white rounded-lg shadow-2xl overflow-hidden"
+        className="fixed z-[71] bg-white rounded-[10px] overflow-hidden"
         style={{
           left: '50%',
           top: '50%',
           transform: 'translate(-50%, -50%)',
-          width: '600px',
-          height: '500px',
-          boxShadow: '0 22px 70px 4px rgba(0, 0, 0, 0.56)'
+          width: 'min(620px, calc(100vw - 32px))',
+          height: 'min(520px, calc(100vh - 80px))',
+          boxShadow: '0 0 0 0.5px rgba(0,0,0,0.2), 0 24px 60px rgba(40,10,30,0.3)'
         }}
         onClick={(e) => e.stopPropagation()}
       >
@@ -139,12 +139,12 @@ const TextFileViewer: React.FC<TextFileViewerProps> = ({ filePath, fileName, isO
             <button className="w-[12px] h-[12px] rounded-full bg-[#28CA42] hover:bg-[#00D924] transition-colors" />
           </div>
           <h3 className="absolute left-1/2 transform -translate-x-1/2 text-[13px] font-semibold text-gray-700">
-            {fileName} - Edited
+            {fileName}
           </h3>
         </div>
 
         {/* Text content area */}
-        <div className="h-[calc(100%-40px)] overflow-auto bg-white p-4">
+        <div className="h-[calc(100%-40px)] overflow-auto bg-white px-6 py-5">
           {loading ? (
             <div className="text-gray-500 text-sm">Loading...</div>
           ) : (
